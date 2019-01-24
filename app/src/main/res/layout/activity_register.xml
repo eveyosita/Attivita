@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/id2_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="ID"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/id2_editText"
+        app:layout_constraintEnd_toStartOf="@+id/id2_editText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/id2_editText" />
+
+    <TextView
+        android:id="@+id/email_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="E-mail"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/email_editText"
+        app:layout_constraintEnd_toStartOf="@+id/email_editText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/email_editText" />
+
+    <EditText
+        android:id="@+id/email_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/email_text"
+        app:layout_constraintTop_toBottomOf="@+id/password2_editText" />
+
+    <EditText
+        android:id="@+id/id2_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/id2_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/password_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Password"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/password2_editText"
+        app:layout_constraintEnd_toStartOf="@+id/password2_editText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/password2_editText" />
+
+    <EditText
+        android:id="@+id/password2_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/password_text"
+        app:layout_constraintTop_toBottomOf="@+id/id2_editText" />
+
+    <TextView
+        android:id="@+id/tel_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tel. Number"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tel_editText"
+        app:layout_constraintEnd_toStartOf="@+id/tel_editText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tel_editText" />
+
+    <EditText
+        android:id="@+id/tel_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tel_text"
+        app:layout_constraintTop_toBottomOf="@+id/email_editText"
+        app:layout_constraintVertical_bias="0.107" />
+
+    <Button
+        android:id="@+id/finish_button"
+        android:layout_width="107dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="finish"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_camera_alt_black_100dp"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="486dp" />
+
+</android.support.constraint.ConstraintLayout>

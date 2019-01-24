@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_dark"
+    tools:context=".AddeventActivity">
+
+    <EditText
+        android:id="@+id/Edate_editText"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:ems="10"
+        android:hint="EndDate"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="@+id/Sdate_editText"
+        app:layout_constraintStart_toEndOf="@+id/Sdate_editText"
+        app:layout_constraintTop_toTopOf="@+id/Sdate_editText" />
+
+    <TextView
+        android:id="@+id/locat_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginTop="35dp"
+        android:text="Location"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/cate_textView"
+        app:layout_constraintStart_toStartOf="@+id/cate_textView"
+        app:layout_constraintTop_toBottomOf="@+id/cate_textView" />
+
+    <Spinner
+        android:id="@+id/cate_spinner"
+        android:layout_width="215dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/cate_textView"
+        app:layout_constraintStart_toEndOf="@+id/cate_textView"
+        app:layout_constraintTop_toTopOf="@+id/cate_textView" />
+
+    <TextView
+        android:id="@+id/cate_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Category"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/year_textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/year_textView"
+        app:layout_constraintTop_toBottomOf="@+id/year_textView" />
+
+    <Spinner
+        android:id="@+id/year_spinner"
+        android:layout_width="215dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/year_textView"
+        app:layout_constraintStart_toEndOf="@+id/year_textView"
+        app:layout_constraintTop_toTopOf="@+id/year_textView" />
+
+    <TextView
+        android:id="@+id/year_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Year"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/depart_textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/depart_textView"
+        app:layout_constraintTop_toBottomOf="@+id/depart_textView" />
+
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:ems="10"
+        android:hint="EndTime"
+        android:inputType="time"
+        app:layout_constraintBottom_toBottomOf="@+id/Stime_editText"
+        app:layout_constraintStart_toEndOf="@+id/Stime_editText"
+        app:layout_constraintTop_toTopOf="@+id/Stime_editText" />
+
+    <TextView
+        android:id="@+id/number_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Number of People"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/descrip_textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/descrip_textView"
+        app:layout_constraintTop_toBottomOf="@+id/descrip_textView" />
+
+    <EditText
+        android:id="@+id/descrip_editText"
+        android:layout_width="351dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/descrip_textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/descrip_textView"
+        app:layout_constraintTop_toBottomOf="@+id/descrip_textView" />
+
+    <TextView
+        android:id="@+id/descrip_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Description"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/eventname_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/eventname_text"
+        app:layout_constraintTop_toBottomOf="@+id/eventname_text" />
+
+    <TextView
+        android:id="@+id/eventname_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="EventName"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="351dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/eventname_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/eventname_text"
+        app:layout_constraintTop_toBottomOf="@+id/eventname_text" />
+
+    <EditText
+        android:id="@+id/number_editText"
+        android:layout_width="351dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/number_textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/number_textView"
+        app:layout_constraintTop_toBottomOf="@+id/number_textView" />
+
+    <EditText
+        android:id="@+id/Stime_editText"
+        android:layout_width="159dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="StartTime"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="@+id/Sdate_editText"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@+id/Sdate_editText"
+        app:layout_constraintTop_toBottomOf="@+id/Sdate_editText" />
+
+    <EditText
+        android:id="@+id/Sdate_editText"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="70dp"
+        android:ems="10"
+        android:hint="StartDate"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="@+id/number_textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/number_textView"
+        app:layout_constraintTop_toBottomOf="@+id/number_textView" />
+
+    <Spinner
+        android:id="@+id/depart_spinner"
+        android:layout_width="215dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/depart_textView"
+        app:layout_constraintStart_toEndOf="@+id/depart_textView"
+        app:layout_constraintTop_toTopOf="@+id/depart_textView" />
+
+    <TextView
+        android:id="@+id/depart_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Department"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/Stime_editText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/Stime_editText"
+        app:layout_constraintTop_toBottomOf="@+id/Stime_editText" />
+
+    <Button
+        android:id="@+id/finishaddevent_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Finish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locat_textView" />
+
+</android.support.constraint.ConstraintLayout>
