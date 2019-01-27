@@ -8,6 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.attivita.fragment.HomeFragment;
+import com.example.attivita.fragment.MessageFragment;
+import com.example.attivita.fragment.NotificationFragment;
+import com.example.attivita.fragment.ProfileFragment;
+import com.example.attivita.fragment.SeachFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;

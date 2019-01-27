@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/fname_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password2_editText" />
+
     <TextView
         android:id="@+id/id2_text"
         android:layout_width="wrap_content"
@@ -22,38 +34,34 @@
         app:layout_constraintTop_toTopOf="@+id/id2_editText" />
 
     <TextView
-        android:id="@+id/email_text"
+        android:id="@+id/birthdate_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:text="E-mail"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:text="Birthdate"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/email_editText"
-        app:layout_constraintEnd_toStartOf="@+id/email_editText"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/birthdate_editText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/email_editText" />
+        app:layout_constraintTop_toTopOf="@+id/birthdate_editText" />
 
     <EditText
-        android:id="@+id/email_editText"
+        android:id="@+id/lname_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/email_text"
-        app:layout_constraintTop_toBottomOf="@+id/password2_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/fname_editText" />
 
     <EditText
         android:id="@+id/id2_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,6 +79,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/password2_editText"
         app:layout_constraintEnd_toStartOf="@+id/password2_editText"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/password2_editText" />
 
@@ -78,7 +87,7 @@
         android:id="@+id/password2_editText"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
@@ -98,22 +107,20 @@
         app:layout_constraintEnd_toStartOf="@+id/tel_editText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tel_editText" />
+        app:layout_constraintTop_toTopOf="@+id/tel_editText"
+        app:layout_constraintVertical_bias="0.571" />
 
     <EditText
         android:id="@+id/tel_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="phone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tel_text"
-        app:layout_constraintTop_toBottomOf="@+id/email_editText"
-        app:layout_constraintVertical_bias="0.107" />
+        app:layout_constraintTop_toBottomOf="@+id/birthdate_editText" />
 
     <Button
         android:id="@+id/finish_button"
@@ -121,20 +128,75 @@
         android:layout_height="52dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="finish"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photo_imageButton"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/photo_imageButton"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tel_editText"
+        app:srcCompat="@drawable/ic_camera_alt_black_100dp" />
+
+    <TextView
+        android:id="@+id/fname_text"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Firstname"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/fname_editText"
+        app:layout_constraintEnd_toStartOf="@+id/fname_editText"
+        app:layout_constraintHorizontal_bias="0.269"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fname_editText"
+        app:layout_constraintVertical_bias="0.444" />
+
+    <TextView
+        android:id="@+id/lname_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_camera_alt_black_100dp"
-        tools:layout_editor_absoluteX="143dp"
-        tools:layout_editor_absoluteY="486dp" />
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:text="Lastname"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/lname_editText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/lname_editText"
+        app:layout_constraintVertical_bias="0.476" />
+
+    <EditText
+        android:id="@+id/birthdate_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/birthdate_text"
+        app:layout_constraintTop_toBottomOf="@+id/lname_editText" />
 
 </android.support.constraint.ConstraintLayout>

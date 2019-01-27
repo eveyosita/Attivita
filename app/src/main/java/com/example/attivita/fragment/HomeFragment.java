@@ -1,4 +1,4 @@
-package com.example.attivita;
+package com.example.attivita.fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.attivita.AddeventActivity;
+import com.example.attivita.AddwarnActivity;
+import com.example.attivita.R;
+
 import java.time.Instant;
 
 
@@ -26,19 +30,17 @@ public class HomeFragment extends Fragment  {
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
              View v = inflater.inflate(R.layout.fragment_home, container, false);
                 imbut_addevent = (ImageButton)v.findViewById(R.id.addevent_imBut);
+                imbut_addwarn = (ImageButton)v.findViewById(R.id.addwarn_imBut);
 
-//             imbut_addwarn.setOnClickListener(new View.OnClickListener() {
-//                     @Override
-//                     public void onClick(View v) {
-//
-//                             imbut_addwarn = (ImageButton) v.findViewById(R.id.addwarn_imBut);
-//                             Intent i = new Intent();
-//                             i.setClass(getActivity(), page2.class);
-//                             startActivity(i);
-//
-//                     }
-//             });
-//
+              imbut_addwarn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(getContext(), AddwarnActivity.class);
+                            startActivity(i);
+
+                        }
+                });
+
                 imbut_addevent.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

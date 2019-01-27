@@ -7,22 +7,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class AddeventActivity extends AppCompatActivity {
+public class AddwarnActivity extends AppCompatActivity {
 
-    Button but_finishaddevent;
+    Button but_finishwarn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addevent);
+        setContentView(R.layout.activity_addwarn);
         getSupportActionBar().hide();
 
-        but_finishaddevent = (Button) findViewById(R.id.finishaddevent_button);
-        but_finishaddevent.setOnClickListener(new View.OnClickListener() {
+        but_finishwarn = (Button) findViewById(R.id.finishwarn_button);
+
+        but_finishwarn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent i = new Intent(AddeventActivity.this, MainActivity.class);
+                Intent i = new Intent(AddwarnActivity.this, MainActivity.class);
                 startActivity(i);
 
             }
