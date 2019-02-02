@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark"
+    android:background="@color/colorYellow"
     tools:context=".AddeventActivity">
 
     <EditText
@@ -14,8 +14,9 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:ems="10"
-        android:hint="EndDate"
+        android:hint="End yyyy-mm-dd"
         android:inputType="date"
+        android:background="@drawable/layout_corner"
         app:layout_constraintBottom_toBottomOf="@+id/Sdate_editText"
         app:layout_constraintStart_toEndOf="@+id/Sdate_editText"
         app:layout_constraintTop_toTopOf="@+id/Sdate_editText" />
@@ -36,12 +37,14 @@
         android:id="@+id/cate_spinner"
         android:layout_width="215dp"
         android:layout_height="37dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:background="@drawable/layout_corner"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="@+id/cate_textView"
         app:layout_constraintStart_toEndOf="@+id/cate_textView"
-        app:layout_constraintTop_toTopOf="@+id/cate_textView" />
+        app:layout_constraintTop_toTopOf="@+id/cate_textView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/cate_textView"
@@ -56,16 +59,28 @@
         app:layout_constraintStart_toStartOf="@+id/year_textView"
         app:layout_constraintTop_toBottomOf="@+id/year_textView" />
 
-    <Spinner
-        android:id="@+id/year_spinner"
+    <EditText
+        android:id="@+id/year_editText"
         android:layout_width="215dp"
         android:layout_height="37dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:spinnerMode="dropdown"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:background="@drawable/layout_corner"
         app:layout_constraintBottom_toBottomOf="@+id/year_textView"
         app:layout_constraintStart_toEndOf="@+id/year_textView"
-        app:layout_constraintTop_toTopOf="@+id/year_textView" />
+        app:layout_constraintTop_toTopOf="@+id/year_textView"
+        app:layout_constraintVertical_bias="0.0" />
+    <!--<Spinner-->
+        <!--android:id="@+id/year_spinner"-->
+        <!--android:layout_width="215dp"-->
+        <!--android:layout_height="37dp"-->
+        <!--android:layout_marginStart="24dp"-->
+        <!--android:layout_marginLeft="24dp"-->
+        <!--android:spinnerMode="dropdown"-->
+        <!--android:background="@drawable/layout_corner"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/year_textView"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/year_textView"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/year_textView" />-->
 
     <TextView
         android:id="@+id/year_textView"
@@ -87,8 +102,9 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:ems="10"
-        android:hint="EndTime"
+        android:hint="End hh:mm"
         android:inputType="time"
+        android:background="@drawable/layout_corner"
         app:layout_constraintBottom_toBottomOf="@+id/Stime_editText"
         app:layout_constraintStart_toEndOf="@+id/Stime_editText"
         app:layout_constraintTop_toTopOf="@+id/Stime_editText" />
@@ -97,39 +113,27 @@
         android:id="@+id/number_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Number of People"
+        android:layout_marginTop="100dp"
+        android:text="Amount"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/descrip_textView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/descrip_textView"
-        app:layout_constraintTop_toBottomOf="@+id/descrip_textView" />
+        app:layout_constraintStart_toStartOf="@+id/eventname_text"
+        app:layout_constraintTop_toBottomOf="@+id/eventname_text" />
 
     <EditText
         android:id="@+id/descrip_editText"
         android:layout_width="351dp"
         android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/layout_corner"
         android:ems="10"
+        android:hint="Description"
         android:inputType="textPersonName"
         android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/descrip_textView"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/descrip_textView"
-        app:layout_constraintTop_toBottomOf="@+id/descrip_textView" />
-
-    <TextView
-        android:id="@+id/descrip_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Description"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/eventname_text"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/eventname_text"
-        app:layout_constraintTop_toBottomOf="@+id/eventname_text" />
+        app:layout_constraintStart_toStartOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <TextView
         android:id="@+id/eventname_text"
@@ -137,14 +141,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="EventName"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -155,6 +159,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="17sp"
+        android:background="@drawable/layout_corner"
         app:layout_constraintEnd_toEndOf="@+id/eventname_text"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/eventname_text"
@@ -166,6 +171,7 @@
         android:layout_height="40dp"
         android:ems="10"
         android:inputType="number"
+        android:background="@drawable/layout_corner"
         app:layout_constraintEnd_toEndOf="@+id/number_textView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/number_textView"
@@ -175,27 +181,50 @@
         android:id="@+id/Stime_editText"
         android:layout_width="159dp"
         android:layout_height="40dp"
-        android:layout_marginTop="30dp"
+        android:background="@drawable/layout_corner"
         android:ems="10"
-        android:hint="StartTime"
+        android:hint="Start hh:mm"
         android:inputType="time"
-        app:layout_constraintEnd_toEndOf="@+id/Sdate_editText"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/Sdate_editText"
-        app:layout_constraintTop_toBottomOf="@+id/Sdate_editText" />
+        app:layout_constraintEnd_toEndOf="@+id/time_textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/time_textView"
+        app:layout_constraintTop_toBottomOf="@+id/time_textView" />
+
+    <TextView
+        android:id="@+id/date_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Date"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/number_textView"
+        app:layout_constraintTop_toBottomOf="@+id/number_textView" />
+
+    <TextView
+        android:id="@+id/time_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="44dp"
+        android:text="Time"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/date_textView"
+        app:layout_constraintTop_toBottomOf="@+id/date_textView" />
 
     <EditText
         android:id="@+id/Sdate_editText"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:layout_marginTop="70dp"
+        android:background="@drawable/layout_corner"
         android:ems="10"
-        android:hint="StartDate"
+        android:hint="Start yyyy-mm-dd"
         android:inputType="date"
-        app:layout_constraintEnd_toEndOf="@+id/number_textView"
+        app:layout_constraintEnd_toEndOf="@+id/date_textView"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/number_textView"
-        app:layout_constraintTop_toBottomOf="@+id/number_textView" />
+        app:layout_constraintStart_toStartOf="@+id/date_textView"
+        app:layout_constraintTop_toBottomOf="@+id/date_textView" />
 
     <Spinner
         android:id="@+id/depart_spinner"
@@ -204,6 +233,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:spinnerMode="dropdown"
+        android:background="@drawable/layout_corner"
         app:layout_constraintBottom_toBottomOf="@+id/depart_textView"
         app:layout_constraintStart_toEndOf="@+id/depart_textView"
         app:layout_constraintTop_toTopOf="@+id/depart_textView" />
@@ -227,11 +257,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:background="@drawable/select_button"
         android:text="Finish"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locat_textView" />
 

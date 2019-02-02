@@ -10,7 +10,7 @@ public class RetrofitClient {
 
     private static final String AUTH = "Basic " + Base64.encodeToString(("belalkhan:123456").getBytes(), Base64.NO_WRAP);
 
-    private static final String BASE_URL = "http://172.20.40.168/";
+    private static final String BASE_URL = "http://172.20.40.232/";
     private static RetrofitClient mInstance;
     private Retrofit retrofit;
 

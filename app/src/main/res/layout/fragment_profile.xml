@@ -4,35 +4,20 @@
     android:layout_height="match_parent"
     android:background="@android:color/holo_red_light">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp"
-        android:layout_marginBottom="677dp"
-        android:text="Profile"
-        android:textColor="@android:color/background_dark"
-        android:textSize="30sp" />
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/coloGray">
 
-    <TextView
-        android:id="@+id/name_textView"
-        android:layout_width="162dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="125dp"
-        android:layout_marginLeft="125dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="123dp"
-        android:layout_marginRight="123dp"
-        android:layout_marginBottom="596dp"
-        android:text="Name"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="27dp"
+            android:text="Profile" />
+
+
+    </android.support.v7.widget.Toolbar>
 
 </RelativeLayout>
