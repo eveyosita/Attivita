@@ -11,128 +11,134 @@
         android:id="@+id/fname_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
         android:background="@drawable/layout_corner"
         android:ems="10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/fname_text"
         app:layout_constraintStart_toEndOf="@+id/fname_text"
-        app:layout_constraintTop_toBottomOf="@+id/password2_editText" />
+        app:layout_constraintTop_toTopOf="@+id/fname_text" />
 
     <TextView
         android:id="@+id/id2_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:text="ID"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/id2_editText"
-        app:layout_constraintEnd_toStartOf="@+id/id2_editText"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/id2_editText" />
-
-    <TextView
-        android:id="@+id/birthdate_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
-        android:text="Birthdate"
+        android:layout_marginTop="52dp"
+        android:text="รหัสนักศึกษา"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/birthdate_editText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/birthdate_editText" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/departRegist_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="สาาขาวิชา"
+        android:textSize="18sp"
+
+        app:layout_constraintEnd_toEndOf="@+id/nickname_text"
+        app:layout_constraintStart_toStartOf="@+id/nickname_text"
+        app:layout_constraintTop_toBottomOf="@+id/nickname_text" />
 
     <EditText
         android:id="@+id/lname_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginLeft="56dp"
         android:background="@drawable/layout_corner"
         android:ems="10"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/lname_text"
         app:layout_constraintStart_toEndOf="@+id/lname_text"
-        app:layout_constraintTop_toBottomOf="@+id/fname_editText" />
+        app:layout_constraintTop_toTopOf="@+id/lname_text" />
 
     <EditText
         android:id="@+id/id2_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
         android:background="@drawable/layout_corner"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/id2_text"
         app:layout_constraintStart_toEndOf="@+id/id2_text"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/id2_text" />
 
     <TextView
         android:id="@+id/password_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Password"
+        android:layout_marginTop="36dp"
+        android:text="รหัสผ่าน"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/password2_editText"
-        app:layout_constraintEnd_toStartOf="@+id/password2_editText"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/password2_editText" />
+        app:layout_constraintEnd_toEndOf="@+id/id2_text"
+        app:layout_constraintStart_toStartOf="@+id/id2_text"
+        app:layout_constraintTop_toBottomOf="@+id/id2_text" />
 
     <EditText
         android:id="@+id/password2_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
         android:background="@drawable/layout_corner"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/password_text"
         app:layout_constraintStart_toEndOf="@+id/password_text"
-        app:layout_constraintTop_toBottomOf="@+id/id2_editText" />
+        app:layout_constraintTop_toTopOf="@+id/password_text" />
+
+    <TextView
+        android:id="@+id/email_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="อีเมล์"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/departRegist_text"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="@+id/departRegist_text"
+        app:layout_constraintTop_toBottomOf="@+id/departRegist_text" />
+
+    <EditText
+        android:id="@+id/email_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="58dp"
+        android:layout_marginLeft="60dp"
+        android:background="@drawable/layout_corner"
+        android:ems="10"
+        app:layout_constraintBottom_toBottomOf="@+id/email_text"
+        app:layout_constraintStart_toEndOf="@+id/email_text"
+        app:layout_constraintTop_toTopOf="@+id/email_text" />
 
     <TextView
         android:id="@+id/tel_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tel. Number"
+        android:layout_marginTop="36dp"
+        android:text="เบอร์โทรศัพท์"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tel_editText"
-        app:layout_constraintEnd_toStartOf="@+id/tel_editText"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tel_editText"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintEnd_toEndOf="@+id/email_text"
+        app:layout_constraintStart_toStartOf="@+id/email_text"
+        app:layout_constraintTop_toBottomOf="@+id/email_text" />
 
     <EditText
         android:id="@+id/tel_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="60dp"
         android:background="@drawable/layout_corner"
         android:ems="10"
         android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/tel_text"
         app:layout_constraintStart_toEndOf="@+id/tel_text"
-        app:layout_constraintTop_toBottomOf="@+id/birthdate_editText" />
+        app:layout_constraintTop_toTopOf="@+id/tel_text" />
 
     <Button
         android:id="@+id/finish_button"
@@ -145,13 +151,12 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/select_button"
-        android:text="finish"
+        android:text="เสร็จสิ้น"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/photo_imageButton"
-        app:layout_constraintVertical_bias="0.179" />
+        app:layout_constraintVertical_bias="0.358" />
 
     <ImageButton
         android:id="@+id/photo_imageButton"
@@ -159,58 +164,71 @@
         android:layout_height="61dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tel_editText"
+        app:layout_constraintTop_toBottomOf="@+id/tel_text"
         app:srcCompat="@drawable/ic_camera_alt_black_100dp" />
 
     <TextView
         android:id="@+id/fname_text"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:text="Firstname"
+        android:layout_marginTop="36dp"
+        android:text="ชื่อ"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/fname_editText"
-        app:layout_constraintEnd_toStartOf="@+id/fname_editText"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fname_editText"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="@+id/password_text"
+        app:layout_constraintHorizontal_bias="0.585"
+        app:layout_constraintStart_toStartOf="@+id/password_text"
+        app:layout_constraintTop_toBottomOf="@+id/password_text" />
 
     <TextView
         android:id="@+id/lname_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:text="Lastname"
+        android:layout_marginTop="36dp"
+        android:text="นามสกุล"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/lname_editText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/lname_editText"
-        app:layout_constraintVertical_bias="0.476" />
+        app:layout_constraintEnd_toEndOf="@+id/fname_text"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="@+id/fname_text"
+        app:layout_constraintTop_toBottomOf="@+id/fname_text" />
 
-    <EditText
-        android:id="@+id/birthdate_editText"
+    <Spinner
+        android:id="@+id/departRegist_spinner"
+        android:layout_width="210dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="56dp"
+        android:background="@drawable/layout_corner"
+        app:layout_constraintBottom_toBottomOf="@+id/departRegist_text"
+        app:layout_constraintStart_toEndOf="@+id/departRegist_text"
+        app:layout_constraintTop_toTopOf="@+id/departRegist_text" />
+
+    <TextView
+        android:id="@+id/nickname_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="36dp"
+        android:text="ชื่อเล่น"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/lname_text"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="@+id/lname_text"
+        app:layout_constraintTop_toBottomOf="@+id/lname_text"/>
+    <EditText
+        android:id="@+id/nickname_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginLeft="56dp"
         android:background="@drawable/layout_corner"
         android:ems="10"
-        android:hint="YYYY-MM-DD"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/birthdate_text"
-        app:layout_constraintTop_toBottomOf="@+id/lname_editText" />
+        app:layout_constraintBottom_toBottomOf="@+id/nickname_text"
+        app:layout_constraintStart_toEndOf="@+id/nickname_text"
+        app:layout_constraintTop_toTopOf="@+id/nickname_text"/>
 
 </android.support.constraint.ConstraintLayout>

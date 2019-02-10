@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light">
+    android:background="@color/colorWhite">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -19,5 +19,48 @@
 
 
     </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="390dp"
+        android:layout_height="220dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/button_login_corner"
+        android:layout_marginBottom="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/firstname_pro"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:text="Firstname" />
+
+        <TextView
+            android:id="@+id/lastname_pro"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_toEndOf="@+id/firstname_pro"
+            android:layout_toRightOf="@+id/firstname_pro"
+            android:text="Lastname" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listfriend"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
+        android:padding="16dp"
+        android:background="@color/colorBlue"
+         />
 
 </RelativeLayout>

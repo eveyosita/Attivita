@@ -17,7 +17,7 @@
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:textSize="27dp"
-            android:text="Message" />
+            android:text="ข้อความ" />
 
 
     </android.support.v7.widget.Toolbar>

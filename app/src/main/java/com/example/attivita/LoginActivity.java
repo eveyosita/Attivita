@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.attivita.fragment.ProfileFragment;
+import com.example.attivita.retrofit.RetrofitClient;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_regist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, page2.class);
+                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(i);
 
             }

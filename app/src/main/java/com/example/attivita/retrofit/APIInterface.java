@@ -1,4 +1,8 @@
-package com.example.attivita;
+package com.example.attivita.retrofit;
+
+import com.example.attivita.model.student;
+
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -11,12 +15,15 @@ public interface APIInterface {
 
     @FormUrlEncoded
     @POST("createuser.php")
-    Call<ResponseBody> createuser(
-            @Field("studentId") String studentid,
+    Call<student> createuser(
+           @Field("studentId") String studentid,
             @Field("password") String password,
             @Field("firstname") String firstname,
             @Field("lastname") String lastname,
-            @Field("birthdate") String birthdate,
+            @Field("nickname") String nickname,
+           @Field("department") String department,
+           @Field("year") String year,
+           @Field("email") String email,
             @Field("telnumber") String telnumber
     );
 
@@ -28,8 +35,8 @@ public interface APIInterface {
     );
 
     @FormUrlEncoded
-    @GET("showprofile.php")
-    Call<ResponseBody> showprofile(
+    @POST("showprofile.php")
+    Call<student> showprofile(
             @Field("studentId") String studentid
     );
 

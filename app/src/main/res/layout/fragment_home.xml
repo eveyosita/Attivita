@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:textSize="27dp"
-            android:text="HOME" />
+            android:text="หน้าหลัก" />
 
         <ImageButton
             android:id="@+id/addwarn_imBut"

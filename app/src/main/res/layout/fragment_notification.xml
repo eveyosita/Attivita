@@ -5,6 +5,7 @@
     android:background="@color/colorBlue">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/bar_noti"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/coloGray">
@@ -15,10 +16,35 @@
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:textSize="27dp"
-            android:text="Notification" />
+            android:text="กิจกรรม" />
 
 
     </android.support.v7.widget.Toolbar>
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bar_noti">
+
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="กำลังเข้าร่วม" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="เคยเข้าร่วม" />
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tablayout">
+
+    </android.support.v4.view.ViewPager>
 
 </RelativeLayout>
