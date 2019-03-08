@@ -5,9 +5,10 @@
     android:background="@android:color/holo_green_light">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/bar_search"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/coloGray">
+        android:background="@color/colorGray">
 
         <TextView
             android:layout_width="wrap_content"
@@ -15,18 +16,26 @@
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:textSize="27dp"
-            android:text="Search" />
+            android:text="ค้นหา" />
 
 
     </android.support.v7.widget.Toolbar>
 
 
 
-    <ListView
+    <GridView
         android:id="@+id/listseach"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        android:layout_marginTop="60dp" />
+        android:layout_below="@+id/bar_search"
+        android:columnWidth="120dp"
+        android:numColumns="2"
+        android:verticalSpacing="4dp"
+        android:horizontalSpacing="4dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center">
+
+    </GridView>
 
 </RelativeLayout>

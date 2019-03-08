@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.attivita">
-<uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,12 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddwarnActivity"></activity>
+        <activity android:name=".search_by_category"></activity>
+        <activity android:name=".EventDetails" />
+        <activity android:name=".AddwarnActivity" />
         <activity android:name=".AddeventActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoadingScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>

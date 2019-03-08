@@ -7,6 +7,22 @@
     android:background="@color/colorOrange"
     tools:context=".AddwarnActivity">
 
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorGray">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="27dp"
+            android:text="สร้างกิจกรรม" />
+
+    </android.support.v7.widget.Toolbar>
+
     <TextView
         android:id="@+id/locatwarn_textView"
         android:layout_width="wrap_content"

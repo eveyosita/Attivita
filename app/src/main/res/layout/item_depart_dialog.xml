@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorYellowjumpa"
+    >
+
+    <Button
+        android:id="@+id/button_dialog_cancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="8dp"
+        android:background="@drawable/ic_clear_black" />
+
+    <CheckBox
+        android:id="@+id/checkBox_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:text="ทุกสาขาวิชา"/>
+
+    <CheckBox
+        android:id="@+id/checkBox_match"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="คณิตศาสตร์"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/checkBox_all" />
+    <CheckBox
+        android:id="@+id/checkBox_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ชีววิทยา"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/checkBox_match" />
+    <CheckBox
+        android:id="@+id/checkBox_chem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="เคมี"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/checkBox_bio" />
+    <CheckBox
+        android:id="@+id/checkBox_phy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ฟิสิกส์"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/checkBox_chem" />
+    <CheckBox
+        android:id="@+id/checkBox_stat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="สถิติ"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/checkBox_phy" />
+
+    <CheckBox
+        android:id="@+id/checkBox_envi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="วิทยาศาสตร์สิ่งแวดล้อม"
+        android:layout_marginLeft="20dp"
+
+        android:layout_below="@id/checkBox_stat"
+       />
+    <CheckBox
+        android:id="@+id/checkBox_com"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="200dp"
+        android:text="วิทยาการคอมพิวเตอร์" />
+    <CheckBox
+        android:id="@+id/checkBox_micro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:text="จุลชีววิทยา"
+        android:layout_below="@id/checkBox_com" />
+    <CheckBox
+        android:id="@+id/checkBox_appmatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:text="คณิตศาสตร์ประยุกต์"
+        android:layout_below="@id/checkBox_micro" />
+    <CheckBox
+        android:id="@+id/checkBox_it"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:text="เทคโนโลยีสารสนเทศ"
+        android:layout_below="@id/checkBox_appmatch" />
+    <CheckBox
+        android:id="@+id/checkBox_tphy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:text="ครูฟิสิกส์"
+        android:layout_below="@id/checkBox_it" />
+
+    <CheckBox
+        android:id="@+id/checkBox_dsci"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkBox_tphy"
+        android:layout_marginLeft="200dp"
+        android:text="วิทยาการข้อมูล" />
+
+    <Button
+        android:id="@+id/button_dialog_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkBox_envi"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_login_corner"
+        android:text="ยืนยัน" />
+</RelativeLayout>

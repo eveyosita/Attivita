@@ -7,5 +7,8 @@
     <color name="colorWhite">#FBFCFC</color>
     <color name="colorOrange">#F7713D</color>
     <color name="colorYellow">#FCD98C</color>
-    <color name="coloGray">#455058</color>
+    <color name="colorGray">#455058</color>
+    <color name="colorYellowjumpa">#eea31f</color>
+    <color name="colorGreen">#45ab87</color>
+    <color name="colorBlack">#000000</color>
 </resources>

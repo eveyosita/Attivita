@@ -4,6 +4,14 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class student {
+    @SerializedName("status")
+    @Expose
+    private boolean status;
+
+    @SerializedName("massage")
+    @Expose
+    private String massage;
+
     @SerializedName("studentId")
     @Expose
     private String studentid;
@@ -54,12 +62,32 @@ public class student {
         this.telnumber = telnumber;
     }
 
-    public student(String firstname, String lastname){
+    public student(String studentid, String password,String firstname, String lastname,String department, String year){
+        this.studentid = studentid;
+        this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.department = department;
+        this.year = year;
     }
 
     public student(){
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getMassage() {
+        return massage;
+    }
+
+    public void setMassage(String massage) {
+        this.massage = massage;
     }
 
     public String getStudentid(){

@@ -1,38 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_bright">
+    tools:context=".search_by_category">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorYellowjumpa">
 
-
-        <ImageButton
-            android:id="@+id/addevent_imBut"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="left"
-            android:background="@drawable/add" />
-
         <TextView
+            android:id="@+id/category_event_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:textSize="27dp"
-            android:text="หน้าหลัก" />
+            android:text="ประเภท" />
 
-        <ImageButton
-            android:id="@+id/addwarn_imBut"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/warning_sign" />
+
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -42,7 +30,7 @@
         android:layout_marginTop="60dp">
 
         <ListView
-            android:id="@+id/list_event"
+            android:id="@+id/list_event_category"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp"
@@ -51,8 +39,5 @@
             android:scrollbars="none"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
-
-
 
 </RelativeLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@color/colorBlue"
+    android:background="@color/colorYellowjumpa"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -50,8 +50,9 @@
             android:id="@+id/id_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="รหัสนักศึกษา"
-            android:layout_gravity="center" />
+            android:hint="  รหัสนักศึกษา"
+            android:layout_gravity="center"
+            android:maxLength="8"/>
     </LinearLayout>
 
     <LinearLayout
@@ -67,7 +68,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="รหัสผ่าน"
+            android:hint="  รหัสผ่าน"
             android:inputType="textPassword"
             android:layout_gravity="center" />
     </LinearLayout>

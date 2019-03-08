@@ -1,6 +1,8 @@
 package com.example.attivita.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -14,10 +16,12 @@ import android.widget.Toast;
 import com.example.attivita.R;
 import com.example.attivita.RegisterActivity;
 import com.example.attivita.model.student;
+import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
 
 ;import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,30 +32,28 @@ public class ProfileFragment extends Fragment {
     student stu;
     TextView fnamePro;
     TextView lnamePro;
+    private static final String MY_PREFS = "prefs";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        Intent i = getActivity().getIntent();
-        id = i.getStringExtra("id");
-        Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
+        SharedPreferences shared = getContext().getSharedPreferences(MY_PREFS,
+                Context.MODE_PRIVATE);
 
-        stu = new student();
-        setStulist(id);
+        final String fname = shared.getString("firstname",null);
+        final String lname = shared.getString("lastname",null);
 
-        System.out.println("Firstname "+stu.getFirstname());
-        System.out.println("Lastname "+stu.getLastname());
-
-      /*  fnamePro = (TextView) v.findViewById(R.id.firstname_pro);
-        fnamePro.setText(stu.getFirstname());
-
+        fnamePro = (TextView) v.findViewById(R.id.firstname_pro);
         lnamePro = (TextView) v.findViewById(R.id.lastname_pro);
-        lnamePro.setText(stu.getLastname());*/
 
-        //setFnamePro(stu.getFirstname());
-        //setLnamePro(stu.getLastname());
+        fnamePro.setText(fname);
+        lnamePro.setText(lname);
+
+//        System.out.println("Firstname "+stu.getFirstname());
+//        System.out.println("Lastname "+stu.getLastname());
+
 
 
 
@@ -68,34 +70,32 @@ public class ProfileFragment extends Fragment {
         lnamePro.setText(lastname);
     }*/
 
-    public void setStulist(String id){
-        Call<student> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .showprofile(id);
-
-        call.enqueue(new Callback<student>() {
-            @Override
-            public void onResponse(Call<student> call, Response<student> response) {
-
-                student res = response.body();
-                System.out.println("Student "+response.body().getFirstname() +" "+ response.body().getLastname());
-                System.out.println("Firstname "+res.getFirstname());
-                System.out.println("Lastname "+res.getLastname());
-
-                stu.setFirstname(res.getFirstname());
-                stu.setLastname(res.getLastname());
-
-                Toast.makeText(getContext(), "Succees", Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onFailure(Call<student> call, Throwable t) {
-                Toast.makeText(getContext(), "Fail"+t.getMessage(), Toast.LENGTH_LONG).show();
-                System.err.println("ERRORRRRR : "+ t.getMessage());
-            }
-        });
-    }
+//    public void setStulist(String id){
+//        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+//        Call<student> call = apiService.showprofile(id);
+//
+//        call.enqueue(new Callback<student>() {
+//            @Override
+//            public void onResponse(Call<student> call, Response<student> response) {
+//
+//                student res = response.body();
+//                System.out.println("Student "+response.body().getFirstname() +" "+ response.body().getLastname());
+//                System.out.println("Firstname "+res.getFirstname());
+//                System.out.println("Lastname "+res.getLastname());
+//
+//                stu.setFirstname(res.getFirstname());
+//                stu.setLastname(res.getLastname());
+//
+//                Toast.makeText(getContext(), "Succees", Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<student> call, Throwable t) {
+//                Toast.makeText(getContext(), "Fail"+t.getMessage(), Toast.LENGTH_LONG).show();
+//                System.err.println("ERRORRRRR : "+ t.getMessage());
+//            }
+//        });
+//    }
 
 }
