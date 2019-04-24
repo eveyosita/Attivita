@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_light">
+    android:background="@drawable/backgroundcolor">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/bar_search"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@color/colorGray">
 
         <TextView
@@ -18,24 +18,317 @@
             android:textSize="27dp"
             android:text="ค้นหา" />
 
-
     </android.support.v7.widget.Toolbar>
 
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/bar_search2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/bar_search">
 
-    <GridView
-        android:id="@+id/listseach"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:background="@drawable/backgroundgary">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_search_black_24dp" />
+
+            <EditText
+                android:id="@+id/edittext_search"
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:background="@null"
+                android:hint="ค้นหา"
+                android:singleLine="true"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ค้นหา"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/button_login_corner"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:layout_below="@+id/bar_search"
-        android:columnWidth="120dp"
-        android:numColumns="2"
-        android:verticalSpacing="4dp"
-        android:horizontalSpacing="4dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center">
+        android:layout_below="@+id/bar_search2">
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_marginTop="5dp"
+>
 
-    </GridView>
+           <LinearLayout
+               android:id="@+id/layoutset1"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:paddingLeft="3dp"
+               android:orientation="horizontal">
+               <LinearLayout
+                   android:id="@+id/layout1"
+                   android:layout_width="200dp"
+                   android:layout_height="200dp"
+                   android:gravity="center"
+                   android:orientation="vertical">
+
+                   <ImageView
+                       android:id="@+id/imageView1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="10dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/shopping_bag" />
+
+                   <TextView
+                       android:id="@+id/textView1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="ขายของ"
+                       android:layout_gravity="center"
+                       android:textSize="20sp"
+                       android:textColor="#000000"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:id="@+id/layout2"
+                   android:layout_width="200dp"
+                   android:layout_height="200dp"
+                   android:layout_gravity="bottom"
+                   android:layout_marginLeft="5dp"
+                   android:gravity="center_vertical"
+                   android:orientation="vertical">
+
+                   <ImageView
+                       android:id="@+id/imageView2"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:layout_margin="10dp"
+                       android:background="@drawable/volunteer" />
+
+                   <TextView
+                       android:id="@+id/textView2"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="จิตอาสา"
+                       android:layout_gravity="center"
+                       android:textSize="20sp"
+                       android:textColor="#000000"/>
+               </LinearLayout>
+           </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/layoutset2"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:paddingLeft="3dp"
+               android:layout_below="@+id/layoutset1">
+               <LinearLayout
+                   android:id="@+id/layout3"
+                   android:layout_width="200dp"
+                   android:layout_height="200dp"
+                   android:gravity="center_vertical"
+                   android:orientation="vertical">
+
+                   <ImageView
+                       android:id="@+id/imageView3"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="10dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/open_book" />
+
+                   <TextView
+                       android:id="@+id/textView3"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="ติวหนังสือ"
+                       android:layout_gravity="center"
+                       android:textSize="20sp"
+                       android:textColor="#000000"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:id="@+id/layout4"
+                   android:layout_width="200dp"
+                   android:layout_height="200dp"
+                   android:layout_gravity="right"
+                   android:layout_marginLeft="5dp"
+                   android:gravity="center_vertical"
+                   android:orientation="vertical">
+
+                   <ImageView
+                       android:id="@+id/imageView4"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:layout_margin="10dp"
+                       android:background="@drawable/temple" />
+
+                   <TextView
+                       android:id="@+id/textView4"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="ทำบุญไหว้พระ"
+                       android:layout_gravity="center"
+                       android:textSize="20sp"
+                       android:textColor="#000000"/>
+               </LinearLayout>
+           </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/layoutset3"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:paddingLeft="3dp"
+               android:layout_below="@+id/layoutset2">
+               <LinearLayout
+                   android:id="@+id/layout5"
+                   android:layout_width="200dp"
+                   android:layout_height="200dp"
+                   android:gravity="center_vertical"
+                   android:orientation="vertical">
+
+                   <ImageView
+                       android:id="@+id/imageView5"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="10dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/airplane" />
+
+                   <TextView
+                       android:id="@+id/textView5"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="ท่องเที่ยว"
+                       android:layout_gravity="center"
+                       android:textSize="20sp"
+                       android:textColor="#000000"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:id="@+id/layout6"
+                   android:layout_width="200dp"
+                   android:layout_height="200dp"
+                   android:layout_gravity="right"
+                   android:layout_marginLeft="5dp"
+                   android:gravity="center_vertical"
+                   android:orientation="vertical">
+
+                   <ImageView
+                       android:id="@+id/imageView6"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:layout_margin="10dp"
+                       android:background="@drawable/gamepad" />
+
+                   <TextView
+                       android:id="@+id/textView6"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="เล่นเกมส์"
+                       android:layout_gravity="center"
+                       android:textSize="20sp"
+                       android:textColor="#000000"/>
+               </LinearLayout>
+           </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/layoutset4"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:paddingLeft="3dp"
+               android:layout_below="@+id/layoutset3">
+               <LinearLayout
+                   android:id="@+id/layout7"
+                   android:layout_width="200dp"
+                   android:layout_height="200dp"
+                   android:gravity="center_vertical"
+                   android:orientation="vertical">
+
+                   <ImageView
+                       android:id="@+id/imageView7"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="10dp"
+                       android:layout_gravity="center"
+                       android:background="@drawable/dish" />
+
+                   <TextView
+                       android:id="@+id/textView7"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="สังสรรค์"
+                       android:layout_gravity="center"
+                       android:textSize="20sp"
+                       android:textColor="#000000"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:id="@+id/layout8"
+                   android:layout_width="200dp"
+                   android:layout_height="200dp"
+                   android:layout_gravity="right"
+                   android:layout_marginLeft="5dp"
+                   android:gravity="center_vertical"
+                   android:orientation="vertical">
+
+                   <ImageView
+                       android:id="@+id/imageView8"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:layout_margin="10dp"
+                       android:background="@drawable/dumbbell" />
+
+                   <TextView
+                       android:id="@+id/textView8"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="ออกกำลังกาย"
+                       android:layout_gravity="center"
+                       android:textSize="20sp"
+                       android:textColor="#000000"/>
+               </LinearLayout>
+           </LinearLayout>
+
+
+       </RelativeLayout>
+    </ScrollView>
+
+    <!--<GridView-->
+        <!--android:id="@+id/listseach"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:padding="16dp"-->
+        <!--android:layout_below="@+id/bar_search2"-->
+        <!--android:columnWidth="120dp"-->
+        <!--android:numColumns="2"-->
+        <!--android:verticalSpacing="4dp"-->
+        <!--android:horizontalSpacing="4dp"-->
+        <!--android:stretchMode="columnWidth"-->
+        <!--android:gravity="center">-->
+
+    <!--</GridView>-->
+
 
 </RelativeLayout>

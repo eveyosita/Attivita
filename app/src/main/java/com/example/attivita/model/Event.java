@@ -4,6 +4,14 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Event {
+    @SerializedName("status")
+    @Expose
+    private int status;
+
+    @SerializedName("message")
+    @Expose
+    private String message;
+
     @SerializedName("eventId")
     @Expose
     private int eventId;
@@ -34,7 +42,7 @@ public class Event {
 
     @SerializedName("categoryId")
     @Expose
-    private String categoryId;
+    private int categoryId;
 
     @SerializedName("eventdetail")
     @Expose
@@ -56,9 +64,26 @@ public class Event {
     @Expose
     private String year;
 
+    @SerializedName("placename")
+    @Expose
+    private String placename;
 
-    public Event(int eventId, String eventname, String studentId, String startdate, String enddate, String strattime, String endtime,
-                 String categoryId, String eventdetail, String locationId, String amount, String department, String year) {
+    @SerializedName("latitude")
+    @Expose
+    private double latitude;
+
+    @SerializedName("longitude")
+    @Expose
+    private double longitude;
+
+    @SerializedName("address")
+    @Expose
+    private String address;
+
+    public Event(int eventId,String eventname, String studentId, String startdate, String enddate, String strattime, String endtime,
+                 int categoryId, String eventdetail, String locationId, String amount, String department, String year,
+                 String placename, double latitude, double longitude, String address) {
+
         this.eventId = eventId;
         this.eventname = eventname;
         this.studentId = studentId;
@@ -72,9 +97,42 @@ public class Event {
         this.amount = amount;
         this.department = department;
         this.year = year;
+        this.placename = placename;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.address = address;
 
     }
 
+    public Event(String eventname, String studentId, String startdate, String enddate, String strattime, String endtime,
+                 int categoryId, String eventdetail, String locationId, String amount, String department, String year,
+                 String placename, double latitude, double longitude, String address) {
+
+        this.eventname = eventname;
+        this.studentId = studentId;
+        this.startdate = startdate;
+        this.enddate = enddate;
+        this.strattime = strattime;
+        this.endtime = endtime;
+        this.categoryId = categoryId;
+        this.eventdetail = eventdetail;
+        this.locationId = locationId;
+        this.amount = amount;
+        this.department = department;
+        this.year = year;
+        this.placename = placename;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.address = address;
+
+    }
+
+    public int isStatus() {
+        return status;
+    }
+    public String getMessage() {
+        return message;
+    }
     public int getEventId() {
         return eventId;
     }
@@ -96,7 +154,7 @@ public class Event {
     public String getEndtime() {
         return endtime;
     }
-    public String getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
     public String getEventdetail() {
@@ -113,6 +171,30 @@ public class Event {
     }
     public String getYear() {
         return year;
+    }
+
+    public String getPlacename() {
+        return placename;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public void setMessage(String massage) {
+        this.message = message;
     }
 
     public void setEventId(int eventId) {
@@ -143,7 +225,7 @@ public class Event {
         this.endtime = endtime;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -166,4 +248,22 @@ public class Event {
     public void setYear(String year) {
         this.year = year;
     }
+
+    public void setPlacename(String placename) {
+        this.placename = placename;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
+
+

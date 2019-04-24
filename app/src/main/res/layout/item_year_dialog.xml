@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorYellowjumpa"
+    >
+
+    <Button
+        android:id="@+id/button_dialog_cancelyear"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="8dp"
+        android:background="@drawable/ic_clear_black" />
+
+
+    <CheckBox
+        android:id="@+id/checkBox_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ปี 1"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="50dp"
+     />
+    <CheckBox
+        android:id="@+id/checkBox_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ปี 2"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@id/checkBox_1" />
+    <CheckBox
+        android:id="@+id/checkBox_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ปี 3"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@id/checkBox_2" />
+    <CheckBox
+        android:id="@+id/checkBox_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ปี 4"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@id/checkBox_3" />
+    <CheckBox
+        android:id="@+id/checkBox_etc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ปีอื่นๆ"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@id/checkBox_4" />
+
+
+
+    <Button
+        android:id="@+id/button_dialog_acceptyear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkBox_etc"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_login_corner"
+        android:text="ยืนยัน" />
+</RelativeLayout>

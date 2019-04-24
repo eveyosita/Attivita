@@ -1,9 +1,306 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EventDetails">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/bar_detailevent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/colorGray"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/button_back_home"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_back" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bar_detailevent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgroundgary"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/textview_eventname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="15dp"
+                    android:text="ชื่อกิจกรรม"
+                    android:textSize="24dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingRight="15dp"
+                android:background="@drawable/ic_access_time"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="2dp"
+                android:layout_marginLeft="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textview_eventDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:text="วันกิจกรรม" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="20dp"
+                    android:background="@color/colorGray"
+                    android:layout_marginLeft="5dp"/>
+
+                <TextView
+                    android:id="@+id/textview_eventTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="เวลากิจกรรม" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingRight="15dp"
+                    android:background="@drawable/ic_place"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="2dp"
+                    android:layout_marginLeft="12dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textview_eventAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="สถานที่"
+                        android:textSize="17dp"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:padding="15dp">
+
+             <!--<ImageView-->
+                 <!--android:layout_width="wrap_content"-->
+                 <!--android:layout_height="wrap_content"-->
+                 <!--android:layout_gravity="center"-->
+                 <!--android:paddingRight="15dp"/>-->
+                <!--&lt;!&ndash;android:src="@drawable/ic_wc_black" &ndash;&gt;-->
+
+             <TextView
+                android:id="@+id/textview_eventCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 android:background="@drawable/backgroundlinegary"
+                android:text="ประเภท"
+                 android:textSize="17dp"/>
+
+        </LinearLayout>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="15dp">
+
+              <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content">
+
+                  <ImageView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center"/>
+                        <!--android:background="@drawable/ic_person_black" -->
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text=" ผู้เข้าร่วม"
+                      android:textSize="24dp" />
+
+                  <TextView
+                      android:id="@+id/textview_amount"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:paddingLeft="5dp"
+                      android:text="0"
+                      android:textSize="22dp" />
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="/"
+                      android:textSize="22dp" />
+
+                  <TextView
+                      android:id="@+id/textview_amountmax"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="เข้าร่วมสูงสุด"
+                      android:textSize="22dp" />
+
+              </LinearLayout>
+
+
+          </LinearLayout>
+
+           <View
+               android:layout_width="match_parent"
+               android:layout_height="20dp" />
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:padding="15dp">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:paddingBottom="15dp"
+                   android:text="รายละเอียด"
+                   android:textSize="24dp" />
+
+               <TextView
+                   android:id="@+id/textview_eventDetail"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="รายละเอียด"
+                   android:textSize="18dp" />
+
+           </LinearLayout>
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/button_joinevent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/select_button"
+        android:text="เข้าร่วม" />
+
+</RelativeLayout>
+
+<!--<TextView-->
+<!--android:id="@+id/e_name_detail"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="name"/>-->
+<!--<TextView-->
+<!--android:id="@+id/e_desc_detail"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="desc"-->
+<!--android:layout_below="@+id/e_name_detail"/>-->
+<!--<TextView-->
+<!--android:id="@+id/e_amount_detail"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="amount"-->
+<!--android:layout_below="@+id/e_desc_detail"/>-->
+<!--<TextView-->
+<!--android:id="@+id/e_sdate_detail"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="sdate"-->
+<!--android:layout_below="@+id/e_amount_detail"/>-->
+<!--<TextView-->
+<!--android:id="@+id/e_edate_detail"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="edate"-->
+<!--android:layout_below="@+id/e_sdate_detail"/>-->
+<!--<TextView-->
+<!--android:id="@+id/e_stime_detail"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="stime"-->
+<!--android:layout_below="@+id/e_desc_detail"/>-->
+<!--<TextView-->
+<!--android:id="@+id/e_etime_detail"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="etime"-->
+<!--android:layout_below="@+id/e_stime_detail"/>-->
+<!--<TextView-->
+<!--android:id="@+id/e_cate_detail"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="cate"-->
+<!--android:layout_below="@+id/e_etime_detail"/>-->
+<!--<TextView-->
+<!--android:id="@+id/e_locat_detail"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="locat"-->
+<!--android:layout_below="@+id/e_cate_detail"/>-->

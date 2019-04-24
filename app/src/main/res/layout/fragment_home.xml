@@ -6,9 +6,10 @@
     android:background="@android:color/holo_blue_bright">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/bar_home"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorYellowjumpa">
+        android:layout_height="50dp"
+        android:background="@color/colorGray">
 
 
         <ImageButton
@@ -16,7 +17,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="left"
-            android:background="@drawable/add" />
+            android:background="@drawable/ic_add_green" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,26 +29,26 @@
 
         <ImageButton
             android:id="@+id/addwarn_imBut"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="end"
             android:layout_marginRight="20dp"
-            android:background="@drawable/warning_sign" />
+            android:background="@drawable/ic_warning_black_50dp" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp">
+        android:layout_below="@+id/bar_home">
 
         <ListView
             android:id="@+id/list_event"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp"
-            android:dividerHeight="10.0sp"
-            android:background="@color/colorBlue"
+            android:dividerHeight="5dp"
+            android:background="@drawable/backgroundcolor"
             android:scrollbars="none"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>

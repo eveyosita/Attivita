@@ -11,4 +11,7 @@
     <color name="colorYellowjumpa">#eea31f</color>
     <color name="colorGreen">#45ab87</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorWhiteGray">#E5E7E9</color>
+    <color name="colorWhiteGrayline">#D5D8DC</color>
+
 </resources>

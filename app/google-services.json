@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "963169660990",
+    "firebase_url": "https://android-attivita.firebaseio.com",
+    "project_id": "android-attivita",
+    "storage_bucket": "android-attivita.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963169660990:android:c7b63164c1efcaeb",
+        "android_client_info": {
+          "package_name": "com.example.attivita"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963169660990-09dnmp27nj7nb4tnelekutpijqicp6nv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.attivita",
+            "certificate_hash": "118383f5c849cf636c7681d6995622aa08366202"
+          }
+        },
+        {
+          "client_id": "963169660990-greadjvidocjk3du132s41q8i1delr5c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi_JQA4IV4jTqgJqB7vCEoIpCLN1nB6l4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963169660990-greadjvidocjk3du132s41q8i1delr5c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

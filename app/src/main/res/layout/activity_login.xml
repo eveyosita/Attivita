@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@color/colorYellowjumpa"
+    android:background="@drawable/backgroundcolor"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -38,36 +38,35 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="230dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/layout_corner"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/id_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="230dp"
+            android:layout_height="45dp"
             android:hint="  รหัสนักศึกษา"
+            android:background="@drawable/layout_corner"
             android:layout_gravity="center"
             android:maxLength="8"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="230dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/layout_corner"
         android:layout_marginBottom="40dp"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/password_editText"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="230dp"
+            android:layout_height="45dp"
+            android:background="@drawable/layout_corner"
             android:hint="  รหัสผ่าน"
             android:inputType="textPassword"
             android:layout_gravity="center" />

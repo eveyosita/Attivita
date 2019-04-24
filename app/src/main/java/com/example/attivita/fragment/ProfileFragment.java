@@ -1,23 +1,28 @@
 package com.example.attivita.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.attivita.LoginActivity;
 import com.example.attivita.R;
 import com.example.attivita.RegisterActivity;
 import com.example.attivita.model.student;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
+import com.google.firebase.auth.FirebaseAuth;
 
 ;import java.util.ArrayList;
 
@@ -28,10 +33,9 @@ import retrofit2.Response;
 
 public class ProfileFragment extends Fragment {
 
-    String id;
-    student stu;
-    TextView fnamePro;
-    TextView lnamePro;
+    TextView fnamePro,lnamePro;
+    Button btn_logout;
+
     private static final String MY_PREFS = "prefs";
 
     @Nullable
@@ -42,60 +46,55 @@ public class ProfileFragment extends Fragment {
         SharedPreferences shared = getContext().getSharedPreferences(MY_PREFS,
                 Context.MODE_PRIVATE);
 
+        final String stuid = shared.getString("studentId",null);
+        final String pass = shared.getString("password",null);
         final String fname = shared.getString("firstname",null);
         final String lname = shared.getString("lastname",null);
 
-        fnamePro = (TextView) v.findViewById(R.id.firstname_pro);
-        lnamePro = (TextView) v.findViewById(R.id.lastname_pro);
+        fnamePro =  v.findViewById(R.id.firstname_pro);
+        lnamePro =  v.findViewById(R.id.lastname_pro);
+        btn_logout =  v.findViewById(R.id.button_logout);
 
         fnamePro.setText(fname);
         lnamePro.setText(lname);
 
-//        System.out.println("Firstname "+stu.getFirstname());
-//        System.out.println("Lastname "+stu.getLastname());
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("ต้องการออกจากระบบใช่หรือไม่?");
+                builder.setPositiveButton("ใช่", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        SharedPreferences shared = getContext().getSharedPreferences(MY_PREFS,
+                                Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = shared.edit();
 
+                        FirebaseAuth.getInstance().signOut();
+
+                        editor.clear();
+                        editor.commit();
+
+                        startActivity(new Intent(getContext(), LoginActivity.class));
+                        getActivity().finish();
+
+                    }
+                });
+                builder.setNegativeButton("ไม่", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+        });
 
 
 
         return v;
     }
 
-   /* public void setFnamePro(String firstname){
 
-
-    }
-
-    public void setLnamePro(String lastname){
-        lnamePro = (TextView) getView().findViewById(R.id.lastname_pro);
-        lnamePro.setText(lastname);
-    }*/
-
-//    public void setStulist(String id){
-//        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-//        Call<student> call = apiService.showprofile(id);
-//
-//        call.enqueue(new Callback<student>() {
-//            @Override
-//            public void onResponse(Call<student> call, Response<student> response) {
-//
-//                student res = response.body();
-//                System.out.println("Student "+response.body().getFirstname() +" "+ response.body().getLastname());
-//                System.out.println("Firstname "+res.getFirstname());
-//                System.out.println("Lastname "+res.getLastname());
-//
-//                stu.setFirstname(res.getFirstname());
-//                stu.setLastname(res.getLastname());
-//
-//                Toast.makeText(getContext(), "Succees", Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<student> call, Throwable t) {
-//                Toast.makeText(getContext(), "Fail"+t.getMessage(), Toast.LENGTH_LONG).show();
-//                System.err.println("ERRORRRRR : "+ t.getMessage());
-//            }
-//        });
 //    }
 
 }

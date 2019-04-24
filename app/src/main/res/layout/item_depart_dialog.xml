@@ -16,21 +16,16 @@
         android:layout_margin="8dp"
         android:background="@drawable/ic_clear_black" />
 
-    <CheckBox
-        android:id="@+id/checkBox_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
-        android:text="ทุกสาขาวิชา"/>
+
 
     <CheckBox
         android:id="@+id/checkBox_match"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="คณิตศาสตร์"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
-        android:layout_below="@id/checkBox_all" />
+     />
     <CheckBox
         android:id="@+id/checkBox_bio"
         android:layout_width="wrap_content"

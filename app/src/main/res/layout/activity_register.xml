@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorYellowjumpa">
+    android:background="@drawable/backgroundcolor">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/barregis"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@color/colorGray">
 
         <TextView
@@ -37,7 +37,6 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/barregis"
             android:gravity="center"
-            android:background="@color/colorYellowjumpa"
             android:padding="5dp">
 
             <TextView
@@ -46,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="รหัสนักศึกษา"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
+                android:textSize="18dp" />
             <LinearLayout
                 android:id="@+id/e1"
                 android:layout_width="wrap_content"
@@ -59,7 +58,7 @@
                     android:layout_height="40dp"
                     android:hint="  รหัสนักศึกษา"
                     android:inputType="number"
-                    android:textSize="16sp"
+                    android:textSize="17dp"
                     android:background="@drawable/layout_corner"/>
             </LinearLayout>
 
@@ -71,7 +70,7 @@
                 android:layout_below="@+id/e1"
                 android:text="รหัสผ่าน"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
+                android:textSize="18dp" />
             <LinearLayout
                 android:id="@+id/e2"
                 android:layout_width="wrap_content"
@@ -84,7 +83,7 @@
                     android:layout_height="40dp"
                     android:hint="  รหัสผ่าน"
                     android:inputType="textPassword"
-                    android:textSize="16sp"
+                    android:textSize="17dp"
                     android:background="@drawable/layout_corner"
                     />
             </LinearLayout>
@@ -97,7 +96,7 @@
                 android:layout_below="@+id/e2"
                 android:text="ยืนยันรหัสผ่าน"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
+                android:textSize="18dp" />
             <LinearLayout
                 android:id="@+id/e3"
                 android:layout_width="wrap_content"
@@ -110,7 +109,7 @@
                     android:layout_height="40dp"
                     android:hint="  ยืนยันรหัสผ่าน"
                     android:inputType="textPassword"
-                    android:textSize="16sp"
+                    android:textSize="17dp"
                     android:background="@drawable/layout_corner"
                     />
             </LinearLayout>
@@ -123,7 +122,7 @@
                 android:layout_below="@+id/e3"
                 android:text="ชื่อ"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
+                android:textSize="18dp" />
             <LinearLayout
                 android:id="@+id/e4"
                 android:layout_width="wrap_content"
@@ -135,7 +134,7 @@
                     android:layout_width="300dp"
                     android:layout_height="40dp"
                     android:hint="  ชื่อ"
-                    android:textSize="16sp"
+                    android:textSize="17dp"
                     android:background="@drawable/layout_corner" />
             </LinearLayout>
 
@@ -147,7 +146,7 @@
                 android:layout_below="@+id/e4"
                 android:text="นามสกุล"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
+                android:textSize="18dp" />
             <LinearLayout
                 android:id="@+id/e5"
                 android:layout_width="wrap_content"
@@ -159,43 +158,43 @@
                     android:layout_width="300dp"
                     android:layout_height="40dp"
                     android:hint="  นามสกุล"
-                    android:textSize="16sp"
+                    android:textSize="17dp"
                     android:background="@drawable/layout_corner"/>
             </LinearLayout>
 
-            <!--<TextView-->
-                <!--android:id="@+id/nickname_text"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_below="@+id/e5"-->
-                <!--android:text="ชื่อเล่น"-->
-                <!--android:textColor="@color/colorBlack"-->
-                <!--android:textSize="18sp" />-->
-            <!--<LinearLayout-->
-                <!--android:id="@+id/e6"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_below="@+id/nickname_text"-->
-                <!--android:orientation="horizontal">-->
-                <!--<EditText-->
-                    <!--android:id="@+id/nickname_editText"-->
-                    <!--android:layout_width="300dp"-->
-                    <!--android:layout_height="40dp"-->
-                    <!--android:hint="  ชื่อเล่น"-->
-                    <!--android:textSize="16sp"-->
-                    <!--android:background="@drawable/layout_corner"/>-->
-            <!--</LinearLayout>-->
+            <TextView
+                android:id="@+id/email_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/e5"
+                android:text="อีเมล์"
+                android:textColor="@color/colorBlack"
+                android:textSize="18dp" />
+            <LinearLayout
+                android:id="@+id/e6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/email_text"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/email_editText"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:hint="  อีเมล์"
+                    android:textSize="16sp"
+                    android:background="@drawable/layout_corner"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/departRegist_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="สาาขาวิชา"
+                android:text="สาขาวิชา"
                 android:textColor="@color/colorBlack"
-                android:layout_below="@+id/e5"
-                android:textSize="18sp" />
+                android:layout_below="@+id/e6"
+                android:textSize="18dp" />
             <LinearLayout
                 android:id="@+id/e7"
                 android:layout_width="wrap_content"
@@ -205,9 +204,9 @@
                 android:background="@drawable/layout_corner">
                 <Spinner
                     android:id="@+id/departRegist_spinner"
-                    android:layout_width="300dp"
+                    android:layout_width="280dp"
                     android:layout_height="38dp"
-                    android:textSize="14sp"/>
+                    android:textSize="17dp"/>
             </LinearLayout>
 
             <!--<TextView-->
@@ -264,7 +263,7 @@
                 android:layout_width="70dp"
                 android:layout_height="61dp"
                 android:layout_marginLeft="120dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_below="@+id/e7"
                 app:srcCompat="@drawable/ic_camera_alt_black_100dp" />
 
@@ -273,7 +272,7 @@
                 android:layout_width="107dp"
                 android:layout_height="52dp"
                 android:layout_marginLeft="104dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_below="@+id/photo_imageButton"
                 android:background="@drawable/select_button"
                 android:text="เสร็จสิ้น" />

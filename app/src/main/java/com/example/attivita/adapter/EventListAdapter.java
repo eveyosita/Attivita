@@ -48,7 +48,6 @@ public class EventListAdapter extends BaseAdapter {
         TextView dateevent = (TextView)itemLayout.findViewById(R.id.date_event);
         TextView timeevent = (TextView)itemLayout.findViewById(R.id.time_event);
         TextView cateegoryevent = (TextView)itemLayout.findViewById(R.id.cateegory_event);
-        TextView locationevent = (TextView)itemLayout.findViewById(R.id.location_event);
 
         String name = "ชื่อกิจกรรม : "+resultList.get(i).getEventname();
         String amout = "จำนวนคน : "+resultList.get(i).getAmount();
@@ -78,7 +77,6 @@ public class EventListAdapter extends BaseAdapter {
         nameevent.setText(name);
         amountevent.setText(amout);
         cateegoryevent.setText(category);
-        locationevent.setText(resultList.get(i).getLocationId());
         dateevent.setText(date);
         timeevent.setText(time);
 
@@ -115,26 +113,24 @@ public class EventListAdapter extends BaseAdapter {
         return "";
     }
 
-    String getCategory(String cate){
+    String getCategory(int cate){
         switch (cate){
-            case "0":
-                return "ทั้งหมด";
-            case "1":
-                return "สังสรรค์";
-            case "2":
-                return "ออกกำลังกาย";
-            case "3":
-                return "ติวหนังสือ";
-            case "4":
-                return "ท่องเที่ยว";
-            case "5":
+            case 0 :
                 return "ขายของ";
-            case "6":
-                return "ทำบุญไหว้พระ";
-            case "7":
+            case 1:
                 return "จิตอาสา";
-            case "8":
+            case 2:
+                return "ติวหนังสือ";
+            case 3:
+                return "ทำบุญไหว้พระ";
+            case 4:
+                return "ท่องเที่ยว";
+            case 5:
                 return "เล่นเกมส์";
+            case 6:
+                return "สังสรรค์";
+            case 7:
+                return "ออกกำลังกาย";
             default: break;
         }
         return "";

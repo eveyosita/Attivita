@@ -2,30 +2,68 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorYellow">
+    android:background="@drawable/backgroundcolor">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/bar_message"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@color/colorGray">
-
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="ข้อความ"
             android:textColor="@color/colorWhite"
-            android:textSize="27dp"
-            android:text="ข้อความ" />
+            android:textSize="27dp" />
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/add_message"/>
 
 
     </android.support.v7.widget.Toolbar>
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/bar_message"
+    android:background="@drawable/backgroundwhite"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginBottom="10dp">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageView_profile"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_gravity="center"
+        android:src="@drawable/boy" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="140dp"
+        android:text="ยศวัฒน์ วรเกียรติชัยธนา"
+        android:textSize="19dp"/>
+
+
+
+
+
+</RelativeLayout>
+
+    <!--<ListView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="60dp" />-->
 
 </RelativeLayout>

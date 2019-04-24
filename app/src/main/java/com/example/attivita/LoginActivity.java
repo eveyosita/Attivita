@@ -1,9 +1,11 @@
 package com.example.attivita;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +19,13 @@ import com.example.attivita.model.ResponseRegist;
 import com.example.attivita.model.student;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Calendar;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -33,16 +42,26 @@ public class LoginActivity extends AppCompatActivity {
     String pass;
     private static final String MY_PREFS = "prefs";
 
+    SharedPreferences shared;
+    SharedPreferences.Editor editor;
+
+    FirebaseAuth auth;
+    FirebaseUser firebaseUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
+        shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
+        editor = shared.edit();
+
         et_id = (EditText) findViewById(R.id.id_editText);
         et_pass = (EditText) findViewById(R.id.password_editText);
 
-        et_id.addTextChangedListener(myTextWatcher);
+        auth = FirebaseAuth.getInstance();
+
 
         btn_regist = (Button) findViewById(R.id.register_button);
         btn_regist.setOnClickListener(new View.OnClickListener() {
@@ -55,44 +74,38 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
         btn_login = (Button) findViewById(R.id.login_button);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 id = et_id.getText().toString();
                 pass = et_pass.getText().toString();
+                int y = Calendar.getInstance().get(Calendar.YEAR);
+                String yy = (Integer.toString(y+543)).substring(2);
 
-                checkLogin(id,pass);
-
+                if(id.isEmpty() || pass.isEmpty()){
+                    Toast.makeText(LoginActivity.this, "กรุณากรอกรหัสนักศึกษาและรหัสผ่าน", Toast.LENGTH_SHORT).show();
+                } else if(id.substring(0,2).equals("07") && Integer.parseInt(id.substring(2,4)) <= Integer.parseInt(yy)){
+                    checkLogin(id,pass);
+                } else {
+                    Toast.makeText(LoginActivity.this, "กรุณากรอกรหัสนักศึกษาและรหัสผ่านให้ถูกต้อง", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
     }
 
-    public TextWatcher myTextWatcher = new TextWatcher() {
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count,
-                                      int after) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            int count = 8 - et_id.length();
-            if(count<8){
-
-            }
-        }
-    };
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//
+//        if (firebaseUser != null) {
+//            Intent intent = new Intent(this, MainActivity.class);
+//            startActivity(intent);
+//        }
+//    }
 
 
     public void checkLogin(String id, String pass){
@@ -101,22 +114,34 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<student>() {
             @Override
             public void onResponse(Call<student> call, Response<student> response) {
-                student res = response.body();
+                final student res = response.body();
                 if(res.isStatus()){
-                    SharedPreferences shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = shared.edit();
-                    editor.putString("studentId", res.getStudentid());
-                    editor.putString("password", res.getPassword());
-                    editor.putString("firstname", res.getFirstname());
-                    editor.putString("lastname", res.getLastname());
-                    editor.putString("department", res.getDepartment());
-                    editor.putString("year", res.getYear());
-                    editor.putBoolean("status", true);
-                    editor.commit();
 
+                    System.out.println("Email : "+res.getEmail());
+                    System.out.println("Pass : "+res.getPassword());
                     Toast.makeText(LoginActivity.this, "Succees", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(i);
+
+                    auth.signInWithEmailAndPassword(res.getEmail(),res.getPassword())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    editor.putString("studentId", res.getStudentid());
+                                    editor.putString("password", res.getPassword());
+                                    editor.putString("firstname", res.getFirstname());
+                                    editor.putString("lastname", res.getLastname());
+                                    editor.putString("department", res.getDepartment());
+                                    editor.putString("year", res.getYear());
+                                    editor.putString("email", res.getEmail());
+                                    editor.putBoolean("status", true);
+                                    editor.commit();
+
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+
+//                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(i);
                 } else {
                     Toast.makeText(LoginActivity.this, res.getMassage(), Toast.LENGTH_SHORT).show();
                 }

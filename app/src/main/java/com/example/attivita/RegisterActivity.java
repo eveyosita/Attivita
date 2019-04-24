@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,6 +21,13 @@ import com.example.attivita.model.ResponseRegist;
 import com.example.attivita.model.student;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -28,6 +36,7 @@ import retrofit2.Response;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -35,13 +44,18 @@ public class RegisterActivity extends AppCompatActivity {
      EditText pass_text;
      EditText conpass_text;
      EditText fname_text;
-     EditText lname_text;
+     EditText lname_text,email_text;
      Spinner depart_spin;
      Button finish_btn;
-     String depart;
+     String stdid,passw,conpass,fname,lname,year,depart,email;
+     int posit=-1;
+
      ArrayList<String> department = new ArrayList<String>();
     Button mButtonDialog;
     private static final String MY_PREFS = "prefs";
+
+    FirebaseAuth auth;
+    DatabaseReference reference;
 
 
     @Override
@@ -57,7 +71,10 @@ public class RegisterActivity extends AppCompatActivity {
         conpass_text = (EditText) findViewById(R.id.conpassword2_editText);
         fname_text = (EditText) findViewById(R.id.fname_editText);
         lname_text = (EditText) findViewById(R.id.lname_editText);
+        email_text = (EditText) findViewById(R.id.email_editText);
         depart_spin = (Spinner) findViewById(R.id.departRegist_spinner);
+
+        auth = FirebaseAuth.getInstance();
 
         createDepartment();
         ArrayAdapter<String> adapterDepart = new ArrayAdapter<String>(this,
@@ -68,11 +85,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-               depart = department.get(position);
-
-//                Toast.makeText(RegisterActivity.this,
-//                        "Select : " + department.get(position),
-//                        Toast.LENGTH_SHORT).show();
+                if(position != 0){
+                    depart = department.get(position);
+                    posit = position;
+                } else {
+                    posit = position;
+                }
             }
 
             @Override
@@ -85,47 +103,57 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String id = id_text.getText().toString();
-                String pass = pass_text.getText().toString();
-                String conpass = conpass_text.getText().toString();
-                String fname = fname_text.getText().toString();
-                String lname = lname_text.getText().toString();
-                String year = "25"+id.substring(2,4);
-                int y = Calendar.getInstance().get(Calendar.YEAR);
-                String yy = (Integer.toString(y+543)).substring(2);
+                stdid = id_text.getText().toString();
+                passw = pass_text.getText().toString();
+                conpass = conpass_text.getText().toString();
+                fname = fname_text.getText().toString();
+                lname = lname_text.getText().toString();
+                email = email_text.getText().toString();
 
+                System.out.println("Email : "+ email);
 
-                if(id.substring(0,2).equals("07") && Integer.parseInt(id.substring(2,4)) <= Integer.parseInt(yy) ){
-                    if(pass.equals(conpass)) {
+                if(stdid.isEmpty() || passw.isEmpty() || conpass.isEmpty() || fname.isEmpty()
+                        || lname.isEmpty() || email.isEmpty() || posit==0){
 
-                        setStudent(id, pass, fname, lname, depart, year);
+                    Toast.makeText(RegisterActivity.this, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show();
 
-                        String s = "รหัสนักศึกษา : "+id+"\nชื่อ : "+fname+"\nนามสกุล : "+lname+"\nสาขาวิชา : "
-                                +depart+"\nชั้นปี : "+year+"\n";
-                        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                }  else {
+                    year = "25"+stdid.substring(2,4);
+                    int y = Calendar.getInstance().get(Calendar.YEAR);
+                    String yy = (Integer.toString(y+543)).substring(2);
+                    if(stdid.substring(0,2).equals("07") && Integer.parseInt(stdid.substring(2,4)) <= Integer.parseInt(yy)
+                            && passw.length()>=6 ) {
+                        if(passw.length() >=8 && passw.equals(conpass)){
+                            String s = "รหัสนักศึกษา : " + stdid + "\nชื่อ : " + fname + "\nนามสกุล : " + lname + "\nสาขาวิชา : "
+                                    + depart + "\nชั้นปี : " + year + "\n";
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                            builder.setMessage(s);
 
-                        builder.setMessage(s);
-
-                        builder.setPositiveButton("ยันยัน", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-                                startActivity(i);
-                            }
-                        });
-                        builder.setNegativeButton("แก้ไข", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        builder.show();
-                        //finish();
+                            builder.setPositiveButton("ยันยัน", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    setStudent();
+                                    //finish();
+//                            Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+//                            startActivity(i);
+                                }
+                            });
+                            builder.setNegativeButton("แก้ไข", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            builder.show();
+                            //finish();
 //                    Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
 //                    startActivity(i);
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "รหัสผ่านไม่ถูกต้อง", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "รหัสนักศึกษาไม่ถูกต้อง", Toast.LENGTH_LONG).show();
                     }
-                } else {
-                Toast.makeText(RegisterActivity.this, "Error", Toast.LENGTH_LONG).show();
+
                 }
             }
         });
@@ -134,7 +162,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void createDepartment() {
         department.add("เลือกสาขาวิชา");
-        department.add("com");
         department.add("คณิตศาสตร์");
         department.add("ชีววิทยา");
         department.add("เคมี");
@@ -150,22 +177,43 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public void setStudent(String id, String pass, String fname, String lname,String depart, String year){
+    public void setStudent(){
 
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-        Call<student> call = apiService.createuser(id,pass,fname,lname,depart,year);
-
-
-//        Call<ResponseRegist> call = RetrofitClient
-//                .getInstance()
-//                .getApi()
-//                .createuser(id,pass,fname,lname,nname,depart,year,email,tel);
+        Call<student> call = apiService.createuser(stdid,passw,fname,lname,depart,year,email);
 
         call.enqueue(new Callback<student>() {
             @Override
             public void onResponse(Call<student> call, Response<student> response) {
                 student res = response.body();
                 if (res.isStatus()){
+                    auth.createUserWithEmailAndPassword(email, passw)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        FirebaseUser firebaseUser = auth.getCurrentUser();
+                                        String userid = firebaseUser.getUid();
+
+                                        reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+
+                                        HashMap<String, String> hashMap = new HashMap<>();
+                                        hashMap.put("id", userid);
+                                        hashMap.put("username", email);
+                                        hashMap.put("imagerUrl", "defult");
+
+                                        reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                            }
+                                        });
+                                    } else {
+                                        Toast.makeText(RegisterActivity.this, "กรอกข้อมูลผิดพลาด", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+
                     SharedPreferences shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = shared.edit();
                     editor.putString("studentId", res.getStudentid());
@@ -174,13 +222,13 @@ public class RegisterActivity extends AppCompatActivity {
                     editor.putString("lastname", res.getLastname());
                     editor.putString("department", res.getDepartment());
                     editor.putString("year", res.getYear());
+                    editor.putString("email", res.getEmail());
                     editor.putBoolean("status", true);
                     editor.commit();
-
-
+                    Toast.makeText(RegisterActivity.this, "ลงทะเบียนเสร็จสิ้น", Toast.LENGTH_LONG).show();
                 }
 
-                Toast.makeText(RegisterActivity.this, "Succees", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

@@ -8,18 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.attivita.fragment.HomeFragment;
 import com.example.attivita.fragment.MessageFragment;
-import com.example.attivita.fragment.NotificationFragment;
+import com.example.attivita.fragment.MyEventFragment;
 import com.example.attivita.fragment.ProfileFragment;
 import com.example.attivita.fragment.SeachFragment;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     selectFragment = new MessageFragment();
                     break;
                 case R.id.nav_notifications:
-                    selectFragment = new NotificationFragment();
+                    selectFragment = new MyEventFragment();
                     break;
                 case R.id.nav_profile:
 
