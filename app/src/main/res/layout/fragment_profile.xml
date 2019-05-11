@@ -84,7 +84,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="50dp"
             android:layout_below="@+id/firstname_pro"
-            android:text="depart" />
+            />
 
         <TextView
             android:id="@+id/id_pro"
@@ -95,7 +95,7 @@
 
             android:layout_marginTop="50dp"
             android:layout_below="@+id/firstname_pro"
-            android:text="id" />
+           />
 
 
 
