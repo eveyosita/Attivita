@@ -35,6 +35,7 @@ import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,6 +58,8 @@ public class HomeFragment extends Fragment  {
     private static final int REQUEST_LOCATION = 1;
 
     private static final String MY_PREFS = "prefs";
+
+    String studentDepart,studentyear;
 
 
         @Override
@@ -88,6 +91,8 @@ public class HomeFragment extends Fragment  {
                     Context.MODE_PRIVATE);
 
             final String stdid = shared.getString("studentId",null);
+            studentDepart = shared.getString("department",null);
+            studentyear = shared.getString("year",null);
 //            String year = "25"+stdid.substring(2,4);
              setEventIDList(stdid);
 
@@ -168,14 +173,32 @@ public class HomeFragment extends Fragment  {
                              eventList.clear();
 
                              if (res.size() != 0) {
-
                                  for (Event r : res) {
-                                     eventList.add(new Event(r.getEventId(),r.getEventname(), r.getStudentId()
-                                             , r.getStartdate(), r.getEnddate(), r.getStrattime()
-                                             , r.getEndtime() , r.getCategoryId() , r.getEventdetail()
-                                             , r.getLocationId() , r.getAmount() , r.getDepartment()
-                                             , r.getYear() , r.getPlacename() , r.getLatitude()
-                                             , r.getLongitude() , r.getAddress()));
+//                                     System.out.println("DDDN "+studentDepart);
+//                                     System.out.println("DDYN "+studentyear);
+//                                     System.out.println("DDD1 "+r.getYear());
+                                     String[] depart = r.getDepartment().split(" ");
+                                     String[] year = r.getYear().split(" ");
+
+//                                     for (int i = 0 ; i<depart.length ; i++){
+//                                         System.out.println("DDD "+depart[i]);
+//                                     }
+//                                     for (int i = 0 ; i<year.length ; i++){
+//                                         System.out.println("DDY "+year[i]);
+//                                     }
+
+                                     if(checkDepartment(depart)){
+                                         if(checkYear(year)){
+
+
+                                         eventList.add(new Event(r.getEventId(),r.getEventname(), r.getStudentId()
+                                                 , r.getStartdate(), r.getEnddate(), r.getStrattime()
+                                                 , r.getEndtime() , r.getCategoryId() , r.getEventdetail()
+                                                 , r.getLocationId() , r.getAmount() , r.getDepartment()
+                                                 , r.getYear() , r.getPlacename() , r.getLatitude()
+                                                 , r.getLongitude() , r.getAddress()));
+                                        }
+                                     }
                                  }
                                  EventListAdapter adapter = new EventListAdapter(getContext(),R.layout.item_event, eventList);
                                  listView.setAdapter(adapter);
@@ -250,6 +273,132 @@ public class HomeFragment extends Fragment  {
         final AlertDialog alert = builder.create();
         alert.show();
     }
+
+    public boolean checkYear(String[] year){
+        int studentyear_int = Integer.parseInt(studentyear);
+
+        int y = Calendar.getInstance().get(Calendar.YEAR)+543;
+
+
+
+        for(int i = 0 ; i<year.length ; i++ ) {
+            int year_int = Integer.parseInt(year[i])-1;
+
+            if(year_int <= 3 && y - year_int == studentyear_int){
+                System.out.println("DDYStu "+year_int);
+                return true;
+            } else if(year_int == 4 && y - year_int >= studentyear_int ) {
+                System.out.println("DDYGrat "+year_int);
+                return true;
+            }
+        }
+        return false;
+    }
+
+   public boolean checkDepartment(String[] depart){
+       String department="";
+       boolean check = false;
+       for(int i = 0 ; i<depart.length ; i++ ) {
+            switch (depart[i]) {
+                case "A":
+
+                    department="คณิตศาสตร์";
+                    if(department.equals(studentDepart)){ System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+
+                case "B":
+
+                    department="ชีววิทยา";
+                    if(department.equals(studentDepart)){System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+
+                case "C":
+
+                    department="เคมี";
+                    if(department.equals(studentDepart)){System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+
+                case "D":
+
+                    department="ฟิสิกส์";
+                    if(department.equals(studentDepart)){System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+
+                case "E":
+
+                    department="สถิติ";
+                    if(department.equals(studentDepart)){System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+
+                case "F":
+
+                    department="วิทยาศาสตร์สิ่งแวดล้อม";
+                    if(department.equals(studentDepart)){System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+
+                case "G":
+
+                    department="วิทยาการคอมพิวเตอร์";
+                    if(department.equals(studentDepart)){System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+
+                case "H":
+
+                    department="จุลชีววิทยา";
+                    if(department.equals(studentDepart)){System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+
+                case "I":
+
+                    department="คณิตศาสตร์ประยุกต์";
+                    if(department.equals(studentDepart)){System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+
+                case "J":
+
+                    department="เทคโนโลยีสารสนเทศ";
+                    if(department.equals(studentDepart)){System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+
+                case "K":
+
+                    department="ครูฟิสิกส์";
+                    if(department.equals(studentDepart)){System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+
+                case "L":
+
+                    department="วิทยาการข้อมูล";
+                    if(department.equals(studentDepart)){System.out.println("DDD2 "+depart[i]);
+                        check = department.equals(studentDepart);
+                        break;
+                    }
+            }
+       }
+       return check;
+   }
 
 
 

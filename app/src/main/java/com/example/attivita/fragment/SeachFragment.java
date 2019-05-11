@@ -56,7 +56,7 @@ public class SeachFragment extends Fragment implements View.OnClickListener{
         return v;
     }
 
-    public void sendType(int cateId, String namecate){
+    public void sendType(String cateId, String namecate){
 
         Intent intent = new Intent(getContext(), search_by_category.class);
         intent.putExtra("categoryId", cateId);
@@ -81,28 +81,28 @@ public class SeachFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageView1:
-                sendType(0,"ขายของ");
+                sendType("0","ขายของ");
                 break;
             case R.id.imageView2:
-                sendType(1,"จิตอาสา");
+                sendType("1","จิตอาสา");
                 break;
             case R.id.imageView3:
-                sendType(2,"ติวหนังสือ");
+                sendType("2","ติวหนังสือ");
                 break;
             case R.id.imageView4:
-                sendType(3,"ทำบุญไหว้พระ");
+                sendType("3","ทำบุญไหว้พระ");
                 break;
             case R.id.imageView5:
-                sendType(4,"ท่องเที่ยว");
+                sendType("4","ท่องเที่ยว");
                 break;
             case R.id.imageView6:
-                sendType(5,"เล่นเกมส์");
+                sendType("5","เล่นเกมส์");
                 break;
             case R.id.imageView7:
-                sendType(6,"สังสรรค์");
+                sendType("6","สังสรรค์");
                 break;
             case R.id.imageView8:
-                sendType(7,"ออกกำลังกาย");
+                sendType("7","ออกกำลังกาย");
                 break;
             case R.id.button_search:
                 search();

@@ -33,7 +33,7 @@ import retrofit2.Response;
 
 public class ProfileFragment extends Fragment {
 
-    TextView fnamePro,lnamePro;
+    TextView fnamePro,lnamePro,departPro,idPro;
     Button btn_logout;
 
     private static final String MY_PREFS = "prefs";
@@ -50,13 +50,18 @@ public class ProfileFragment extends Fragment {
         final String pass = shared.getString("password",null);
         final String fname = shared.getString("firstname",null);
         final String lname = shared.getString("lastname",null);
+        final String depart = shared.getString("department",null);
 
         fnamePro =  v.findViewById(R.id.firstname_pro);
         lnamePro =  v.findViewById(R.id.lastname_pro);
         btn_logout =  v.findViewById(R.id.button_logout);
+        departPro =  v.findViewById(R.id.depart_pro);
+        idPro =  v.findViewById(R.id.id_pro);
 
         fnamePro.setText(fname);
         lnamePro.setText(lname);
+        departPro.setText(depart);
+        idPro.setText(stuid);
 
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +74,7 @@ public class ProfileFragment extends Fragment {
                                 Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = shared.edit();
 
-                        FirebaseAuth.getInstance().signOut();
+                        //FirebaseAuth.getInstance().signOut();
 
                         editor.clear();
                         editor.commit();

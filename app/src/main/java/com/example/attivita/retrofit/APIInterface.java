@@ -25,7 +25,8 @@ public interface APIInterface {
            @Field("lastname") String lastname,
            @Field("department") String department,
            @Field("year") String year,
-           @Field("email") String email
+           @Field("email") String email,
+           @Field("identity_pic") String identity_pic
     );
 
     @FormUrlEncoded
@@ -68,9 +69,17 @@ public interface APIInterface {
             @Field("studentId") String studentId
     );
 
-    @GET("readevent_bycategory.php")
+    @FormUrlEncoded
+    @POST("readevent_bycategory.php")
     Call<ArrayList<Event>> readevent_bycategory(
-//            @Field("categoryId") int categoryId
+            @Field("categoryId") int categoryId
+    );
+
+    @FormUrlEncoded
+    @POST("searchevent.php")
+    Call<ArrayList<Event>> searchevent(
+            @Field("studentId") String studentId,
+            @Field("search_query") String search_query
     );
 
     @FormUrlEncoded

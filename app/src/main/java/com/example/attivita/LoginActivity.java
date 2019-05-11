@@ -121,10 +121,10 @@ public class LoginActivity extends AppCompatActivity {
                     System.out.println("Pass : "+res.getPassword());
                     Toast.makeText(LoginActivity.this, "Succees", Toast.LENGTH_SHORT).show();
 
-                    auth.signInWithEmailAndPassword(res.getEmail(),res.getPassword())
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
+//                    auth.signInWithEmailAndPassword(res.getEmail(),res.getPassword())
+//                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<AuthResult> task) {
                                     editor.putString("studentId", res.getStudentid());
                                     editor.putString("password", res.getPassword());
                                     editor.putString("firstname", res.getFirstname());
@@ -137,8 +137,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
-                                }
-                            });
+//                                }
+//                            });
 
 //                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
 //                    startActivity(i);

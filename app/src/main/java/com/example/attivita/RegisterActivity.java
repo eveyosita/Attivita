@@ -1,19 +1,26 @@
 package com.example.attivita;
 
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,6 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -47,12 +55,16 @@ public class RegisterActivity extends AppCompatActivity {
      EditText lname_text,email_text;
      Spinner depart_spin;
      Button finish_btn;
-     String stdid,passw,conpass,fname,lname,year,depart,email;
+     ImageView photo_btn;
+     String stdid,passw,conpass,fname,lname,year,depart,email,image_confirm;
      int posit=-1;
 
      ArrayList<String> department = new ArrayList<String>();
     Button mButtonDialog;
     private static final String MY_PREFS = "prefs";
+
+    private int SELECT_IMAGE = 1001;
+    private int CROP_IMAGE = 2001;
 
     FirebaseAuth auth;
     DatabaseReference reference;
@@ -65,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         finish_btn = (Button) findViewById(R.id.finish_button);
-
+        photo_btn = findViewById(R.id.photo_Button);
         id_text = (EditText) findViewById(R.id.id2_editText);
         pass_text = (EditText) findViewById(R.id.password2_editText);
         conpass_text = (EditText) findViewById(R.id.conpassword2_editText);
@@ -73,6 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
         lname_text = (EditText) findViewById(R.id.lname_editText);
         email_text = (EditText) findViewById(R.id.email_editText);
         depart_spin = (Spinner) findViewById(R.id.departRegist_spinner);
+
 
         auth = FirebaseAuth.getInstance();
 
@@ -95,6 +108,16 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        photo_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(Intent.createChooser(intent, "Select Image from Gallery"), SELECT_IMAGE);
 
             }
         });
@@ -177,10 +200,52 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    public String imageToString(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imgByte = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgByte, Base64.DEFAULT);
+    }
+
+    private void CropImage(Uri uri) {
+        try {
+            Intent CropIntent = new Intent("com.android.camera.action.CROP");
+            CropIntent.setDataAndType(uri, "image/*");
+            CropIntent.putExtra("crop", "true");
+            CropIntent.putExtra("outputX", 360);
+            CropIntent.putExtra("outputY", 360);
+            CropIntent.putExtra("aspectX", 1);
+            CropIntent.putExtra("aspectY", 1);
+            CropIntent.putExtra("scaleUpIfNeeded", true);
+            CropIntent.putExtra("return-data", true);
+            startActivityForResult(CropIntent, CROP_IMAGE);
+        } catch (ActivityNotFoundException ex) {
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_IMAGE) {
+                if (data != null) {
+                    CropImage(data.getData());
+                }
+            } else if (requestCode == CROP_IMAGE) {
+                Bundle bundle = data.getExtras();
+                Bitmap bitmap = bundle.getParcelable("data");
+                image_confirm = imageToString(bitmap);
+                Toast.makeText(RegisterActivity.this, image_confirm, Toast.LENGTH_SHORT).show();
+
+            }
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(RegisterActivity.this, "Canceled", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void setStudent(){
 
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-        Call<student> call = apiService.createuser(stdid,passw,fname,lname,depart,year,email);
+        Call<student> call = apiService.createuser(stdid,passw,fname,lname,depart,year,email,image_confirm);
 
         call.enqueue(new Callback<student>() {
             @Override
@@ -226,6 +291,7 @@ public class RegisterActivity extends AppCompatActivity {
                     editor.putBoolean("status", true);
                     editor.commit();
                     Toast.makeText(RegisterActivity.this, "ลงทะเบียนเสร็จสิ้น", Toast.LENGTH_LONG).show();
+                    finish();
                 }
 
 

@@ -23,13 +23,13 @@
 
     </android.support.v7.widget.Toolbar>
 
-<!--<ScrollView-->
-    <!--android:id="@+id/scrollRegist"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_below="@+id/barregis"-->
-    <!--android:layout_gravity="center"-->
-    <!--&gt;-->
+<ScrollView
+    android:id="@+id/scrollRegist"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/barregis"
+    android:layout_gravity="center"
+    >
 
         <RelativeLayout
             android:id="@+id/editall"
@@ -43,6 +43,7 @@
                 android:id="@+id/id2_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="รหัสนักศึกษา"
                 android:textColor="@color/colorBlack"
                 android:textSize="18dp" />
@@ -258,12 +259,12 @@
                     <!--android:background="@drawable/layout_corner" />-->
             <!--</LinearLayout>-->
 
-            <ImageButton
-                android:id="@+id/photo_imageButton"
+            <ImageView
+                android:id="@+id/photo_Button"
                 android:layout_width="70dp"
                 android:layout_height="61dp"
                 android:layout_marginLeft="120dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_below="@+id/e7"
                 app:srcCompat="@drawable/ic_camera_alt_black_100dp" />
 
@@ -272,11 +273,11 @@
                 android:layout_width="107dp"
                 android:layout_height="52dp"
                 android:layout_marginLeft="104dp"
-                android:layout_marginTop="10dp"
-                android:layout_below="@+id/photo_imageButton"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/photo_Button"
                 android:background="@drawable/select_button"
                 android:text="เสร็จสิ้น" />
 
         </RelativeLayout>
-    <!--</ScrollView>-->
+    </ScrollView>
 </LinearLayout>
