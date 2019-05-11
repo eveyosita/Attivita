@@ -60,8 +60,8 @@ public class ProfileFragment extends Fragment {
 
         fnamePro.setText(fname);
         lnamePro.setText(lname);
-        departPro.setText(depart);
-        idPro.setText(stuid);
+//        departPro.setText(depart);
+//        idPro.setText(stuid);
 
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
