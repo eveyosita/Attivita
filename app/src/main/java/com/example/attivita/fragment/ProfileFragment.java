@@ -55,8 +55,8 @@ public class ProfileFragment extends Fragment {
         fnamePro =  v.findViewById(R.id.firstname_pro);
         lnamePro =  v.findViewById(R.id.lastname_pro);
         btn_logout =  v.findViewById(R.id.button_logout);
-        departPro =  v.findViewById(R.id.depart_pro);
-        idPro =  v.findViewById(R.id.id_pro);
+//        departPro =  v.findViewById(R.id.depart_pro);
+//        idPro =  v.findViewById(R.id.id_pro);
 
         fnamePro.setText(fname);
         lnamePro.setText(lname);
