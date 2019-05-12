@@ -93,7 +93,6 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
 
         Eventid = Integer.valueOf(eventId);
         eventamount = Integer.valueOf(eventAmount);
-        eventcategoryid = Integer.valueOf(eventCategoryId);
         eventlatitude = Double.valueOf(eventLatitude);
         eventlongitude = Double.valueOf(eventLongitude);
 
@@ -112,13 +111,13 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         String timeend = eventEndtime.substring(0,5);
         String time = timeStart+" - "+timeend;
 
-//        String category = getCategory(eventCategoryId);
+        String category = getCategory(eventCategoryId);
 
         textview_eventname.setText(eventname);
         textview_eventDate.setText(date);
         textview_eventTime.setText(time);
         textview_eventAddress.setText(eventAddress);
-        //textview_eventCategory.setText(category);
+        textview_eventCategory.setText(category);
         textview_amountmax.setText(eventAmount);
         textview_eventDetail.setText(eventDetail);
 
@@ -126,7 +125,6 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
         }
-
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
@@ -210,21 +208,18 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private boolean checkJoinEvent(){
+        System.out.println("Size :"+ joineventList.size() +" std :"+ studentId);
         for(int i=0 ; i<joineventList.size() ; i++){
-            System.out.println("Size :"+ i +" std :"+ studentId);
+            System.out.println("Size :"+ i +" std :"+ joineventList.get(i).getStudentId());
             if(joineventList.get(i).getStudentId().equals(studentId) ){
 
                 return true;
-            } else {
-                return false;
             }
         }
         return false;
     }
 
-
     public void joinEvent(){
-
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
         Call<ResponseJoinevent> call = apiService.joinevent(studentId,Eventid);
 
@@ -234,8 +229,8 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
                 ResponseJoinevent res = response.body();
 
                 if (!res.isStatus()){
-
-
+                    btn_joinevent.setText("เข้ารวมแล้ว");
+                    btn_joinevent.setEnabled(false);
                     Toast.makeText(EventDetails.this, res.getMessage(), Toast.LENGTH_LONG).show();
                 } else {
                     checkCountJoinEvent();
