@@ -596,37 +596,31 @@ public class AddeventActivity extends AppCompatActivity {
 
     public String setCheckboxYear(){
         String total = "";
-        String s_total = "";
         StringBuilder result = new StringBuilder();
         result.append("Selected Items:");
         if(cb_1.isChecked()) {
             result.append("\nปี1");
             total += "1 ";
-            s_total += "1 ";
         }
         if(cb_2.isChecked()) {
             result.append("\nปี2");
             total += "2 ";
-            s_total += "2 ";
         }
         if(cb_3.isChecked()) {
             result.append("\nปี3");
             total += "3 ";
-            s_total += "3 ";
         }
         if(cb_4.isChecked()) {
             result.append("\nปี4");
             total += "4 ";
-            s_total += "4 ";
         }
         if(cb_etc.isChecked()) {
             result.append("\nปีอื่นๆ");
             total += "5 ";
-            s_total += " ";
         }
         result.append("\nTotal: "+total);
         Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_LONG).show();
-        year_ed.setText(s_total);
+        year_ed.setText(total);
         return total;
     }
 
