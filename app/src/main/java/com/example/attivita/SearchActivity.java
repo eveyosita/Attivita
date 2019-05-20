@@ -28,6 +28,7 @@ import retrofit2.Response;
 public class SearchActivity extends AppCompatActivity {
     ArrayList<Event> eventList = new ArrayList<>();
     ListView listView;
+    TextView text_background;
     SwipeRefreshLayout swipeRefreshLayout;
     Handler handle;
     Runnable runable;
@@ -44,7 +45,8 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         getSupportActionBar().hide();
-        listView = (ListView) findViewById(R.id.list_event_category);
+        listView =  findViewById(R.id.list_event);
+        text_background = findViewById(R.id.textBackgroung_searchbycat);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
 
@@ -60,32 +62,32 @@ public class SearchActivity extends AppCompatActivity {
         setEventIDList();
 
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//                handle = new Handler();
+//                runable = new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        swipeRefreshLayout.setRefreshing(false);
+//                        handle.removeCallbacks(runable); // stop runable.
+//                        setEventIDList();
+//                        swipeRefreshLayout.setRefreshing(false);
+//                    }
+//                };
+//                handle.postDelayed(runable, 1000); // delay 3 s.
+//            }
+//        });
 
-                handle = new Handler();
-                runable = new Runnable() {
-
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        handle.removeCallbacks(runable); // stop runable.
-                        setEventIDList();
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                };
-                handle.postDelayed(runable, 1000); // delay 3 s.
-            }
-        });
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(SearchActivity.this, EventDetails.class);
-                startActivity(intent);
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Intent intent = new Intent(SearchActivity.this, EventDetails.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     public void setEventIDList() {
@@ -115,12 +117,11 @@ public class SearchActivity extends AppCompatActivity {
                             }
                         }
                     }
-
-                    EventListAdapter adapter = new EventListAdapter(SearchActivity.this,R.layout.item_event, eventList);
-                    listView.setAdapter(adapter);
+                        EventListAdapter adapter = new EventListAdapter(SearchActivity.this,R.layout.item_event, eventList);
+                        listView.setAdapter(adapter);
 
                 } else {
-                    Toast.makeText(SearchActivity.this, "No event now", Toast.LENGTH_LONG).show();
+                    text_background.setText("ไม่พบกิจกรรมที่ค้นหา");
                 }
                 //  resultFromCategory(categoryId);
             }

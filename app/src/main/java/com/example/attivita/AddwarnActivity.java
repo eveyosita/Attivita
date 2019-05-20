@@ -22,8 +22,7 @@ public class AddwarnActivity extends AppCompatActivity {
         but_finishwarn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AddwarnActivity.this, MainActivity.class);
-                startActivity(i);
+                finish();
 
             }
         });

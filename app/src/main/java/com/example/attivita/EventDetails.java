@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +36,10 @@ import retrofit2.Response;
 
 public class EventDetails extends AppCompatActivity implements OnMapReadyCallback {
 
-    TextView textview_eventname,textview_eventDate,textview_eventTime,textview_eventAddress,textview_eventCategory
-            ,textview_amount,textview_amountmax,textview_eventDetail;
+    TextView textview_eventname,textview_eventDate,textview_eventTime,textview_eventAddress,textview_eventnameaddress
+            ,textview_eventCategory,textview_amount,textview_amountmax,textview_eventDetail;
     Button btn_joinevent;
+    ImageView btn_backhome;
     String studentId;
     int Eventid,eventamount,eventcategoryid;
     double eventlatitude,eventlongitude;
@@ -85,11 +87,13 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         textview_eventDate = findViewById(R.id.textview_eventDate);
         textview_eventTime = findViewById(R.id.textview_eventTime);
         textview_eventAddress = findViewById(R.id.textview_eventAddress);
+        textview_eventnameaddress = findViewById(R.id.textview_eventNameaddress);
         textview_eventCategory = findViewById(R.id.textview_eventCategory);
         textview_amount = findViewById(R.id.textview_amount);
         textview_amountmax = findViewById(R.id.textview_amountmax);
         textview_eventDetail = findViewById(R.id.textview_eventDetail);
         btn_joinevent = findViewById(R.id.button_joinevent);
+        btn_backhome = findViewById(R.id.button_backhome);
 
         Eventid = Integer.valueOf(eventId);
         eventamount = Integer.valueOf(eventAmount);
@@ -117,6 +121,7 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         textview_eventDate.setText(date);
         textview_eventTime.setText(time);
         textview_eventAddress.setText(eventAddress);
+        textview_eventnameaddress.setText(eventPlacename);
         textview_eventCategory.setText(category);
         textview_amountmax.setText(eventAmount);
         textview_eventDetail.setText(eventDetail);
@@ -136,6 +141,13 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
                 joinEvent();
                 checkAmount();
 
+            }
+        });
+
+        btn_backhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

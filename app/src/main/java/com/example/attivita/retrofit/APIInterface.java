@@ -107,4 +107,19 @@ public interface APIInterface {
             @Field("studentId") String studentid
     );
 
+    @FormUrlEncoded
+    @POST("updateprofile.php")
+    Call<student> updateprofile(
+            @Field("studentId") String studentid,
+            @Field("nickname") String nickname,
+            @Field("telnumber") String telnumber,
+            @Field("profile_pic") String profile_pic
+    );
+
+    @FormUrlEncoded
+    @POST("readstudent.php")
+    Call<student> readstudent(
+            @Field("studentId") String studentid
+    );
+
 }

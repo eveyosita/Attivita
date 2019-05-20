@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundcolor">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/bar_setting"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorGray">
+
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:background="@drawable/ic_chevron_left_black_"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="27dp"
+            android:text="แก้ไขข้อมูลส่วนตัว" />
+
+    </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bar_setting"
+            android:orientation="vertical"  >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleImageView_profile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/girl" />
+
+            <TextView
+                android:id="@+id/textEditPicprofile"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:text="แก้ไข"
+                android:textColor="@color/colorWhite"
+                android:textSize="16dp" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:id="@+id/textProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center"
+                android:text="ข้อมูลส่วนตัว"
+                android:textColor="@color/colorWhite"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/backgroundwhite">
+
+                <LinearLayout
+                    android:layout_width="380dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="2.5dp"
+                    android:paddingHorizontal="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="รหัสนักศึกษา"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                    <TextView
+                        android:id="@+id/textStudentid"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="รหัสนักศึกษา"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="360dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/backgroundcolor"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="2.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="ชื่อ"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                    <TextView
+                        android:id="@+id/textFirstname"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="ชื่อ"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="360dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/backgroundcolor"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="2.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="นามสกุล"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                    <TextView
+                        android:id="@+id/textLastname"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="นามสกุล"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="360dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/backgroundcolor"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="2.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="ชื่อเล่น"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                    <EditText
+                        android:id="@+id/edittextNickname"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="ยังไม่กำหนด"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="360dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/backgroundcolor"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="15dp"
+                    android:paddingTop="2.5dp"
+                    android:paddingBottom="3dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="สาขาวิชาเอก"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                    <TextView
+                        android:id="@+id/textDepartment"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="สาขาวิชาเอก"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="360dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/backgroundcolor"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="2.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="เบอร์โทรศัพท์"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                    <EditText
+                        android:id="@+id/edittextTelnumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="ยังไม่กำหนด"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_finisheditprofile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/button_login_corner"
+                android:text=" เสร็จสิ้น "/>
+
+        </LinearLayout>
+
+
+
+</RelativeLayout>

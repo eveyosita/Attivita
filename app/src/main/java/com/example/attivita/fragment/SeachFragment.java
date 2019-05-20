@@ -14,6 +14,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.attivita.SearchActivity;
 import com.example.attivita.adapter.CustomAdapter;
 import com.example.attivita.adapter.EventListAdapter;
 import com.example.attivita.model.Event;
@@ -70,7 +71,7 @@ public class SeachFragment extends Fragment implements View.OnClickListener{
         if(search.equals("")){
             Toast.makeText(getContext(), "ยังไมไ่ด้พิมพ์ข้อความ", Toast.LENGTH_SHORT).show();
         }else{
-            Intent intent = new Intent(getContext(), search_by_category.class);
+            Intent intent = new Intent(getContext(), SearchActivity.class);
             intent.putExtra("textSearch",search);
             startActivity(intent);
         }

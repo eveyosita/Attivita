@@ -54,10 +54,10 @@ public class AddeventActivity extends AppCompatActivity {
 
     Button button_back, button_finishaddevent, button_depart, button_cancel_depart,
             button_accept_depart, button_year, button_cancel_year, button_accept_year;
-    EditText eventname, startdate, enddate, strattime, endtime, eventdetail, amount, department,
+    EditText eventname, edittexe_startdate, edittexe_enddate, strattime, endtime, eventdetail, amount, department,
             year_ed;
     Spinner category;
-    String depart,year, cate, id;
+    String depart,year, cate, id,Startdate,Enddate;
     int cate_posit,eventId;
     CheckBox cb_match, cb_bio, cb_chem, cb_phy, cb_stat, cb_envi, cb_com, cb_micro, cb_appmatch,
             cb_it, cb_tphy, cb_dsci;
@@ -80,6 +80,8 @@ public class AddeventActivity extends AppCompatActivity {
     private Button mDisplayDateStart, mDisplayDateEnd;
     private DatePickerDialog.OnDateSetListener mDateStartSetListener, mDateEndSetListener;
     Button tstart, tend;
+
+    DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
     Calendar calendar;
     int currentHour, currentMinute;
@@ -98,8 +100,8 @@ public class AddeventActivity extends AppCompatActivity {
         eventname = findViewById(R.id.eventname_editText);
         eventdetail = findViewById(R.id.descrip_editText);
         amount =  findViewById(R.id.number_editText);
-        startdate =  findViewById(R.id.Sdate_editText);
-        enddate =  findViewById(R.id.Edate_editText);
+        edittexe_startdate =  findViewById(R.id.Sdate_editText);
+        edittexe_enddate =  findViewById(R.id.Edate_editText);
         strattime =  findViewById(R.id.Stime_editText);
         endtime = findViewById(R.id.Etime_editText);
         department =  findViewById(R.id.depart_editText);
@@ -132,25 +134,23 @@ public class AddeventActivity extends AppCompatActivity {
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(
-                        AddeventActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateStartSetListener,
-                        year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                datePickerDialog = new DatePickerDialog(AddeventActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                                // TODO: 2019-03-06  set textview เอาวันที่ที่เลือกมาแสดง
+                                String date = day + "/" + (month + 1) + "/" + year+543;
+                                Startdate = year + "-" + (month + 1) + "-" + day;
+
+                                edittexe_startdate.setText(date);
+                            }
+                        }, year, month, day);
+
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.show();
             }
         });
-        mDateStartSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                Log.d(TAG, "onDateSet: dd/mm/yyy: " + year + "-" + month + "-" + day);
 
-                String date = year + "-" + month + "-" + day;
-                startdate.setText(date);
-            }
-        };
 
         // set วันที่สิ้นสุด
         mDisplayDateEnd.setOnClickListener(new View.OnClickListener() {
@@ -161,25 +161,22 @@ public class AddeventActivity extends AppCompatActivity {
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(
-                        AddeventActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateEndSetListener,
-                        year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                datePickerDialog = new DatePickerDialog(AddeventActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                                // TODO: 2019-03-06  set textview เอาวันที่ที่เลือกมาแสดง
+                                String date = day + "/" + (month + 1) + "/" + year+543;
+                                Enddate = year + "-" + (month + 1) + "-" + day;
+
+                                edittexe_enddate.setText(date);
+                            }
+                        }, year, month, day);
+
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.show();
             }
         });
-        mDateEndSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                Log.d(TAG, "onDateSet: dd/mm/yyy: " + year + "-" + month + "-" + day);
-
-                String date = year + "-" + month + "-" + day;
-                enddate.setText(date);
-            }
-        };
 
         // ปุ่มเลือกเอก
         button_depart.setOnClickListener(new View.OnClickListener() {
@@ -367,8 +364,6 @@ public class AddeventActivity extends AppCompatActivity {
                 String ename = eventname.getText().toString();
                 String detail = eventdetail.getText().toString();
                 String amout = amount.getText().toString();
-                String sdate = startdate.getText().toString();
-                String edate = enddate.getText().toString();
                 String stime = strattime.getText().toString();
                 String etime = endtime.getText().toString();
                 String year = year_ed.getText().toString();
@@ -379,7 +374,7 @@ public class AddeventActivity extends AppCompatActivity {
                         !checkEventdepartment() || !checkEventyear()){
                     Toast.makeText(AddeventActivity.this, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show();
                 } else {
-                    setEvent(ename,id,sdate,edate,stime,etime,cate_posit,detail
+                    setEvent(ename,id,stime,etime,cate_posit,detail
                             ,locat,amout);
 
                 }
@@ -452,11 +447,11 @@ public class AddeventActivity extends AppCompatActivity {
     }
 
 
-    public void setEvent(String ename, String id, String sdate, String edate, String stime, String etime,
+    public void setEvent(String ename, String id, String stime, String etime,
                          int cate, String detail, int locat, String amount){
 
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-        Call<Event> call = apiService.createevent(ename,id,sdate,edate,stime,etime,cate,detail
+        Call<Event> call = apiService.createevent(ename,id,Startdate,Enddate,stime,etime,cate,detail
                 ,locat,amount,depart,year,event_placename,event_latitude,event_longitude,event_address);
 
 
@@ -652,7 +647,7 @@ public class AddeventActivity extends AppCompatActivity {
     }
 
     private boolean checkEventstartdate() {
-        String eventStartdate = startdate.getText().toString().trim();
+        String eventStartdate = edittexe_startdate.getText().toString().trim();
         if (eventStartdate.isEmpty()) {
             return false;
         } else {
@@ -661,7 +656,7 @@ public class AddeventActivity extends AppCompatActivity {
     }
 
     private boolean checkEventenddate() {
-        String eventEnddate = enddate.getText().toString().trim();
+        String eventEnddate = edittexe_enddate.getText().toString().trim();
         if (eventEnddate.isEmpty()) {
             return false;
         } else {

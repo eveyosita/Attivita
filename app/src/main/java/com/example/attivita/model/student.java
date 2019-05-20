@@ -48,6 +48,12 @@ public class student {
     @Expose
     private String telnumber;
 
+    @SerializedName("profile_pic")
+    @Expose
+    private String profile_pic;
+
+
+
 
 
     public student(String studentid, String password, String firstname, String lastname, String nickname, String department, String year, String email, String telnumber) {
@@ -160,5 +166,13 @@ public class student {
 
     public void setTelnumber(String telnumber) {
         this.telnumber = telnumber;
+    }
+
+    public String getProfile_pic() {
+        return profile_pic;
+    }
+
+    public void setProfile_pic(String profile_pic) {
+        this.profile_pic = profile_pic;
     }
 }

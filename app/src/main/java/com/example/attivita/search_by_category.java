@@ -32,6 +32,7 @@ public class search_by_category extends AppCompatActivity {
     Handler handle;
     Runnable runable;
     int cateId;
+    TextView textbg_searchbycat;
 
     private static final String MY_PREFS = "prefs";
     String studentDepart,studentyear;
@@ -46,6 +47,7 @@ public class search_by_category extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.list_event_category);
         TextView EventTitle = (TextView)findViewById(R.id.category_event_title);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        textbg_searchbycat =  findViewById(R.id.textBackgroung_searchbycat);
 
         Intent getIntent = getIntent();
         String categoryTitle = getIntent.getStringExtra("categoryName");
@@ -88,6 +90,7 @@ public class search_by_category extends AppCompatActivity {
             }
         });
 
+        textbg_searchbycat.setText("ไม่มีกิจกรรม");
     }
 
     public void setEventIDList() {

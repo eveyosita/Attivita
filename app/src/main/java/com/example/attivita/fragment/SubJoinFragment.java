@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.attivita.EventDetails;
@@ -49,6 +50,7 @@ public class SubJoinFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     ArrayList<Event> eventList = new ArrayList<>();
     ListView listView;
+    TextView textbg_subjoin;
 
     private static final String MY_PREFS = "prefs";
 
@@ -92,6 +94,7 @@ public class SubJoinFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sub_join, container, false);
 
         listView = view.findViewById(R.id.list_joinevent);
+        textbg_subjoin = view.findViewById(R.id.textBackgroung_subjoin);
 
         SharedPreferences shared = getContext().getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
 
@@ -156,7 +159,7 @@ public class SubJoinFragment extends Fragment {
                                  EventListAdapter adapter = new EventListAdapter(getContext(),R.layout.item_event, eventList);
                                  listView.setAdapter(adapter);
                              } else {
-                                 Toast.makeText(getContext(), "No event now", Toast.LENGTH_LONG).show();
+                                 textbg_subjoin.setText("ไม่มีกิจกรรมที่คุณสร้าง");
                              }
                          }
 

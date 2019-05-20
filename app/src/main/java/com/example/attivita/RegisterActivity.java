@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,6 +46,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -56,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
      Spinner depart_spin;
      Button finish_btn;
      ImageView photo_btn;
-     String stdid,passw,conpass,fname,lname,year,depart,email,image_confirm;
+     String stdid,passw,conpass,fname,lname,year,depart,email,image_confirm = "";
      int posit=-1;
 
      ArrayList<String> department = new ArrayList<String>();
@@ -136,7 +138,7 @@ public class RegisterActivity extends AppCompatActivity {
                 System.out.println("Email : "+ email);
 
                 if(stdid.isEmpty() || passw.isEmpty() || conpass.isEmpty() || fname.isEmpty()
-                        || lname.isEmpty() || email.isEmpty() || posit==0){
+                        || lname.isEmpty() || email.isEmpty() || posit==0 || image_confirm.isEmpty()){
 
                     Toast.makeText(RegisterActivity.this, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show();
 
@@ -144,9 +146,8 @@ public class RegisterActivity extends AppCompatActivity {
                     year = "25"+stdid.substring(2,4);
                     int y = Calendar.getInstance().get(Calendar.YEAR);
                     String yy = (Integer.toString(y+543)).substring(2);
-                    if(stdid.substring(0,2).equals("07") && Integer.parseInt(stdid.substring(2,4)) <= Integer.parseInt(yy)
-                            && passw.length()>=6 ) {
-                        if(passw.length() >=8 && passw.equals(conpass)){
+                    if(stdid.substring(0,2).equals("07") && Integer.parseInt(stdid.substring(2,4)) <= Integer.parseInt(yy)) {
+                        if(checkPassword() && checkEmail()) {
                             String s = "รหัสนักศึกษา : " + stdid + "\nชื่อ : " + fname + "\nนามสกุล : " + lname + "\nสาขาวิชา : "
                                     + depart + "\nชั้นปี : " + year + "\n";
                             AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
@@ -167,11 +168,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                             });
                             builder.show();
-                            //finish();
-//                    Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-//                    startActivity(i);
-                        } else {
-                            Toast.makeText(RegisterActivity.this, "รหัสผ่านไม่ถูกต้อง", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Toast.makeText(RegisterActivity.this, "รหัสนักศึกษาไม่ถูกต้อง", Toast.LENGTH_LONG).show();
@@ -305,7 +301,23 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    private boolean checkPassword() {
+        if (passw.length() >=6 && passw.equals(conpass)) {
+            return true;
+        } else {
+            Toast.makeText(RegisterActivity.this, "รหัสผ่านไม่ถูกต้อง", Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
 
+    private boolean checkEmail() {
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            return true;
+        } else {
+            Toast.makeText(RegisterActivity.this, "รูปแบบอีเมลไม่ถูกต้อง", Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
 
 
 }

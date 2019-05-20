@@ -17,85 +17,66 @@
             android:textSize="27dp"
             android:text="บัญชีของฉัน" />
 
-        <Button
-            android:id="@+id/button_setting"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_marginRight="18dp"
-            android:background="@drawable/ic_settings_black_24dp"/>
+        <!--<Button-->
+            <!--android:id="@+id/button_setting"-->
+            <!--android:layout_width="38dp"-->
+            <!--android:layout_height="38dp"-->
+            <!--android:layout_gravity="end"-->
+            <!--android:layout_marginRight="18dp"-->
+            <!--android:background="@drawable/ic_settings_black_24dp"/>-->
 
-        <Button
-            android:id="@+id/button_logout"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="end"
-            android:layout_marginRight="18dp"
-            android:background="@drawable/logout"/>
+        <!--<Button-->
+            <!--android:id="@+id/button_logout"-->
+            <!--android:layout_width="32dp"-->
+            <!--android:layout_height="32dp"-->
+            <!--android:layout_gravity="end"-->
+            <!--android:layout_marginRight="18dp"-->
+            <!--android:background="@drawable/logout"/>-->
 
 
     </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
-        android:id="@+id/layout_pro"
+        android:id="@+id/layout_profile"
         android:layout_width="390dp"
         android:layout_height="220dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:background="@drawable/backgroundwhite"
-        android:orientation="horizontal">
+        android:background="@drawable/backgroundwhite">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView_profile"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="25dp"
-            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/girl" />
 
-        <TextView
-            android:id="@+id/firstname_pro"
-            android:textSize="20dp"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center"
-            android:text="Firstname" />
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="150dp">
 
-        <TextView
-            android:id="@+id/lastname_pro"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="50dp"
-            android:layout_toEndOf="@+id/firstname_pro"
-            android:layout_toRightOf="@+id/firstname_pro"
-            android:text="Lastname" />
+            <TextView
+                android:id="@+id/firstname_pro"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="Firstname" />
 
-        <TextView
-            android:id="@+id/depart_pro"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="50dp"
-            android:layout_below="@+id/firstname_pro"
-            />
+            <TextView
+                android:id="@+id/lastname_pro"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lastname" />
 
-        <TextView
-            android:id="@+id/id_pro"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
+        </LinearLayout>
 
-            android:layout_marginTop="50dp"
-            android:layout_below="@+id/firstname_pro"
-           />
+
 
 
 
@@ -105,7 +86,7 @@
         android:id="@+id/listfriend"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layout_pro"
+        android:layout_below="@+id/layout_profile"
         android:layout_marginTop="15dp"
         android:padding="16dp" />
 

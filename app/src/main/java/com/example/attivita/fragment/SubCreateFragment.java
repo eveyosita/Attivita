@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.attivita.EventDetails;
@@ -48,6 +49,7 @@ public class SubCreateFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     ArrayList<Event> eventList = new ArrayList<>();
     ListView listView;
+    TextView textbg_subcreate;
 
     private static final String MY_PREFS = "prefs";
 
@@ -86,9 +88,10 @@ public class SubCreateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_sub_join, container, false);
+        View view = inflater.inflate(R.layout.fragment_sub_create, container, false);
 
-        listView = view.findViewById(R.id.list_joinevent);
+        listView = view.findViewById(R.id.list_createvent);
+        textbg_subcreate = view.findViewById(R.id.textBackgroung_subcreate);
 
         SharedPreferences shared = getContext().getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
 
@@ -153,7 +156,7 @@ public class SubCreateFragment extends Fragment {
                                  EventListAdapter adapter = new EventListAdapter(getContext(),R.layout.item_event, eventList);
                                  listView.setAdapter(adapter);
                              } else {
-                                 Toast.makeText(getContext(), "No event now", Toast.LENGTH_LONG).show();
+                                 textbg_subcreate.setText("ไม่มีกิจกรรมที่คุณสร้าง");
                              }
                          }
 

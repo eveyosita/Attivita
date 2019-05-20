@@ -58,22 +58,22 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"/>
 
-        <TextView
-            android:id="@+id/editText_count_eventname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/textView_eventnamemax"
-            android:text="0" />
+        <!--<TextView-->
+            <!--android:id="@+id/editText_count_eventname"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toStartOf="@+id/textView_eventnamemax"-->
+            <!--android:text="0" />-->
 
-        <TextView
-            android:id="@+id/textView_eventnamemax"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="40dp"
-            android:text="/50" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView_eventnamemax"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="40dp"-->
+            <!--android:text="/50" />-->
     </RelativeLayout>
 
     <RelativeLayout
@@ -95,22 +95,22 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"/>
 
-        <TextView
-            android:id="@+id/editText_create_count_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/textView_name_max"
-            android:text="0" />
+        <!--<TextView-->
+            <!--android:id="@+id/editText_create_count_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toStartOf="@+id/textView_name_max"-->
+            <!--android:text="0" />-->
 
-        <TextView
-            android:id="@+id/textView_name_max"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="40dp"
-            android:text="/200" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView_name_max"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="40dp"-->
+            <!--android:text="/200" />-->
     </RelativeLayout>
 
 
@@ -265,7 +265,8 @@
         android:background="@drawable/layout_corner"
         android:layout_below="@+id/depart_textView"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="30dp"  />
+        android:layout_marginLeft="30dp"
+        android:lines="1"/>
     <Button
         android:id="@+id/button_select_depart"
         android:layout_width="wrap_content"
@@ -291,7 +292,7 @@
         android:layout_width="180dp"
         android:layout_height="37dp"
         android:textSize="16dp"
-        android:maxLength="5"
+        android:maxLength="15"
         android:background="@drawable/layout_corner"
         android:layout_below="@+id/depart_editText"
         android:layout_marginTop="10dp"
