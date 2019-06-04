@@ -52,7 +52,7 @@
             android:layout_width="351dp"
             android:layout_height="40dp"
             android:inputType="textPersonName"
-            android:textSize="14dp"
+            android:textSize="16dp"
             android:maxLength="50"
             android:background="@drawable/layout_corner"
             android:layout_marginTop="5dp"
@@ -87,13 +87,14 @@
             android:id="@+id/descrip_editText"
             android:layout_width="351dp"
             android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/layout_corner"
             android:hint="รายละเอียด"
             android:inputType="textPersonName"
-            android:textSize="16dp"
             android:maxLength="100"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="30dp"/>
+            android:textSize="16dp" />
 
         <!--<TextView-->
             <!--android:id="@+id/editText_create_count_name"-->
@@ -146,7 +147,7 @@
         android:textSize="18dp"
         android:layout_below="@+id/number_editText"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"  />
+        android:layout_marginLeft="30dp"/>
 
     <EditText
         android:id="@+id/Sdate_editText"
@@ -159,7 +160,8 @@
         android:maxLength="9"
         android:layout_below="@+id/date_textView"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="30dp" />
+        android:layout_marginLeft="30dp"/>
+
     <Button
         android:id="@+id/calendarStart"
         android:layout_width="40dp"
@@ -380,5 +382,6 @@
         android:layout_below="@+id/locat_textView"
         android:layout_marginTop="30dp"
         android:layout_centerInParent="true" />
+
 
 </RelativeLayout>

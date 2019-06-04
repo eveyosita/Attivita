@@ -45,14 +45,14 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:layout_gravity="center"
-        android:src="@drawable/boy" />
+        android:src="@drawable/girl" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="140dp"
-        android:text="ยศวัฒน์ วรเกียรติชัยธนา"
+        android:text="ธนารีย์ อุปยโส"
         android:textSize="19dp"/>
 
 

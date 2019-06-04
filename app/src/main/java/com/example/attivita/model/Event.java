@@ -48,10 +48,6 @@ public class Event {
     @Expose
     private String eventdetail;
 
-    @SerializedName("locationId")
-    @Expose
-    private String locationId;
-
     @SerializedName("amount")
     @Expose
     private String amount;
@@ -80,8 +76,10 @@ public class Event {
     @Expose
     private String address;
 
+    public Event(){}
+
     public Event(int eventId,String eventname, String studentId, String startdate, String enddate, String strattime, String endtime,
-                 int categoryId, String eventdetail, String locationId, String amount, String department, String year,
+                 int categoryId, String eventdetail, String amount, String department, String year,
                  String placename, double latitude, double longitude, String address) {
 
         this.eventId = eventId;
@@ -93,7 +91,6 @@ public class Event {
         this.endtime = endtime;
         this.categoryId = categoryId;
         this.eventdetail = eventdetail;
-        this.locationId = locationId;
         this.amount = amount;
         this.department = department;
         this.year = year;
@@ -104,30 +101,7 @@ public class Event {
 
     }
 
-    public Event(String eventname, String studentId, String startdate, String enddate, String strattime, String endtime,
-                 int categoryId, String eventdetail, String locationId, String amount, String department, String year,
-                 String placename, double latitude, double longitude, String address) {
-
-        this.eventname = eventname;
-        this.studentId = studentId;
-        this.startdate = startdate;
-        this.enddate = enddate;
-        this.strattime = strattime;
-        this.endtime = endtime;
-        this.categoryId = categoryId;
-        this.eventdetail = eventdetail;
-        this.locationId = locationId;
-        this.amount = amount;
-        this.department = department;
-        this.year = year;
-        this.placename = placename;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.address = address;
-
-    }
-
-    public int isStatus() {
+    public int getStatus() {
         return status;
     }
     public String getMessage() {
@@ -159,9 +133,6 @@ public class Event {
     }
     public String getEventdetail() {
         return eventdetail;
-    }
-    public String getLocationId() {
-        return locationId;
     }
     public String getAmount() {
         return amount;
@@ -231,10 +202,6 @@ public class Event {
 
     public void setEventdetail(String eventdetail) {
         this.eventdetail = eventdetail;
-    }
-
-    public void setLocationId(String locationId) {
-        this.locationId = locationId;
     }
 
     public void setAmount(String amount) {

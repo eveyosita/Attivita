@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventDetails"
-    android:background="@drawable/backgroundcolor">
-
-
+    android:background="@drawable/backgroundcolor"
+    tools:context=".EventcreateDetailActivity">
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -99,8 +97,8 @@
             </LinearLayout>
 
             <View
-               android:layout_width="match_parent"
-               android:layout_height="15dp" />
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -154,32 +152,32 @@
             </LinearLayout>
 
             <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="20dp" />-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
 
             <!---->
 
             <!--<LinearLayout-->
-                 <!--android:layout_width="match_parent"-->
-                 <!--android:layout_height="wrap_content"-->
-                 <!--android:orientation="horizontal"-->
-                 <!--android:padding="15dp"-->
-                <!--android:background="@drawable/backgroundwhite">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:padding="15dp"-->
+            <!--android:background="@drawable/backgroundwhite">-->
 
-                 <!--<ImageView-->
-                     <!--android:layout_width="wrap_content"-->
-                     <!--android:layout_height="wrap_content"-->
-                     <!--android:layout_gravity="center"-->
-                     <!--android:paddingRight="15dp"/>-->
-                    <!--&lt;!&ndash;android:src="@drawable/ic_wc_black" &ndash;&gt;-->
+            <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:paddingRight="15dp"/>-->
+            <!--&lt;!&ndash;android:src="@drawable/ic_wc_black" &ndash;&gt;-->
 
 
 
             <!--</LinearLayout>-->
 
             <View
-               android:layout_width="match_parent"
-               android:layout_height="15dp" />
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
 
 
             <LinearLayout
@@ -190,19 +188,19 @@
                 android:background="@drawable/backgroundwhite2">
 
                 <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:paddingBottom="15dp"
-                       android:text="รายละเอียด"
-                       android:textSize="24dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dp"
+                    android:text="รายละเอียด"
+                    android:textSize="24dp" />
 
-                   <TextView
-                       android:id="@+id/textview_eventDetail"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginLeft="10dp"
-                       android:text="รายละเอียด"
-                       android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/textview_eventDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="รายละเอียด"
+                    android:textSize="18dp" />
 
             </LinearLayout>
 
@@ -303,76 +301,23 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/buttonCancel"
+            android:id="@+id/buttonEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginRight="10dp"
-            android:textSize="20dp" />
+            android:layout_marginRight="15dp"
+            android:textSize="20dp"
+            android:background="@drawable/backgroundlinegary"
+            android:text="แก้ไข"/>
     </android.support.v7.widget.Toolbar>
 
     <Button
-        android:id="@+id/button_joinevent"
+        android:id="@+id/button_deleteevent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
         android:background="@drawable/select_button"
-        android:text="เข้าร่วม" />
-
+        android:text="ลบกิจกรรม" />
 </RelativeLayout>
-
-<!--<TextView-->
-<!--android:id="@+id/e_name_detail"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="name"/>-->
-<!--<TextView-->
-<!--android:id="@+id/e_desc_detail"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="desc"-->
-<!--android:layout_below="@+id/e_name_detail"/>-->
-<!--<TextView-->
-<!--android:id="@+id/e_amount_detail"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="amount"-->
-<!--android:layout_below="@+id/e_desc_detail"/>-->
-<!--<TextView-->
-<!--android:id="@+id/e_sdate_detail"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="sdate"-->
-<!--android:layout_below="@+id/e_amount_detail"/>-->
-<!--<TextView-->
-<!--android:id="@+id/e_edate_detail"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="edate"-->
-<!--android:layout_below="@+id/e_sdate_detail"/>-->
-<!--<TextView-->
-<!--android:id="@+id/e_stime_detail"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="stime"-->
-<!--android:layout_below="@+id/e_desc_detail"/>-->
-<!--<TextView-->
-<!--android:id="@+id/e_etime_detail"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="etime"-->
-<!--android:layout_below="@+id/e_stime_detail"/>-->
-<!--<TextView-->
-<!--android:id="@+id/e_cate_detail"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="cate"-->
-<!--android:layout_below="@+id/e_etime_detail"/>-->
-<!--<TextView-->
-<!--android:id="@+id/e_locat_detail"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:text="locat"-->
-<!--android:layout_below="@+id/e_cate_detail"/>-->

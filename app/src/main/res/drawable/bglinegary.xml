@@ -4,19 +4,19 @@
     android:shape="rectangle"   >
 
 
-    <stroke
-        android:width="2dp"
-        android:color="@color/colorWhiteGrayline" >
-    </stroke>
+    <solid
+        android:color="@color/colorWhiteGraybtn" >
+    </solid>
+
 
     <padding
-        android:left="5dp"
+        android:left="10dp"
         android:top="5dp"
-        android:right="5dp"
+        android:right="10dp"
         android:bottom="5dp"    >
     </padding>
     <corners
-        android:radius="20dp"   >
+        android:radius="18dp"   >
     </corners>
 
 </shape>

@@ -12,6 +12,12 @@
         android:layout_height="50dp"
         android:background="@color/colorGray">
 
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:background="@drawable/ic_chevron_left_black_"/>
 
         <TextView
             android:id="@+id/category_event_title"
@@ -38,7 +44,7 @@
         android:textSize="20dp"/>
 
     <ListView
-        android:id="@+id/list_event"
+        android:id="@+id/list_eventsearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"

@@ -78,7 +78,6 @@ public class AddeventActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private Button mDisplayDateStart, mDisplayDateEnd;
-    private DatePickerDialog.OnDateSetListener mDateStartSetListener, mDateEndSetListener;
     Button tstart, tend;
 
     DatePickerDialog datePickerDialog;
@@ -87,7 +86,6 @@ public class AddeventActivity extends AppCompatActivity {
     int currentHour, currentMinute;
     String amPm;
 
-    ArrayList<String> department_event = new ArrayList<String>();
     ArrayList<String> category_event = new ArrayList<String>();
 
     @Override
@@ -139,7 +137,7 @@ public class AddeventActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                                 // TODO: 2019-03-06  set textview เอาวันที่ที่เลือกมาแสดง
-                                String date = day + "/" + (month + 1) + "/" + year+543;
+                                String date = day + "/" + (month + 1) + "/" + (year+543);
                                 Startdate = year + "-" + (month + 1) + "-" + day;
 
                                 edittexe_startdate.setText(date);
@@ -166,7 +164,7 @@ public class AddeventActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                                 // TODO: 2019-03-06  set textview เอาวันที่ที่เลือกมาแสดง
-                                String date = day + "/" + (month + 1) + "/" + year+543;
+                                String date = day + "/" + (month + 1) + "/" + (year+543);
                                 Enddate = year + "-" + (month + 1) + "-" + day;
 
                                 edittexe_enddate.setText(date);
@@ -283,9 +281,6 @@ public class AddeventActivity extends AppCompatActivity {
                 cate = category_event.get(position);
                 cate_posit = position;
 
-//                Toast.makeText(RegisterActivity.this,
-//                        "Select : " + department.get(position),
-//                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -367,7 +362,7 @@ public class AddeventActivity extends AppCompatActivity {
                 String stime = strattime.getText().toString();
                 String etime = endtime.getText().toString();
                 String year = year_ed.getText().toString();
-                int locat = 1;
+
 
                 if(!checkEventname() || !checkEventdetail() || !checkEventamount() || !checkEventstartdate()
                         || !checkEventenddate() || !checkEventstrattime() || !checkEventendtime() ||
@@ -375,7 +370,7 @@ public class AddeventActivity extends AppCompatActivity {
                     Toast.makeText(AddeventActivity.this, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show();
                 } else {
                     setEvent(ename,id,stime,etime,cate_posit,detail
-                            ,locat,amout);
+                            ,amout);
 
                 }
 
@@ -394,23 +389,6 @@ public class AddeventActivity extends AppCompatActivity {
         category_event.add("เล่นเกมส์");
         category_event.add("สังสรรค์");
         category_event.add("ออกกำลังกาย");
-    }
-
-    private void createDepartment() {
-        department_event.add("เลือกสาขาวิชา");
-        department_event.add("คณิตศาสตร์");
-        department_event.add("ชีววิทยา");
-        department_event.add("เคมี");
-        department_event.add("ฟิสิกส์");
-        department_event.add("สถิติ");
-        department_event.add("วิทยาศาสตร์สิ่งแวดล้อม");
-        department_event.add("วิทยาการคอมพิวเตอร์");
-        department_event.add("จุลชีววิทยา");
-        department_event.add("คณิตศาสตร์ประยุกต์");
-        department_event.add("เทคโนโลยีสารสนเทศ");
-        department_event.add("ครูฟิสิกส์");
-        department_event.add("วิทยาการข้อมูล");
-
     }
 
     private void openPlacePicker() {
@@ -448,11 +426,11 @@ public class AddeventActivity extends AppCompatActivity {
 
 
     public void setEvent(String ename, String id, String stime, String etime,
-                         int cate, String detail, int locat, String amount){
+                         int cate, String detail,  String amount){
 
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
         Call<Event> call = apiService.createevent(ename,id,Startdate,Enddate,stime,etime,cate,detail
-                ,locat,amount,depart,year,event_placename,event_latitude,event_longitude,event_address);
+                ,amount,depart,year,event_placename,event_latitude,event_longitude,event_address);
 
 
         call.enqueue(new Callback<Event>() {
@@ -460,18 +438,18 @@ public class AddeventActivity extends AppCompatActivity {
             public void onResponse(Call<Event> call, Response<Event> response) {
                 Event res = response.body();
 
-                if (res.isStatus() == 100){
+                if (res.getStatus() == 100){
                     String message = res.getMessage();
                     Toast.makeText(AddeventActivity.this, message, Toast.LENGTH_SHORT).show();
 
-                } else if (res.isStatus() == 200){
+                } else if (res.getStatus() == 200){
                     String message = res.getMessage();
                     Toast.makeText(AddeventActivity.this, message, Toast.LENGTH_SHORT).show();
                     eventId = res.getEventId();
                     joinEvent(eventId);
                     finish();
 
-                } else if (res.isStatus() == 101){
+                } else if (res.getStatus() == 101){
                     String message = res.getMessage();
                     Toast.makeText(AddeventActivity.this, message, Toast.LENGTH_SHORT).show();
 

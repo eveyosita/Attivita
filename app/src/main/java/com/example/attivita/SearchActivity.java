@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,14 +27,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SearchActivity extends AppCompatActivity {
-    ArrayList<Event> eventList = new ArrayList<>();
-    ListView listView;
+    private ArrayList<Event> eventList = new ArrayList<>();
+    ListView listViewsearch;
     TextView text_background;
     SwipeRefreshLayout swipeRefreshLayout;
     Handler handle;
     Runnable runable;
     int cateId;
     String textSearch;
+    Button button_back;
 
     private static final String MY_PREFS = "prefs";
     String studentId,studentDepart,studentyear;
@@ -45,8 +47,9 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         getSupportActionBar().hide();
-        listView =  findViewById(R.id.list_event);
+        listViewsearch =  findViewById(R.id.list_eventsearch);
         text_background = findViewById(R.id.textBackgroung_searchbycat);
+        button_back = findViewById(R.id.button_back);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
 
@@ -61,7 +64,12 @@ public class SearchActivity extends AppCompatActivity {
 
         setEventIDList();
 
-
+        button_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 //        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 //            @Override
 //            public void onRefresh() {
@@ -81,13 +89,36 @@ public class SearchActivity extends AppCompatActivity {
 //            }
 //        });
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(SearchActivity.this, EventDetails.class);
-//                startActivity(intent);
-//            }
-//        });
+        listViewsearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String eventId = String.valueOf(eventList.get(i).getEventId());
+                String eventCategoryId = String.valueOf(eventList.get(i).getCategoryId());
+                String eventAmount = String.valueOf(eventList.get(i).getAmount());
+                String eventLatitude = String.valueOf(eventList.get(i).getLatitude());
+                String eventLongitude = String.valueOf(eventList.get(i).getLongitude());
+
+                Intent intent = new Intent(SearchActivity.this, EventDetails.class);
+                intent.putExtra("eventId", eventId);
+                intent.putExtra("eventName", eventList.get(i).getEventname());
+                intent.putExtra("eventStuId", eventList.get(i).getStudentId());
+                intent.putExtra("eventDetail", eventList.get(i).getEventdetail());
+                intent.putExtra("eventAmount", eventAmount);
+                intent.putExtra("eventStartdate", eventList.get(i).getStartdate());
+                intent.putExtra("eventEnddate", eventList.get(i).getEnddate());
+                intent.putExtra("eventStarttime", eventList.get(i).getStrattime());
+                intent.putExtra("eventEndtime", eventList.get(i).getEndtime());
+                intent.putExtra("eventDepart", eventList.get(i).getDepartment());
+                intent.putExtra("eventCategoryId", eventCategoryId);
+                intent.putExtra("eventYear", eventList.get(i).getYear());
+                intent.putExtra("eventPlacename", eventList.get(i).getPlacename());
+                intent.putExtra("eventLatitude", eventLatitude);
+                intent.putExtra("eventLongitude", eventLongitude);
+                intent.putExtra("eventAddress", eventList.get(i).getAddress());
+                startActivity(intent);
+            }
+        });
     }
 
     public void setEventIDList() {
@@ -111,14 +142,14 @@ public class SearchActivity extends AppCompatActivity {
                                 eventList.add(new Event(r.getEventId(),r.getEventname(), r.getStudentId()
                                         , r.getStartdate(), r.getEnddate(), r.getStrattime()
                                         , r.getEndtime() , r.getCategoryId() , r.getEventdetail()
-                                        , r.getLocationId() , r.getAmount() , r.getDepartment()
+                                        , r.getAmount() , r.getDepartment()
                                         , r.getYear() , r.getPlacename() , r.getLatitude()
                                         , r.getLongitude() , r.getAddress()));
                             }
                         }
                     }
                         EventListAdapter adapter = new EventListAdapter(SearchActivity.this,R.layout.item_event, eventList);
-                        listView.setAdapter(adapter);
+                        listViewsearch.setAdapter(adapter);
 
                 } else {
                     text_background.setText("ไม่พบกิจกรรมที่ค้นหา");

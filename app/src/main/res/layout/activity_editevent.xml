@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundcolor"
+    tools:context=".EditeventActivity">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/backgroundwhite2">
+
+                <EditText
+                    android:id="@+id/edittext_eventname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:hint="ชื่อกิจกรรม"
+                    android:textSize="28dp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/backgroundwhite2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:text="วันจัดกิจกรรม"
+                        android:textSize="22dp"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_today_gray"/>
+                        <TextView
+                            android:id="@+id/button_eventDatestart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:text="เลือกวันเริ่มต้น"
+                            android:textSize="18dp"
+                            android:background="@drawable/bglinegary" />
+                        <View
+                            android:layout_width="12dp"
+                            android:layout_height="2dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@color/colorGray"/>
+                        <TextView
+                            android:id="@+id/button_eventDateend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18dp"
+                            android:text="เลือกวันสิ้นสุด"
+                            android:background="@drawable/bglinegary"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:text="เวลาจัดกิจกรรม"
+                        android:textSize="22dp"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_access_time"/>
+                        <TextView
+                            android:id="@+id/button_eventTimestart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:textSize="18dp"
+                            android:text="เลือกเวลาเริ่มต้น"
+                            android:background="@drawable/bglinegary"/>
+                        <View
+                            android:layout_width="12dp"
+                            android:layout_height="2dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:background="@color/colorGray"/>
+                        <TextView
+                            android:id="@+id/button_eventTimeend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18dp"
+                            android:text="เลือกเวลาสิ้นสุด"
+                            android:background="@drawable/bglinegary"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="ประเภท"
+                    android:textSize="22dp"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/backgroundlinegary">
+                    <Spinner
+                        android:id="@+id/spinner_category"
+                        android:layout_width="200dp"
+                        android:layout_height="32dp"
+                        android:textSize="16dp"
+                        android:spinnerMode="dropdown"/>
+                </RelativeLayout>
+
+                <!--<TextView-->
+                    <!--android:id="@+id/textview_eventCategory"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_marginBottom="15dp"-->
+                    <!--android:background="@drawable/backgroundlinegary"-->
+                    <!--android:text="ประเภท"-->
+                    <!--android:textSize="22dp"/>-->
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:background="@drawable/backgroundwhite2">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:paddingRight="15dp"
+                        android:background="@drawable/ic_person_60dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="20dp"
+                        android:text="ผู้เข้าร่วม"
+                        android:textSize="22dp"/>
+
+
+                    <EditText
+                        android:id="@+id/edittext_amountmax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="จำนวนคนเข้าร่วม"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp" />-->
+
+            <!---->
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:padding="15dp"-->
+            <!--android:background="@drawable/backgroundwhite">-->
+
+            <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:paddingRight="15dp"/>-->
+            <!--&lt;!&ndash;android:src="@drawable/ic_wc_black" &ndash;&gt;-->
+
+
+
+            <!--</LinearLayout>-->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:background="@drawable/backgroundwhite2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="รายละเอียด"
+                    android:textSize="22dp" />
+
+                <EditText
+                    android:id="@+id/edittext_eventDetail"
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:hint="รายละเอียด"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:orientation="vertical"
+                android:background="@drawable/backgroundwhite2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="สถานที่จัดกิจกรรม"
+                    android:textSize="22dp"/>
+
+                <!--<TextView-->
+                    <!--android:id="@+id/textview_eventNameaddress"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="15dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:text="ชื่อสถานที่"-->
+                    <!--android:textSize="20dp"/>-->
+
+                <LinearLayout
+                    android:id="@+id/layout_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:paddingRight="15dp"
+                        android:background="@drawable/ic_place"/>
+
+                    <TextView
+                        android:id="@+id/textview_eventAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:text="เลือกสถานที่"
+                        android:textSize="19dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="70dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:padding="15dp"-->
+                <!--android:background="@drawable/backgroundwhite2">-->
+
+                <!--<com.google.android.gms.maps.MapView-->
+                    <!--android:id="@+id/mapView"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="160dp"-->
+                    <!--android:layout_weight="1" />-->
+
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/bar_detailevent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_brightness_1_black">
+
+            <ImageView
+                android:id="@+id/button_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_chevron_left_black_" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/button_acceptedit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/backgroundlinegary"
+            android:text="เสร็จสิ้น"
+            android:textSize="20dp" />
+    </android.support.v7.widget.Toolbar>
+
+    <!--<Button-->
+        <!--android:id="@+id/button_joinevent"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:background="@drawable/select_button"-->
+        <!--android:text="เข้าร่วม" />-->
+
+</RelativeLayout>

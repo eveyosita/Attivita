@@ -53,7 +53,6 @@ public interface APIInterface {
             @Field("endtime") String endtime,
             @Field("categoryId") int categoryId,
             @Field("eventdetail") String eventdetail,
-            @Field("locationId") int locationId,
             @Field("amount") String amount,
             @Field("department") String department,
             @Field("year") String year,
@@ -85,6 +84,13 @@ public interface APIInterface {
     @FormUrlEncoded
     @POST("joinevent.php")
     Call<ResponseJoinevent> joinevent(
+            @Field("studentId") String studentid,
+            @Field("eventId") int eventId
+    );
+
+    @FormUrlEncoded
+    @POST("canceljoin.php")
+    Call<ResponseJoinevent> canceljoin(
             @Field("studentId") String studentid,
             @Field("eventId") int eventId
     );
@@ -122,4 +128,27 @@ public interface APIInterface {
             @Field("studentId") String studentid
     );
 
+    @FormUrlEncoded
+    @POST("getevent.php")
+    Call<Event> getevent(
+            @Field("eventId") int eventId
+    );
+
+    @FormUrlEncoded
+    @POST("editEvent.php")
+    Call<Event> editEvent(
+            @Field("eventId") int eventId,
+            @Field("eventname") String eventname,
+            @Field("startdate") String startdate,
+            @Field("enddate") String enddate,
+            @Field("strattime") String strattime,
+            @Field("endtime") String endtime,
+            @Field("categoryId") int categoryId,
+            @Field("eventdetail") String eventdetail,
+            @Field("amount") String amount,
+            @Field("placename") String placename,
+            @Field("latitude") double latitude,
+            @Field("longitude") double longitude,
+            @Field("address") String address
+    );
 }

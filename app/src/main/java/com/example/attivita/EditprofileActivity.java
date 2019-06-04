@@ -41,7 +41,7 @@ import retrofit2.Response;
 public class EditprofileActivity extends AppCompatActivity implements View.OnClickListener{
 
     private CircleImageView circleImageView_profile;
-    TextView textView_studentid,textView_firstname,textView_lastname,textView_department;
+    TextView textView_studentid,textView_firstname,textView_lastname,textView_department,textView_email;
     EditText edittText_nickname,edittText_telnumber;
     Button button_finish;
     String studentid,image_confirm;
@@ -67,6 +67,7 @@ public class EditprofileActivity extends AppCompatActivity implements View.OnCli
         edittText_nickname = findViewById(R.id.edittextNickname);
         textView_department = findViewById(R.id.textDepartment);
         edittText_telnumber = findViewById(R.id.edittextTelnumber);
+        textView_email = findViewById(R.id.textEmail);
         button_finish = findViewById(R.id.button_finisheditprofile);
         circleImageView_profile = findViewById(R.id.circleImageView_profile);
 
@@ -74,33 +75,33 @@ public class EditprofileActivity extends AppCompatActivity implements View.OnCli
                 Context.MODE_PRIVATE);
 
         studentid = shared.getString("studentId",null);
-        final String firstname = shared.getString("firstname",null);
-        final String lastname = shared.getString("lastname",null);
-        final String department = shared.getString("department",null);
-        final String nickname = shared.getString("nickname",null);
-        final String telnumber = shared.getString("telnumber",null);
-        final String profile_pic = shared.getString("profile_pic",null);
+//        final String firstname = shared.getString("firstname",null);
+//        final String lastname = shared.getString("lastname",null);
+//        final String department = shared.getString("department",null);
+//        final String nickname = shared.getString("nickname",null);
+//        final String telnumber = shared.getString("telnumber",null);
+//        final String profile_pic = shared.getString("profile_pic",null);
 
-        textView_studentid.setText(studentid);
-        textView_firstname.setText(firstname);
-        textView_lastname.setText(lastname);
-        textView_department.setText(department);
-
-        if(nickname != null)
-            edittText_nickname.setText(nickname);
-
-        if( telnumber != null)
-            edittText_telnumber.setText(telnumber);
-
-
-        String picture = profile_pic;
-        if(picture == null || picture.isEmpty()){
-            circleImageView_profile.setImageResource(R.drawable.girl);
-        }else{
-            String url = "http://pilot.cp.su.ac.th/usr/u07580553/attivita/picture/profile/"+picture;
-            System.out.println(url);
-            Picasso.get().load(url).into(circleImageView_profile);
-        }
+//        textView_studentid.setText(studentid);
+//        textView_firstname.setText(firstname);
+//        textView_lastname.setText(lastname);
+//        textView_department.setText(department);
+//
+//        if(nickname != null)
+//            edittText_nickname.setText(nickname);
+//
+//        if( telnumber != null)
+//            edittText_telnumber.setText(telnumber);
+//
+//
+//        String picture = profile_pic;
+//        if(picture == null || picture.isEmpty()){
+//            circleImageView_profile.setImageResource(R.drawable.girl);
+//        }else{
+//            String url = "http://pilot.cp.su.ac.th/usr/u07580553/attivita/picture/profile/"+picture;
+//            System.out.println(url);
+//            Picasso.get().load(url).into(circleImageView_profile);
+//        }
     }
 
     public String imageToString(Bitmap bitmap) {
@@ -216,6 +217,52 @@ public class EditprofileActivity extends AppCompatActivity implements View.OnCli
                 break;
 
         }
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+        Call<student> call = apiService.readstudent(studentid);
+
+        call.enqueue(new Callback<student>() {
+            @Override
+            public void onResponse(Call<student> call, Response<student> response) {
+                student res = response.body();
+                if (res.isStatus()){
+
+                    textView_studentid.setText(res.getStudentid());
+                    textView_firstname.setText(res.getFirstname());
+                    textView_lastname.setText(res.getLastname());
+                    textView_department.setText(res.getDepartment());
+                    textView_email.setText(res.getEmail());
+
+                    if( res.getNickname() != null)
+                        edittText_nickname.setText(res.getNickname());
+                    if( res.getTelnumber() != null)
+                        edittText_telnumber.setText(res.getTelnumber());
+
+                    String picture = res.getProfile_pic();
+                    if(picture == null){
+                        circleImageView_profile.setImageResource(R.drawable.girl);
+                    }else{
+                        String url = "http://pilot.cp.su.ac.th/usr/u07580553/attivita/picture/profile/"+picture;
+                        System.out.println(url);
+                        Picasso.get().load(url).into(circleImageView_profile);
+                    }
+
+                }
+            }
+            @Override
+            public void onFailure(Call<student> call, Throwable t) {
+                Toast.makeText(EditprofileActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("ERRORRRRR : "+ t.getMessage());
+            }
+        });
+
+
 
     }
 }

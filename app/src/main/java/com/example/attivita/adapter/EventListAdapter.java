@@ -62,9 +62,9 @@ public class EventListAdapter extends BaseAdapter {
         String getOnlyYear = ""+(Integer.parseInt(dateEnd.substring(0,4))+543);
         String date;
         if(getOnlyDateStart.equals(getOnlyDateEnd)){
-            date = "วันที่จัดกิจจกรม : "+getOnlyDateStart +  " " + getOnlyMonth + " " +getOnlyYear;
+            date = "วันที่จัดกิจกรรม : "+getOnlyDateStart +  " " + getOnlyMonth + " " +getOnlyYear;
         } else {
-            date = "วันที่จัดกิจจกรม : "+getOnlyDateStart + " - " + getOnlyDateEnd + " " + getOnlyMonth + " " +getOnlyYear;
+            date = "วันที่จัดกิจกรรม : "+getOnlyDateStart + " - " + getOnlyDateEnd + " " + getOnlyMonth + " " +getOnlyYear;
         }
 
 
@@ -72,7 +72,7 @@ public class EventListAdapter extends BaseAdapter {
         timeStart = timeStart.substring(0,5);
         String timeend = resultList.get(i).getEndtime();
         timeend = timeend.substring(0,5);
-        String time = "เวลาที่จัดกิจจกรม : "+timeStart+" - "+timeend;
+        String time = "เวลาที่จัดกิจกรรม : "+timeStart+" - "+timeend+" น.";
 
         nameevent.setText(name);
         amountevent.setText(amout);

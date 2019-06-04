@@ -263,6 +263,38 @@
                         android:padding="10dp" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="360dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/backgroundcolor"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="2.5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="อีเมล์"
+                        android:textSize="16dp"
+                        android:padding="10dp" />
+                    <TextView
+                        android:id="@+id/textEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="อีเมล์"
+                        android:textSize="16dp"
+                        android:padding="10dp"/>
+                </LinearLayout>
+
             </LinearLayout>
 
             <Button

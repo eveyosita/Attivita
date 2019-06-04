@@ -124,7 +124,6 @@ public class SubJoinFragment extends Fragment {
                 intent.putExtra("eventDepart", eventList.get(i).getDepartment());
                 intent.putExtra("eventCategoryId", eventCategoryId);
                 intent.putExtra("eventYear", eventList.get(i).getYear());
-                intent.putExtra("eventLocation", eventList.get(i).getLocationId());
                 intent.putExtra("eventPlacename", eventList.get(i).getPlacename());
                 intent.putExtra("eventLatitude", eventLatitude);
                 intent.putExtra("eventLongitude", eventLongitude);
@@ -152,14 +151,14 @@ public class SubJoinFragment extends Fragment {
                                      eventList.add(new Event(r.getEventId(),r.getEventname(), r.getStudentId()
                                              , r.getStartdate(), r.getEnddate(), r.getStrattime()
                                              , r.getEndtime() , r.getCategoryId() , r.getEventdetail()
-                                             , r.getLocationId() , r.getAmount() , r.getDepartment()
+                                             , r.getAmount() , r.getDepartment()
                                              , r.getYear() , r.getPlacename() , r.getLatitude()
                                              , r.getLongitude() , r.getAddress()));
                                  }
                                  EventListAdapter adapter = new EventListAdapter(getContext(),R.layout.item_event, eventList);
                                  listView.setAdapter(adapter);
                              } else {
-                                 textbg_subjoin.setText("ไม่มีกิจกรรมที่คุณสร้าง");
+                                 textbg_subjoin.setText("ไม่มีกิจกรรมที่คุณเข้าร่วม");
                              }
                          }
 

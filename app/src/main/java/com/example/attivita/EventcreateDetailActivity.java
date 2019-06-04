@@ -13,8 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.attivita.adapter.EventListAdapter;
-import com.example.attivita.model.Event;
 import com.example.attivita.model.ResponseJoinevent;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
@@ -26,21 +24,21 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EventDetails extends AppCompatActivity implements OnMapReadyCallback {
+public class EventcreateDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     TextView textview_eventname,textview_eventDate,textview_eventTime,textview_eventAddress,textview_eventnameaddress
-            ,textview_eventCategory,textview_amount,textview_amountmax,textview_eventDetail,btn_Cancel;
+            ,textview_eventCategory,textview_amount,textview_amountmax,textview_eventDetail,btn_Edit;
     Button btn_joinevent;
-    ImageView btn_backhome;
+    ImageView btn_back;
     String studentId;
+    String eventId,eventname,eventStuId,eventDetail,eventAmount,eventStartdate,eventEnddate,eventStarttime
+            ,eventEndtime,eventCategoryId,eventPlacename,eventLatitude,eventLongitude,eventAddress;
     int Eventid,eventamount,eventcategoryid;
     double eventlatitude,eventlongitude;
     public boolean boolean_joinevent = false;
@@ -56,7 +54,7 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_details);
+        setContentView(R.layout.activity_eventcreate_detail);
         getSupportActionBar().hide();
 
         SharedPreferences shared = this.getSharedPreferences(MY_PREFS,
@@ -65,23 +63,20 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         studentId = shared.getString("studentId",null);
 
         Intent getIntent = getIntent();
-        String eventId = getIntent.getStringExtra("eventId");
-        String eventname = getIntent.getStringExtra("eventName");
-        String eventStuId = getIntent.getStringExtra("eventStuId");
-        String eventDetail = getIntent.getStringExtra("eventDetail");
-        String eventAmount = getIntent.getStringExtra("eventAmount");
-        String eventStartdate = getIntent.getStringExtra("eventStartdate");
-        String eventEnddate = getIntent.getStringExtra("eventEnddate");
-        String eventStarttime = getIntent.getStringExtra("eventStarttime");
-        String eventEndtime = getIntent.getStringExtra("eventEndtime");
-        String eventDepart = getIntent.getStringExtra("eventDepart");
-        String eventCategoryId = getIntent.getStringExtra("eventCategoryId");
-        String eventYear = getIntent.getStringExtra("eventYear");
-        String eventLocation = getIntent.getStringExtra("eventLocation");
-        String eventPlacename = getIntent.getStringExtra("eventPlacename");
-        String eventLatitude = getIntent.getStringExtra("eventLatitude");
-        String eventLongitude = getIntent.getStringExtra("eventLongitude");
-        String eventAddress = getIntent.getStringExtra("eventAddress");
+        eventId = getIntent.getStringExtra("eventId");
+        eventname = getIntent.getStringExtra("eventName");
+        eventStuId = getIntent.getStringExtra("eventStuId");
+        eventDetail = getIntent.getStringExtra("eventDetail");
+        eventAmount = getIntent.getStringExtra("eventAmount");
+        eventStartdate = getIntent.getStringExtra("eventStartdate");
+        eventEnddate = getIntent.getStringExtra("eventEnddate");
+        eventStarttime = getIntent.getStringExtra("eventStarttime");
+        eventEndtime = getIntent.getStringExtra("eventEndtime");
+        eventCategoryId = getIntent.getStringExtra("eventCategoryId");
+        eventPlacename = getIntent.getStringExtra("eventPlacename");
+        eventLatitude = getIntent.getStringExtra("eventLatitude");
+        eventLongitude = getIntent.getStringExtra("eventLongitude");
+        eventAddress = getIntent.getStringExtra("eventAddress");
 
         textview_eventname = findViewById(R.id.textview_eventname);
         textview_eventDate = findViewById(R.id.textview_eventDate);
@@ -93,8 +88,8 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         textview_amountmax = findViewById(R.id.textview_amountmax);
         textview_eventDetail = findViewById(R.id.textview_eventDetail);
         btn_joinevent = findViewById(R.id.button_joinevent);
-        btn_backhome = findViewById(R.id.button_backhome);
-        btn_Cancel = findViewById(R.id.buttonCancel);
+        btn_back = findViewById(R.id.button_backhome);
+        btn_Edit = findViewById(R.id.buttonEdit);
 
         Eventid = Integer.valueOf(eventId);
         eventamount = Integer.valueOf(eventAmount);
@@ -136,23 +131,31 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         mapView.getMapAsync(this);
 
         checkCountJoinEvent();
-        btn_joinevent.setOnClickListener(new View.OnClickListener() {
+
+        btn_Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                joinEvent();
-                checkAmount();
+                Intent intent = new Intent(EventcreateDetailActivity.this, EditeventActivity.class);
+                intent.putExtra("eventId", eventId);
+//                intent.putExtra("eventName", eventname);
+//                intent.putExtra("eventStuId", eventStuId);
+//                intent.putExtra("eventDetail", eventDetail);
+//                intent.putExtra("eventAmount", eventAmount);
+//                intent.putExtra("eventStartdate", eventStartdate);
+//                intent.putExtra("eventEnddate", eventEnddate);
+//                intent.putExtra("eventStarttime", eventStarttime);
+//                intent.putExtra("eventEndtime", eventEndtime);
+//                intent.putExtra("eventCategoryId", eventCategoryId);
+//                intent.putExtra("eventPlacename", eventPlacename);
+//                intent.putExtra("eventLatitude", eventLatitude);
+//                intent.putExtra("eventLongitude", eventLongitude);
+//                intent.putExtra("eventAddress",eventAddress);
+                startActivity(intent);
 
             }
         });
 
-        btn_Cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelJoinEvent();
-            }
-        });
-
-        btn_backhome.setOnClickListener(new View.OnClickListener() {
+        btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -164,29 +167,29 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
     private String getMonth(String month){
         switch (month){
             case "01":
-                return "มกราคม";
+                return "ม.ค";
             case "02":
-                return "กุมภาพันธ์";
+                return "ก.พ";
             case "03":
-                return "มีนาคม";
+                return "มี.ค";
             case "04":
-                return "เมษายม";
+                return "เม.ย";
             case "05":
-                return "พฤษภาคม";
+                return "พ.ค";
             case "06":
-                return "มิถุนายม";
+                return "มิ.ย";
             case "07":
-                return "กรกฎาคม";
+                return "ก.ค";
             case "08":
-                return "สิงหาคม";
+                return "ส.ค";
             case "09":
-                return "กันยายน";
+                return "ก.ย";
             case "10":
-                return "ตุลาคม";
+                return "ต.ค";
             case "11":
-                return "พฤศจิกายน";
+                return "พ.ย";
             case "12":
-                return "ธันวาคม";
+                return "ธ.ค";
             default: break;
         }
         return "";
@@ -215,59 +218,6 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         return "";
     }
 
-    private boolean checkAmount(){
-        //int amount = Integer.valueOf(textview_amount.getText().toString());
-        int amountmax = Integer.valueOf(textview_amountmax.getText().toString());
-        if(joineventList.size() < amountmax){
-            return true;
-        } else {
-            btn_joinevent.setText("ผู้เข้าร่วมครบแล้ว");
-            btn_joinevent.setEnabled(false);
-            return false;
-        }
-    }
-
-    private boolean checkJoinEvent(){
-        System.out.println("Size :"+ joineventList.size() +" std :"+ studentId);
-        for(int i=0 ; i<joineventList.size() ; i++){
-            System.out.println("Size :"+ i +" std :"+ joineventList.get(i).getStudentId());
-            if(joineventList.get(i).getStudentId().equals(studentId) ){
-
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void joinEvent(){
-        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-        Call<ResponseJoinevent> call = apiService.joinevent(studentId,Eventid);
-
-        call.enqueue(new Callback<ResponseJoinevent>() {
-            @Override
-            public void onResponse(Call<ResponseJoinevent> call, Response<ResponseJoinevent> response) {
-                ResponseJoinevent res = response.body();
-
-                if (!res.isStatus()){
-                    btn_joinevent.setText("เข้าร่วมแล้ว");
-                    btn_joinevent.setEnabled(false);
-                    btn_Cancel.setText("ยกเลิก");
-                    btn_Cancel.setBackgroundResource(R.drawable.backgroundlinegary);
-
-                    Toast.makeText(EventDetails.this, res.getMessage(), Toast.LENGTH_LONG).show();
-                } else {
-                    checkCountJoinEvent();
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseJoinevent> call, Throwable t) {
-                Toast.makeText(EventDetails.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
-                System.err.println("ERRORRRRR : "+ t.getMessage());
-            }
-        });
-    }
 
     public void checkCountJoinEvent(){
 
@@ -288,61 +238,22 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
                     }
                     String amount_s = String.valueOf(joineventList.size());
                     textview_amount.setText(amount_s);
-                    if(checkJoinEvent()){
-                        btn_joinevent.setText("เข้าร่วมแล้ว");
-                        btn_joinevent.setEnabled(false);
-                        btn_Cancel.setText("ยกเลิก");
-                        btn_Cancel.setBackgroundResource(R.drawable.backgroundlinegary);
-                    } else {
-                        checkAmount();
-                    }
+
                 } else {
                     String amount_s = String.valueOf(joineventList.size());
                     textview_amount.setText(amount_s);
-                    Toast.makeText(EventDetails.this, "No event now", Toast.LENGTH_LONG).show();
+
                 }
 
             }
 
             @Override
             public void onFailure(Call<ArrayList<ResponseJoinevent>> call, Throwable t) {
-                Toast.makeText(EventDetails.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(EventcreateDetailActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
                 System.err.println("ERRORRRRR : "+ t.getMessage());
             }
         });
     }
-
-    public void cancelJoinEvent(){
-        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-        Call<ResponseJoinevent> call = apiService.canceljoin(studentId,Eventid);
-
-        call.enqueue(new Callback<ResponseJoinevent>() {
-            @Override
-            public void onResponse(Call<ResponseJoinevent> call, Response<ResponseJoinevent> response) {
-                ResponseJoinevent res = response.body();
-
-                if (res.isStatus()){
-                    btn_joinevent.setText("เข้าร่วม");
-                    btn_joinevent.setEnabled(true);
-                    btn_Cancel.setText("");
-                    btn_Cancel.setBackgroundResource(0);
-                    checkAmount();
-
-                    Toast.makeText(EventDetails.this, res.getMessage(), Toast.LENGTH_LONG).show();
-                } else {
-
-                    Toast.makeText(EventDetails.this, res.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseJoinevent> call, Throwable t) {
-                Toast.makeText(EventDetails.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
-                System.err.println("ERRORRRRR : "+ t.getMessage());
-            }
-        });
-    }
-
 
     @Override
     public void onSaveInstanceState(Bundle outState) {

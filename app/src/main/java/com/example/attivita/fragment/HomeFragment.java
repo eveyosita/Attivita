@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment  {
     ImageButton imbut_addwarn;
     ImageButton imbut_addevent;
     ListView listView;
-    ArrayList<Event> eventList = new ArrayList<>();
+    private ArrayList<Event> eventList = new ArrayList<>();
     ProgressDialog dialog;
 
     private LocationManager locationManager;
@@ -140,7 +140,6 @@ public class HomeFragment extends Fragment  {
                     intent.putExtra("eventDepart", eventList.get(i).getDepartment());
                     intent.putExtra("eventCategoryId", eventCategoryId);
                     intent.putExtra("eventYear", eventList.get(i).getYear());
-                    intent.putExtra("eventLocation", eventList.get(i).getLocationId());
                     intent.putExtra("eventPlacename", eventList.get(i).getPlacename());
                     intent.putExtra("eventLatitude", eventLatitude);
                     intent.putExtra("eventLongitude", eventLongitude);
@@ -194,7 +193,7 @@ public class HomeFragment extends Fragment  {
                                          eventList.add(new Event(r.getEventId(),r.getEventname(), r.getStudentId()
                                                  , r.getStartdate(), r.getEnddate(), r.getStrattime()
                                                  , r.getEndtime() , r.getCategoryId() , r.getEventdetail()
-                                                 , r.getLocationId() , r.getAmount() , r.getDepartment()
+                                                 , r.getAmount() , r.getDepartment()
                                                  , r.getYear() , r.getPlacename() , r.getLatitude()
                                                  , r.getLongitude() , r.getAddress()));
                                         }

@@ -128,7 +128,7 @@ public class SettingActivity extends AppCompatActivity {
                         textView_telnumber.setText(res.getTelnumber());
 
                     String picture = res.getProfile_pic();
-                    if(picture.isEmpty()){
+                    if(picture == null){
                         circleImageView_profile.setImageResource(R.drawable.girl);
                     }else{
                         String url = "http://pilot.cp.su.ac.th/usr/u07580553/attivita/picture/profile/"+picture;

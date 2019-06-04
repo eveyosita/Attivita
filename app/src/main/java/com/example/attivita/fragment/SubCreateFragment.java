@@ -14,7 +14,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.attivita.EditeventActivity;
 import com.example.attivita.EventDetails;
+import com.example.attivita.EventcreateDetailActivity;
 import com.example.attivita.R;
 import com.example.attivita.adapter.EventListAdapter;
 import com.example.attivita.model.Event;
@@ -108,7 +110,7 @@ public class SubCreateFragment extends Fragment {
                 String eventLatitude = String.valueOf(eventList.get(i).getLatitude());
                 String eventLongitude = String.valueOf(eventList.get(i).getLongitude());
 
-                Intent intent = new Intent(getContext(), EventDetails.class);
+                Intent intent = new Intent(getContext(), EventcreateDetailActivity.class);
                 intent.putExtra("eventId", eventId);
                 intent.putExtra("eventName", eventList.get(i).getEventname());
                 intent.putExtra("eventStuId", eventList.get(i).getStudentId());
@@ -121,7 +123,6 @@ public class SubCreateFragment extends Fragment {
                 intent.putExtra("eventDepart", eventList.get(i).getDepartment());
                 intent.putExtra("eventCategoryId", eventCategoryId);
                 intent.putExtra("eventYear", eventList.get(i).getYear());
-                intent.putExtra("eventLocation", eventList.get(i).getLocationId());
                 intent.putExtra("eventPlacename", eventList.get(i).getPlacename());
                 intent.putExtra("eventLatitude", eventLatitude);
                 intent.putExtra("eventLongitude", eventLongitude);
@@ -149,7 +150,7 @@ public class SubCreateFragment extends Fragment {
                                      eventList.add(new Event(r.getEventId(),r.getEventname(), r.getStudentId()
                                              , r.getStartdate(), r.getEnddate(), r.getStrattime()
                                              , r.getEndtime() , r.getCategoryId() , r.getEventdetail()
-                                             , r.getLocationId() , r.getAmount() , r.getDepartment()
+                                             , r.getAmount() , r.getDepartment()
                                              , r.getYear() , r.getPlacename() , r.getLatitude()
                                              , r.getLongitude() , r.getAddress()));
                                  }

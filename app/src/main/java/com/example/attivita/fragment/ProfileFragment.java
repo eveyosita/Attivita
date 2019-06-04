@@ -56,10 +56,10 @@ public class ProfileFragment extends Fragment {
                 Context.MODE_PRIVATE);
 
         final String stuid = shared.getString("studentId",null);
-        final String pass = shared.getString("password",null);
-        final String fname = shared.getString("firstname",null);
-        final String lname = shared.getString("lastname",null);
-        final String profile_pic = shared.getString("profile_pic",null);
+//        final String pass = shared.getString("password",null);
+//        final String fname = shared.getString("firstname",null);
+//        final String lname = shared.getString("lastname",null);
+//        final String profile_pic = shared.getString("profile_pic",null);
 
 
         layout_profile =  v.findViewById(R.id.layout_profile);
@@ -67,17 +67,36 @@ public class ProfileFragment extends Fragment {
         fnamePro =  v.findViewById(R.id.firstname_pro);
         lnamePro =  v.findViewById(R.id.lastname_pro);
 
-        fnamePro.setText(fname);
-        lnamePro.setText(lname);
 
-        String picture = profile_pic;
-        if(picture == null){
-            circleImageView_profile.setImageResource(R.drawable.girl);
-        }else{
-            String url = "http://pilot.cp.su.ac.th/usr/u07580553/attivita/picture/profile/"+picture;
-            System.out.println(url);
-            Picasso.get().load(url).into(circleImageView_profile);
-        }
+        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+        Call<student> call = apiService.readstudent(stuid);
+
+        call.enqueue(new Callback<student>() {
+            @Override
+            public void onResponse(Call<student> call, Response<student> response) {
+                student res = response.body();
+                if (res.isStatus()){
+
+                    fnamePro.setText(res.getFirstname());
+                    lnamePro.setText(res.getLastname());
+
+                    String picture = res.getProfile_pic();
+                    if(picture == null){
+                        circleImageView_profile.setImageResource(R.drawable.girl);
+                    }else{
+                        String url = "http://pilot.cp.su.ac.th/usr/u07580553/attivita/picture/profile/"+picture;
+                        System.out.println(url);
+                        Picasso.get().load(url).into(circleImageView_profile);
+                    }
+
+                }
+            }
+            @Override
+            public void onFailure(Call<student> call, Throwable t) {
+                Toast.makeText(getContext(), "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("ERRORRRRR : "+ t.getMessage());
+            }
+        });
 
         layout_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,8 +104,6 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(getContext(), SettingActivity.class));
             }
         });
-
-
 
         return v;
     }
