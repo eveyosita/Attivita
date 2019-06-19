@@ -3,7 +3,7 @@ package com.example.attivita.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class student {
+public class StudentPHP {
     @SerializedName("status")
     @Expose
     private boolean status;
@@ -56,7 +56,7 @@ public class student {
 
 
 
-    public student(String studentid, String password, String firstname, String lastname, String nickname, String department, String year, String email, String telnumber) {
+    public StudentPHP(String studentid, String password, String firstname, String lastname, String nickname, String department, String year, String email, String telnumber) {
         this.studentid = studentid;
         this.password = password;
         this.firstname = firstname;
@@ -68,7 +68,7 @@ public class student {
         this.telnumber = telnumber;
     }
 
-    public student(String studentid, String password,String firstname, String lastname,String department, String year){
+    public StudentPHP(String studentid, String password, String firstname, String lastname, String department, String year){
         this.studentid = studentid;
         this.password = password;
         this.firstname = firstname;
@@ -77,7 +77,7 @@ public class student {
         this.year = year;
     }
 
-    public student(){
+    public StudentPHP(){
     }
 
     public boolean isStatus() {

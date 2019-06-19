@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EventcreateDetailActivity"></activity>
+        <activity android:name=".MessagesActivity"></activity>
+        <activity android:name=".EventcreateDetailActivity" />
         <activity android:name=".EditeventActivity" />
         <activity android:name=".EditprofileActivity" />
         <activity android:name=".SettingActivity" />

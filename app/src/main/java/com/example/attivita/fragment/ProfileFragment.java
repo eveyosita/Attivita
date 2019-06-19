@@ -1,14 +1,11 @@
 package com.example.attivita.fragment;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,21 +14,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.attivita.AddwarnActivity;
-import com.example.attivita.LoginActivity;
 import com.example.attivita.R;
-import com.example.attivita.RegisterActivity;
 import com.example.attivita.SettingActivity;
-import com.example.attivita.model.student;
+import com.example.attivita.model.StudentPHP;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
-import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
-;import java.util.ArrayList;
+;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -69,12 +61,12 @@ public class ProfileFragment extends Fragment {
 
 
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-        Call<student> call = apiService.readstudent(stuid);
+        Call<StudentPHP> call = apiService.readstudent(stuid);
 
-        call.enqueue(new Callback<student>() {
+        call.enqueue(new Callback<StudentPHP>() {
             @Override
-            public void onResponse(Call<student> call, Response<student> response) {
-                student res = response.body();
+            public void onResponse(Call<StudentPHP> call, Response<StudentPHP> response) {
+                StudentPHP res = response.body();
                 if (res.isStatus()){
 
                     fnamePro.setText(res.getFirstname());
@@ -92,7 +84,7 @@ public class ProfileFragment extends Fragment {
                 }
             }
             @Override
-            public void onFailure(Call<student> call, Throwable t) {
+            public void onFailure(Call<StudentPHP> call, Throwable t) {
                 Toast.makeText(getContext(), "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
                 System.err.println("ERRORRRRR : "+ t.getMessage());
             }

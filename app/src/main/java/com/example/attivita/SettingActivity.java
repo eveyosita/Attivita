@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,9 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.attivita.model.student;
+import com.example.attivita.model.StudentPHP;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -82,10 +81,10 @@ public class SettingActivity extends AppCompatActivity {
                                 Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = shared.edit();
 
-                        //FirebaseAuth.getInstance().signOut();
+                        FirebaseAuth.getInstance().signOut();
 
                         editor.clear();
-                        editor.commit();
+                        editor.apply();
 
                         startActivity(new Intent(SettingActivity.this, LoginActivity.class));
                         finish();
@@ -108,12 +107,12 @@ public class SettingActivity extends AppCompatActivity {
         super.onStart();
 
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-        Call<student> call = apiService.readstudent(studentid);
+        Call<StudentPHP> call = apiService.readstudent(studentid);
 
-        call.enqueue(new Callback<student>() {
+        call.enqueue(new Callback<StudentPHP>() {
             @Override
-            public void onResponse(Call<student> call, Response<student> response) {
-                student res = response.body();
+            public void onResponse(Call<StudentPHP> call, Response<StudentPHP> response) {
+                StudentPHP res = response.body();
                 if (res.isStatus()){
 
                     textView_studentid.setText(res.getStudentid());
@@ -139,7 +138,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<student> call, Throwable t) {
+            public void onFailure(Call<StudentPHP> call, Throwable t) {
                 Toast.makeText(SettingActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
                 System.err.println("ERRORRRRR : "+ t.getMessage());
             }

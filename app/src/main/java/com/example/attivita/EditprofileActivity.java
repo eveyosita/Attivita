@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -20,18 +19,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.attivita.model.student;
+import com.example.attivita.model.StudentPHP;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
-import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -168,13 +161,13 @@ public class EditprofileActivity extends AppCompatActivity implements View.OnCli
     public void setProfile(){
 
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-        Call<student> call = apiService.updateprofile(studentid,edittText_nickname.getText().toString(),
+        Call<StudentPHP> call = apiService.updateprofile(studentid,edittText_nickname.getText().toString(),
                 edittText_telnumber.getText().toString(),image_confirm);
 
-        call.enqueue(new Callback<student>() {
+        call.enqueue(new Callback<StudentPHP>() {
             @Override
-            public void onResponse(Call<student> call, Response<student> response) {
-                student res = response.body();
+            public void onResponse(Call<StudentPHP> call, Response<StudentPHP> response) {
+                StudentPHP res = response.body();
                 if (res.isStatus()){
 
                     SharedPreferences shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
@@ -194,7 +187,7 @@ public class EditprofileActivity extends AppCompatActivity implements View.OnCli
                 }
             }
             @Override
-            public void onFailure(Call<student> call, Throwable t) {
+            public void onFailure(Call<StudentPHP> call, Throwable t) {
                 Toast.makeText(EditprofileActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
                 System.err.println("ERRORRRRR : "+ t.getMessage());
             }
@@ -225,12 +218,12 @@ public class EditprofileActivity extends AppCompatActivity implements View.OnCli
         super.onStart();
 
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-        Call<student> call = apiService.readstudent(studentid);
+        Call<StudentPHP> call = apiService.readstudent(studentid);
 
-        call.enqueue(new Callback<student>() {
+        call.enqueue(new Callback<StudentPHP>() {
             @Override
-            public void onResponse(Call<student> call, Response<student> response) {
-                student res = response.body();
+            public void onResponse(Call<StudentPHP> call, Response<StudentPHP> response) {
+                StudentPHP res = response.body();
                 if (res.isStatus()){
 
                     textView_studentid.setText(res.getStudentid());
@@ -256,7 +249,7 @@ public class EditprofileActivity extends AppCompatActivity implements View.OnCli
                 }
             }
             @Override
-            public void onFailure(Call<student> call, Throwable t) {
+            public void onFailure(Call<StudentPHP> call, Throwable t) {
                 Toast.makeText(EditprofileActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
                 System.err.println("ERRORRRRR : "+ t.getMessage());
             }

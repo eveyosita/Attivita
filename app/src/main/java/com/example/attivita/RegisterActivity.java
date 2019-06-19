@@ -25,8 +25,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.attivita.model.ResponseRegist;
-import com.example.attivita.model.student;
+import com.example.attivita.model.StudentPHP;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,10 +33,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,7 +47,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.regex.Pattern;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -128,6 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 stdid = id_text.getText().toString();
                 passw = pass_text.getText().toString();
                 conpass = conpass_text.getText().toString();
@@ -156,9 +157,7 @@ public class RegisterActivity extends AppCompatActivity {
                             builder.setPositiveButton("ยันยัน", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     setStudent();
-                                    //finish();
-//                            Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-//                            startActivity(i);
+
                                 }
                             });
                             builder.setNegativeButton("แก้ไข", new DialogInterface.OnClickListener() {
@@ -172,11 +171,9 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(RegisterActivity.this, "รหัสนักศึกษาไม่ถูกต้อง", Toast.LENGTH_LONG).show();
                     }
-
                 }
             }
         });
-
     }
 
     private void createDepartment() {
@@ -193,7 +190,6 @@ public class RegisterActivity extends AppCompatActivity {
         department.add("เทคโนโลยีสารสนเทศ");
         department.add("ครูฟิสิกส์");
         department.add("วิทยาการข้อมูล");
-
     }
 
     public String imageToString(Bitmap bitmap) {
@@ -230,7 +226,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Bundle bundle = data.getExtras();
                 Bitmap bitmap = bundle.getParcelable("data");
                 image_confirm = imageToString(bitmap);
-                Toast.makeText(RegisterActivity.this, image_confirm, Toast.LENGTH_SHORT).show();
+
 
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
@@ -241,12 +237,12 @@ public class RegisterActivity extends AppCompatActivity {
     public void setStudent(){
 
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-        Call<student> call = apiService.createuser(stdid,passw,fname,lname,depart,year,email,image_confirm);
+        Call<StudentPHP> call = apiService.createuser(stdid,passw,fname,lname,depart,year,email,image_confirm);
 
-        call.enqueue(new Callback<student>() {
+        call.enqueue(new Callback<StudentPHP>() {
             @Override
-            public void onResponse(Call<student> call, Response<student> response) {
-                student res = response.body();
+            public void onResponse(Call<StudentPHP> call, Response<StudentPHP> response) {
+                StudentPHP res = response.body();
                 if (res.isStatus()){
                     auth.createUserWithEmailAndPassword(email, passw)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -254,19 +250,26 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         FirebaseUser firebaseUser = auth.getCurrentUser();
+
+                                        assert firebaseUser != null;
                                         String userid = firebaseUser.getUid();
 
-                                        reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+                                        reference = FirebaseDatabase.getInstance().getReference("Student").child(userid);
 
                                         HashMap<String, String> hashMap = new HashMap<>();
                                         hashMap.put("id", userid);
-                                        hashMap.put("username", email);
-                                        hashMap.put("imagerUrl", "defult");
+                                        hashMap.put("username", stdid);
+                                        hashMap.put("latitude", "defult");
+                                        hashMap.put("longitude", "defult");
+
+                                        System.out.println("DDD");
 
                                         reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-
+                                                if(task.isSuccessful()){
+                                                    System.out.println("YAHH");
+                                                }
                                             }
                                         });
                                     } else {
@@ -275,17 +278,17 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                             });
 
-                    SharedPreferences shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = shared.edit();
-                    editor.putString("studentId", res.getStudentid());
-                    editor.putString("password", res.getPassword());
-                    editor.putString("firstname", res.getFirstname());
-                    editor.putString("lastname", res.getLastname());
-                    editor.putString("department", res.getDepartment());
-                    editor.putString("year", res.getYear());
-                    editor.putString("email", res.getEmail());
-                    editor.putBoolean("status", true);
-                    editor.commit();
+//                    SharedPreferences shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = shared.edit();
+//                    editor.putString("studentId", res.getStudentid());
+//                    editor.putString("password", res.getPassword());
+//                    editor.putString("firstname", res.getFirstname());
+//                    editor.putString("lastname", res.getLastname());
+//                    editor.putString("department", res.getDepartment());
+//                    editor.putString("year", res.getYear());
+//                    editor.putString("email", res.getEmail());
+//                    editor.putBoolean("status", true);
+//                    editor.apply();
                     Toast.makeText(RegisterActivity.this, "ลงทะเบียนเสร็จสิ้น", Toast.LENGTH_LONG).show();
                     finish();
                 }
@@ -294,7 +297,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<student> call, Throwable t) {
+            public void onFailure(Call<StudentPHP> call, Throwable t) {
                 Toast.makeText(RegisterActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
                 System.err.println("ERRORRRRR : "+ t.getMessage());
             }

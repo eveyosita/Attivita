@@ -33,9 +33,15 @@ import com.example.attivita.adapter.EventListAdapter;
 import com.example.attivita.model.Event;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,6 +67,8 @@ public class HomeFragment extends Fragment  {
 
     String studentDepart,studentyear;
 
+    FirebaseUser firebaseUser;
+    DatabaseReference reference;
 
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -152,9 +160,9 @@ public class HomeFragment extends Fragment  {
 
             if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 buildAlertMessageNoGps();
-
             } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 getLocation();
+                setLocationCurrent();
             }
 
 
@@ -212,6 +220,17 @@ public class HomeFragment extends Fragment  {
                          }
                      }
         );
+    }
+
+    private void setLocationCurrent(){
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Student").child(firebaseUser.getUid());
+        Map<String, Object> hashMap = new HashMap<>();
+        hashMap.put("latitude", Latitude_current);
+        hashMap.put("longitude", Longitude_current);
+        reference.updateChildren(hashMap);
+        System.out.println("LOOO");
+
     }
 
     private void getLocation() {

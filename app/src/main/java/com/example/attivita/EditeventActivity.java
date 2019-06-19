@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +25,6 @@ import android.widget.Toast;
 
 import com.example.attivita.model.Event;
 import com.example.attivita.model.ResponseJoinevent;
-import com.example.attivita.model.student;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -35,14 +32,6 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -317,17 +306,25 @@ public class EditeventActivity extends AppCompatActivity {
                     event.setLongitude(res.getLongitude());
                     event.setAddress(res.getAddress());
                 }
-
                 System.out.println("Event :" + event.getEventname());
+
+                String dateStart = event.getStartdate().substring(8)+"/"+getMonth(event.getStartdate().substring(6,7))
+                        +"/"+(Integer.valueOf(event.getStartdate().substring(0,4))+543);
+                String dateEnd = event.getEnddate().substring(8)+"/"+getMonth(event.getEnddate().substring(6,7))
+                        +"/"+(Integer.valueOf(event.getEnddate().substring(0,4))+543);
+                String timeStart = event.getStrattime().substring(0,5)+" น.";
+                String timeEnd = event.getEndtime().substring(0,5)+" น.";
 
                 edittext_eventname.setText(event.getEventname());
                 edittext_amountmax.setText(event.getAmount());
                 edittext_eventDetail.setText(event.getEventdetail());
                 textview_eventAddress.setText(event.getPlacename());
                 spinner_category.setSelection(event.getCategoryId());
-                String dateStart = event.getStartdate().substring(8)+"/"+getMonth(event.getStartdate().substring(6,7))
-                        +"/"+(Integer.valueOf(event.getStartdate().substring(0,4))+543);
-          
+                button_eventDatestart.setText(dateStart);
+                button_eventDateend.setText(dateEnd);
+                button_eventTimestart.setText(timeStart);
+                button_eventTimeend.setText(timeEnd);
+
             }
 
             @Override

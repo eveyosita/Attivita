@@ -2,23 +2,20 @@ package com.example.attivita.retrofit;
 
 import com.example.attivita.model.Event;
 import com.example.attivita.model.ResponseJoinevent;
-import com.example.attivita.model.ResponseRegist;
-import com.example.attivita.model.student;
+import com.example.attivita.model.StudentPHP;
 
 import java.util.ArrayList;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface APIInterface {
 
     @FormUrlEncoded
     @POST("createuser.php")
-    Call<student> createuser(
+    Call<StudentPHP> createuser(
            @Field("studentId") String studentid,
            @Field("password") String password,
            @Field("firstname") String firstname,
@@ -31,14 +28,14 @@ public interface APIInterface {
 
     @FormUrlEncoded
     @POST("loginuser.php")
-    Call<student> loginuser(
+    Call<StudentPHP> loginuser(
             @Field("studentId") String studentid,
             @Field("password") String password
     );
 
     @FormUrlEncoded
     @POST("showprofile.php")
-    Call<student> showprofile(
+    Call<StudentPHP> showprofile(
             @Field("studentId") String studentid
     );
 
@@ -115,7 +112,7 @@ public interface APIInterface {
 
     @FormUrlEncoded
     @POST("updateprofile.php")
-    Call<student> updateprofile(
+    Call<StudentPHP> updateprofile(
             @Field("studentId") String studentid,
             @Field("nickname") String nickname,
             @Field("telnumber") String telnumber,
@@ -124,8 +121,14 @@ public interface APIInterface {
 
     @FormUrlEncoded
     @POST("readstudent.php")
-    Call<student> readstudent(
+    Call<StudentPHP> readstudent(
             @Field("studentId") String studentid
+    );
+
+    @FormUrlEncoded
+    @POST("getstudent.php")
+    Call<StudentPHP> getstudent(
+            @Field("email") String email
     );
 
     @FormUrlEncoded

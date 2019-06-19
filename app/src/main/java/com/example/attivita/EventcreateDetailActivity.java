@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.attivita.model.Event;
 import com.example.attivita.model.ResponseJoinevent;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
@@ -37,16 +38,15 @@ public class EventcreateDetailActivity extends AppCompatActivity implements OnMa
     Button btn_joinevent;
     ImageView btn_back;
     String studentId;
-    String eventId,eventname,eventStuId,eventDetail,eventAmount,eventStartdate,eventEnddate,eventStarttime
-            ,eventEndtime,eventCategoryId,eventPlacename,eventLatitude,eventLongitude,eventAddress;
-    int Eventid,eventamount,eventcategoryid;
+    String eventId;
+    int Eventid,eventamount;
     double eventlatitude,eventlongitude;
-    public boolean boolean_joinevent = false;
     private GoogleMap mMap;
     private MapView mapView;
     private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
 
     ArrayList<ResponseJoinevent> joineventList = new ArrayList<>();
+    Event event = new Event();
 
     private static final String MY_PREFS = "prefs";
 
@@ -64,19 +64,6 @@ public class EventcreateDetailActivity extends AppCompatActivity implements OnMa
 
         Intent getIntent = getIntent();
         eventId = getIntent.getStringExtra("eventId");
-        eventname = getIntent.getStringExtra("eventName");
-        eventStuId = getIntent.getStringExtra("eventStuId");
-        eventDetail = getIntent.getStringExtra("eventDetail");
-        eventAmount = getIntent.getStringExtra("eventAmount");
-        eventStartdate = getIntent.getStringExtra("eventStartdate");
-        eventEnddate = getIntent.getStringExtra("eventEnddate");
-        eventStarttime = getIntent.getStringExtra("eventStarttime");
-        eventEndtime = getIntent.getStringExtra("eventEndtime");
-        eventCategoryId = getIntent.getStringExtra("eventCategoryId");
-        eventPlacename = getIntent.getStringExtra("eventPlacename");
-        eventLatitude = getIntent.getStringExtra("eventLatitude");
-        eventLongitude = getIntent.getStringExtra("eventLongitude");
-        eventAddress = getIntent.getStringExtra("eventAddress");
 
         textview_eventname = findViewById(R.id.textview_eventname);
         textview_eventDate = findViewById(R.id.textview_eventDate);
@@ -92,35 +79,7 @@ public class EventcreateDetailActivity extends AppCompatActivity implements OnMa
         btn_Edit = findViewById(R.id.buttonEdit);
 
         Eventid = Integer.valueOf(eventId);
-        eventamount = Integer.valueOf(eventAmount);
-        eventlatitude = Double.valueOf(eventLatitude);
-        eventlongitude = Double.valueOf(eventLongitude);
-
-        String getOnlyDateStart = eventStartdate.substring(8);
-        String getOnlyDateEnd = eventEnddate.substring(8);
-        String getOnlyMonth = getMonth(eventEnddate.substring(5,7));
-        String getOnlyYear = ""+(Integer.parseInt(eventEnddate.substring(0,4))+543);
-        String date;
-        if(getOnlyDateStart.equals(getOnlyDateEnd)){
-            date = getOnlyDateStart + " " + getOnlyMonth + " " +getOnlyYear;
-        } else {
-            date = getOnlyDateStart + " - " + getOnlyDateEnd + " " + getOnlyMonth + " " +getOnlyYear;
-        }
-
-        String timeStart = eventStarttime.substring(0,5);
-        String timeend = eventEndtime.substring(0,5);
-        String time = timeStart+" - "+timeend +" น.";
-
-        String category = getCategory(eventCategoryId);
-
-        textview_eventname.setText(eventname);
-        textview_eventDate.setText(date);
-        textview_eventTime.setText(time);
-        textview_eventAddress.setText(eventAddress);
-        textview_eventnameaddress.setText(eventPlacename);
-        textview_eventCategory.setText(category);
-        textview_amountmax.setText(eventAmount);
-        textview_eventDetail.setText(eventDetail);
+        getEvent();
 
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
@@ -137,19 +96,6 @@ public class EventcreateDetailActivity extends AppCompatActivity implements OnMa
             public void onClick(View v) {
                 Intent intent = new Intent(EventcreateDetailActivity.this, EditeventActivity.class);
                 intent.putExtra("eventId", eventId);
-//                intent.putExtra("eventName", eventname);
-//                intent.putExtra("eventStuId", eventStuId);
-//                intent.putExtra("eventDetail", eventDetail);
-//                intent.putExtra("eventAmount", eventAmount);
-//                intent.putExtra("eventStartdate", eventStartdate);
-//                intent.putExtra("eventEnddate", eventEnddate);
-//                intent.putExtra("eventStarttime", eventStarttime);
-//                intent.putExtra("eventEndtime", eventEndtime);
-//                intent.putExtra("eventCategoryId", eventCategoryId);
-//                intent.putExtra("eventPlacename", eventPlacename);
-//                intent.putExtra("eventLatitude", eventLatitude);
-//                intent.putExtra("eventLongitude", eventLongitude);
-//                intent.putExtra("eventAddress",eventAddress);
                 startActivity(intent);
 
             }
@@ -164,25 +110,96 @@ public class EventcreateDetailActivity extends AppCompatActivity implements OnMa
 
     }
 
+    private void getEvent(){
+
+        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+        Call<Event> call = apiService.getevent(Eventid);
+
+        call.enqueue(new Callback<Event>() {
+            @Override
+            public void onResponse(Call<Event> call, Response<Event> response) {
+                Event res = response.body();
+
+                if (res.getStatus() == 200) {
+                    event.setEventId(res.getEventId());
+                    event.setEventname(res.getEventname());
+                    event.setStudentId(res.getStudentId());
+                    event.setStartdate(res.getStartdate());
+                    event.setEnddate(res.getEnddate());
+                    event.setStrattime(res.getStrattime());
+                    event.setEndtime(res.getEndtime());
+                    event.setCategoryId(res.getCategoryId());
+                    event.setEventdetail(res.getEventdetail());
+                    event.setAmount(res.getAmount());
+                    event.setDepartment(res.getDepartment());
+                    event.setYear(res.getYear());
+                    event.setPlacename(res.getPlacename());
+                    event.setLatitude(res.getLatitude());
+                    event.setLongitude(res.getLongitude());
+                    event.setAddress(res.getAddress());
+                }
+                System.out.println("Event :" + event.getEventname());
+
+                String time = event.getStrattime().substring(0,5) +" - "+event.getEndtime().substring(0,5)+" น.";
+
+                String getOnlyDateStart = event.getStartdate().substring(8);
+                String getOnlyDateEnd = event.getEnddate().substring(8);
+                String getOnlyMonthStart = getMonth(event.getStartdate().substring(6,7));
+                String getOnlyMonthEnd = getMonth(event.getEnddate().substring(6,7));
+                String getOnlyYear = ""+(Integer.valueOf(event.getStartdate().substring(0,4))+543);
+                String date;
+                if(getOnlyMonthStart.equals(getOnlyMonthEnd)){
+                    if(getOnlyDateStart.equals(getOnlyDateEnd)){
+                        date = getOnlyDateStart + " " + getOnlyMonthStart + " " +getOnlyYear;
+                    } else {
+                        date = getOnlyDateStart +" - "+getOnlyDateEnd+ " " + getOnlyMonthStart + " " +getOnlyYear;
+                    }
+                } else {
+                    date = getOnlyDateStart + " " + getOnlyMonthStart +" - "+getOnlyDateEnd + " " + getOnlyMonthEnd + " " +getOnlyYear;
+                }
+
+                textview_eventname.setText(event.getEventname());
+                textview_amountmax.setText(event.getAmount());
+                textview_eventDetail.setText(event.getEventdetail());
+                textview_eventnameaddress.setText(event.getPlacename());
+                textview_eventAddress.setText(event.getAddress());
+                textview_eventCategory.setText(getCategory(event.getCategoryId()));
+                textview_eventDate.setText(date);
+                textview_eventTime.setText(time);
+                eventamount = Integer.valueOf(event.getAmount());
+                eventlatitude = event.getLatitude();
+                eventlongitude = event.getLongitude();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Event> call, Throwable t) {
+                Toast.makeText(EventcreateDetailActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("ERRORRRRR : "+ t.getMessage());
+            }
+        });
+    }
+
     private String getMonth(String month){
         switch (month){
-            case "01":
+            case "1":
                 return "ม.ค";
-            case "02":
+            case "2":
                 return "ก.พ";
-            case "03":
+            case "3":
                 return "มี.ค";
-            case "04":
+            case "4":
                 return "เม.ย";
-            case "05":
+            case "5":
                 return "พ.ค";
-            case "06":
+            case "6":
                 return "มิ.ย";
-            case "07":
+            case "7":
                 return "ก.ค";
-            case "08":
+            case "8":
                 return "ส.ค";
-            case "09":
+            case "9":
                 return "ก.ย";
             case "10":
                 return "ต.ค";
@@ -195,23 +212,23 @@ public class EventcreateDetailActivity extends AppCompatActivity implements OnMa
         return "";
     }
 
-    private String getCategory(String cate){
+    private String getCategory(int cate){
         switch (cate){
-            case "0" :
+            case 0 :
                 return "ขายของ";
-            case "1":
+            case 1:
                 return "จิตอาสา";
-            case "2":
+            case 2:
                 return "ติวหนังสือ";
-            case "3":
+            case 3:
                 return "ทำบุญไหว้พระ";
-            case "4":
+            case 4:
                 return "ท่องเที่ยว";
-            case "5":
+            case 5:
                 return "เล่นเกมส์";
-            case "6":
+            case 6:
                 return "สังสรรค์";
-            case "7":
+            case 7:
                 return "ออกกำลังกาย";
             default: break;
         }
@@ -316,6 +333,8 @@ public class EventcreateDetailActivity extends AppCompatActivity implements OnMa
         uiSettings.setCompassEnabled(true);
         uiSettings.setZoomControlsEnabled(true);
 
+        System.out.println("LAT : "+eventlatitude);
+        System.out.println("LONG : "+eventlongitude);
         LatLng ny = new LatLng(eventlatitude, eventlongitude);
 
         MarkerOptions markerOptions = new MarkerOptions();
