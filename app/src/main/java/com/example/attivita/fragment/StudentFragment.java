@@ -51,15 +51,14 @@ public class StudentFragment extends Fragment {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Student");
 
-        System.out.println("RRR "+reference);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 studentFirebaseList.clear();
-                System.out.println("RRR2.1");
+
                 for (DataSnapshot snapshot :dataSnapshot.getChildren()){
                     StudentFirebase studentFirebase = snapshot.getValue(StudentFirebase.class);
-                    System.out.println("RRR3");
+
                     assert studentFirebase != null;
                     assert firebaseUser != null;
                     if(!studentFirebase.getId().equals(firebaseUser.getUid())){

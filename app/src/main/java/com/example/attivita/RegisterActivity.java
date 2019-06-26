@@ -244,6 +244,20 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(Call<StudentPHP> call, Response<StudentPHP> response) {
                 StudentPHP res = response.body();
                 if (res.isStatus()){
+
+                    SharedPreferences shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = shared.edit();
+                    editor.putString("studentId", res.getStudentid());
+                    editor.putString("password", res.getPassword());
+                    editor.putString("firstname", res.getFirstname());
+                    editor.putString("lastname", res.getLastname());
+                    editor.putString("department", res.getDepartment());
+                    editor.putString("year", res.getYear());
+                    editor.putString("email", res.getEmail());
+                    editor.putBoolean("status", true);
+                    editor.putBoolean("status_notification", false);
+                    editor.apply();
+
                     auth.createUserWithEmailAndPassword(email, passw)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -256,11 +270,15 @@ public class RegisterActivity extends AppCompatActivity {
 
                                         reference = FirebaseDatabase.getInstance().getReference("Student").child(userid);
 
-                                        HashMap<String, String> hashMap = new HashMap<>();
+                                        HashMap<String, Object> hashMap = new HashMap<>();
                                         hashMap.put("id", userid);
                                         hashMap.put("username", stdid);
                                         hashMap.put("latitude", "defult");
                                         hashMap.put("longitude", "defult");
+                                        hashMap.put("requesthelp", false);
+                                        hashMap.put("helped", "defult");
+                                        hashMap.put("status_helpful", false);
+                                        hashMap.put("detail_helpful", "defult");
 
                                         System.out.println("DDD");
 
@@ -268,7 +286,8 @@ public class RegisterActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(task.isSuccessful()){
-                                                    System.out.println("YAHH");
+                                                    Toast.makeText(RegisterActivity.this, "ลงทะเบียนเสร็จสิ้น", Toast.LENGTH_LONG).show();
+                                                    startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                                                 }
                                             }
                                         });
@@ -278,19 +297,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                             });
 
-//                    SharedPreferences shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = shared.edit();
-//                    editor.putString("studentId", res.getStudentid());
-//                    editor.putString("password", res.getPassword());
-//                    editor.putString("firstname", res.getFirstname());
-//                    editor.putString("lastname", res.getLastname());
-//                    editor.putString("department", res.getDepartment());
-//                    editor.putString("year", res.getYear());
-//                    editor.putString("email", res.getEmail());
-//                    editor.putBoolean("status", true);
-//                    editor.apply();
-                    Toast.makeText(RegisterActivity.this, "ลงทะเบียนเสร็จสิ้น", Toast.LENGTH_LONG).show();
-                    finish();
+
+
+
                 }
 
 

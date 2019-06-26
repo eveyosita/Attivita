@@ -2,6 +2,7 @@ package com.example.attivita.fragment;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,10 +14,14 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,12 +36,18 @@ import com.example.attivita.EventDetails;
 import com.example.attivita.R;
 import com.example.attivita.adapter.EventListAdapter;
 import com.example.attivita.model.Event;
+import com.example.attivita.model.StudentFirebase;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -46,7 +57,6 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 public class HomeFragment extends Fragment  {
     SwipeRefreshLayout swipeRefreshLayout;
@@ -73,14 +83,18 @@ public class HomeFragment extends Fragment  {
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
              View v = inflater.inflate(R.layout.fragment_home, container, false);
-                imbut_addevent = (ImageButton)v.findViewById(R.id.addevent_imBut);
-                imbut_addwarn = (ImageButton)v.findViewById(R.id.addwarn_imBut);
-                listView = (ListView) v.findViewById(R.id.list_event);
+                imbut_addevent = v.findViewById(R.id.addevent_imBut);
+                imbut_addwarn = v.findViewById(R.id.addwarn_imBut);
+                listView = v.findViewById(R.id.list_event);
 
             imbut_addwarn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            String Latitude = String.valueOf(Latitude_current);
+                            String Longitude = String.valueOf(Longitude_current);
                             Intent i = new Intent(getContext(), AddwarnActivity.class);
+                            i.putExtra("Latitude_current", Latitude);
+                            i.putExtra("Longitude_current", Longitude);
                             startActivity(i);
 
                         }
@@ -105,7 +119,7 @@ public class HomeFragment extends Fragment  {
              setEventIDList(stdid);
 
 
-            swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
+            swipeRefreshLayout = v.findViewById(R.id.swipe_refresh);
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
@@ -273,6 +287,7 @@ public class HomeFragment extends Fragment  {
             }
         }
     }
+
     protected void buildAlertMessageNoGps() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -313,7 +328,7 @@ public class HomeFragment extends Fragment  {
         return false;
     }
 
-   public boolean checkDepartment(String[] depart){
+    public boolean checkDepartment(String[] depart){
        String department="";
        boolean check = false;
        for(int i = 0 ; i<depart.length ; i++ ) {
@@ -417,7 +432,6 @@ public class HomeFragment extends Fragment  {
        }
        return check;
    }
-
 
 
 

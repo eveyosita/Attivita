@@ -126,6 +126,7 @@ public class LoginActivity extends AppCompatActivity {
                                         editor.putString("year", res.getYear());
                                         editor.putString("email", res.getEmail());
                                         editor.putBoolean("status", true);
+                                        editor.putBoolean("status_notification", false);
                                         editor.commit();
                                         Toast.makeText(LoginActivity.this, "YAHH", Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
