@@ -151,7 +151,7 @@ public class search_by_category extends AppCompatActivity {
                                         , r.getEndtime() , r.getCategoryId() , r.getEventdetail()
                                         , r.getAmount() , r.getDepartment()
                                         , r.getYear() , r.getPlacename() , r.getLatitude()
-                                        , r.getLongitude() , r.getAddress()));
+                                        , r.getLongitude() , r.getAddress() , r.getStatus_checkin()));
                             }
                         }
                     }

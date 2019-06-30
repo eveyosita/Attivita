@@ -24,7 +24,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RequestHelpActivity"></activity>
+        <activity android:name=".ShowRequesthelpActivity"></activity>
+        <activity android:name=".RequestHelpActivity" />
         <activity android:name=".MessagesActivity" />
         <activity android:name=".EventcreateDetailActivity" />
         <activity android:name=".EditeventActivity" />

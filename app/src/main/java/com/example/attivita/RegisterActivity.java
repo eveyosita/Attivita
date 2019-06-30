@@ -256,6 +256,7 @@ public class RegisterActivity extends AppCompatActivity {
                     editor.putString("email", res.getEmail());
                     editor.putBoolean("status", true);
                     editor.putBoolean("status_notification", false);
+                    editor.putBoolean("status_notificationAccept", false);
                     editor.apply();
 
                     auth.createUserWithEmailAndPassword(email, passw)
@@ -279,6 +280,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         hashMap.put("helped", "defult");
                                         hashMap.put("status_helpful", false);
                                         hashMap.put("detail_helpful", "defult");
+                                        hashMap.put("status_star", 5);
 
                                         System.out.println("DDD");
 

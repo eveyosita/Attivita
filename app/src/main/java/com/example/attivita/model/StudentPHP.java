@@ -77,6 +77,11 @@ public class StudentPHP {
         this.year = year;
     }
 
+    public StudentPHP(String firstname, String lastname){
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
     public StudentPHP(){
     }
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,9 @@ import android.widget.Toast;
 
 import com.example.attivita.adapter.EventListAdapter;
 import com.example.attivita.model.Event;
+import com.example.attivita.model.ResponseCheckin;
 import com.example.attivita.model.ResponseJoinevent;
+import com.example.attivita.model.StudentFirebase;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,10 +28,21 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,6 +66,10 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
 
     private static final String MY_PREFS = "prefs";
 
+    Date Dates = new Date();
+    String timeend,eventEnddate,time_current,date_current;
+    ResponseCheckin RSEventC, RSJoinC ;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +89,7 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         String eventDetail = getIntent.getStringExtra("eventDetail");
         String eventAmount = getIntent.getStringExtra("eventAmount");
         String eventStartdate = getIntent.getStringExtra("eventStartdate");
-        String eventEnddate = getIntent.getStringExtra("eventEnddate");
+        eventEnddate = getIntent.getStringExtra("eventEnddate");
         String eventStarttime = getIntent.getStringExtra("eventStarttime");
         String eventEndtime = getIntent.getStringExtra("eventEndtime");
         String eventDepart = getIntent.getStringExtra("eventDepart");
@@ -82,6 +100,7 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         String eventLatitude = getIntent.getStringExtra("eventLatitude");
         String eventLongitude = getIntent.getStringExtra("eventLongitude");
         String eventAddress = getIntent.getStringExtra("eventAddress");
+        String eventstatus_checkin = getIntent.getStringExtra("eventstatus_checkin");
 
         textview_eventname = findViewById(R.id.textview_eventname);
         textview_eventDate = findViewById(R.id.textview_eventDate);
@@ -113,7 +132,7 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         String timeStart = eventStarttime.substring(0,5);
-        String timeend = eventEndtime.substring(0,5);
+        timeend = eventEndtime.substring(0,5);
         String time = timeStart+" - "+timeend +" น.";
 
         String category = getCategory(eventCategoryId);
@@ -127,15 +146,8 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         textview_amountmax.setText(eventAmount);
         textview_eventDetail.setText(eventDetail);
 
-        Bundle mapViewBundle = null;
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
-        }
-        mapView = findViewById(R.id.mapView);
-        mapView.onCreate(mapViewBundle);
-        mapView.getMapAsync(this);
+        System.out.println("STC "+eventstatus_checkin);
 
-        checkCountJoinEvent();
         btn_joinevent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,12 +157,14 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        btn_Cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelJoinEvent();
-            }
-        });
+        if(btn_Cancel.getText().toString().equals("ยกเลิก")){
+            btn_Cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cancelJoinEvent();
+                }
+            });
+        }
 
         btn_backhome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,6 +172,44 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
                 finish();
             }
         });
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter2 = new SimpleDateFormat("HH:mm");
+        date_current = formatter.format(Dates);
+        time_current = formatter2.format(Dates);
+
+        if(eventstatus_checkin.equals("0")){
+            System.out.println("HEY 0");
+            if(date_current.compareTo(eventStartdate) >= 0 && time_current.compareTo(timeStart) >= 0){  //ในวัน
+                System.out.println("IN");
+                setEventStatus_chackin(1);
+            } else if(date_current.compareTo(eventEnddate) > 0 && time_current.compareTo(timeend) > 0){   //นอกวัน
+                System.out.println("OUT");
+                getJoinStatuscheckin0();
+            } else if(date_current.compareTo(eventStartdate) <= 0 && time_current.compareTo(timeStart) < 0){   //ยังไม่ถึงวัน
+                System.out.println("COMING");
+                checkCountJoinEvent();
+            }
+        }
+        if(eventstatus_checkin.equals("1")){
+            System.out.println("HEY 1");
+            if(date_current.compareTo(eventEnddate) > 0 && time_current.compareTo(timeend) > 0){   //นอกวัน
+                System.out.println("OUT 1");
+                setEventStatus_chackin(0);
+            } else if(date_current.compareTo(eventStartdate) >= 0 && time_current.compareTo(timeStart) >= 0) {   //ในวัน
+                System.out.println("IN 1");
+                getJoinStatuscheckin1();
+            }
+
+        }
+
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
+        }
+        mapView = findViewById(R.id.mapView);
+        mapView.onCreate(mapViewBundle);
+        mapView.getMapAsync(this);
 
     }
 
@@ -215,8 +267,206 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         return "";
     }
 
+    private double distanceFrom_in_Km(double lat1, double lng1, double lat2, double lng2) {
+        double earthRadius = 6371000; //meters
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLng = Math.toRadians(lng2-lng1);
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLng/2) * Math.sin(dLng/2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double dist = earthRadius * c;
+        return dist;
+    }
+
+    public void setEventStatus_chackin(int status_chackin){
+        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+        Call<ResponseCheckin> call = apiService.setEventStatuscheckin(Eventid,status_chackin);
+
+        call.enqueue(new Callback<ResponseCheckin>() {
+            @Override
+            public void onResponse(Call<ResponseCheckin> call, Response<ResponseCheckin> response) {
+                ResponseCheckin res = response.body();
+                if (res.isStatus()){
+                    RSEventC = new ResponseCheckin(res.getStatus_chackin());
+                    System.out.println("EVENTCHECK"+res.getMessage());
+                } else {
+                    System.out.println("EVENTCHECK"+res.getMessage());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseCheckin> call, Throwable t) {
+                Toast.makeText(EventDetails.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("ERRORRRRR : "+ t.getMessage());
+            }
+        });
+    }
+
+    public void setJoinStatus_chackin(int status_chackin){
+        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+        Call<ResponseCheckin> call = apiService.setJoinStatuscheckin(Eventid,studentId,status_chackin);
+
+        call.enqueue(new Callback<ResponseCheckin>() {
+            @Override
+            public void onResponse(Call<ResponseCheckin> call, Response<ResponseCheckin> response) {
+                ResponseCheckin res = response.body();
+                if (res.isStatus()){
+                    RSJoinC = new ResponseCheckin(res.getStatus_chackin());
+                    System.out.println("EVENTJOIN"+res.getMessage());
+                } else {
+                    System.out.println("EVENTJOIN"+res.getMessage());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseCheckin> call, Throwable t) {
+                Toast.makeText(EventDetails.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("ERRORRRRR : "+ t.getMessage());
+            }
+        });
+    }
+
+    public void getJoinStatuscheckin0(){
+        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+        Call<ResponseCheckin> call = apiService.getJoinStatuscheckin(Eventid,studentId);
+
+        call.enqueue(new Callback<ResponseCheckin>() {
+            @Override
+            public void onResponse(Call<ResponseCheckin> call, Response<ResponseCheckin> response) {
+                ResponseCheckin res = response.body();
+                if (res.isStatus()){
+                   // RSJoinC = new ResponseCheckin(res.getStatus_chackin());
+
+                    if(res.getStatus_chackin().equals("0")){
+
+                        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Student");
+
+                        System.out.println("EEE "+reference);
+                        reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                System.out.println("EEE2.1");
+                                for (DataSnapshot snapshot :dataSnapshot.getChildren()){
+                                    StudentFirebase studentFirebase = snapshot.getValue(StudentFirebase.class);
+                                    assert studentFirebase != null;
+                                    assert firebaseUser != null;
+
+                                    System.out.println("EEE3 " + studentFirebase.getUsername());
+
+                                    if(studentFirebase.getId().equals(firebaseUser.getUid())){
+                                        if(studentFirebase.getStatus_star()>=1){
+                                            int star = studentFirebase.getStatus_star()-1;
+                                            HashMap<String, Object> hashMap = new HashMap<>();
+                                            hashMap.put("status_star", star);
+                                            reference.updateChildren(hashMap);
+                                        }
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                System.out.println("RRR2.2");
+                            }
+                        });
+                    }
+                    System.out.println("EVENTCHECK"+res.getMessage());
+                } else {
+                    System.out.println("EVENTCHECK"+res.getMessage());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseCheckin> call, Throwable t) {
+                Toast.makeText(EventDetails.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("ERRORRRRR : "+ t.getMessage());
+            }
+        });
+    }
+
+    public void getJoinStatuscheckin1(){
+        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+        Call<ResponseCheckin> call = apiService.getJoinStatuscheckin(Eventid,studentId);
+
+        call.enqueue(new Callback<ResponseCheckin>() {
+            @Override
+            public void onResponse(Call<ResponseCheckin> call, Response<ResponseCheckin> response) {
+                ResponseCheckin res = response.body();
+                if (res.isStatus()){
+                    //RSJoinC = new ResponseCheckin(res.getStatus_chackin());
+                    System.out.println("IN 1-1"+ res.getStatus_chackin());
+                    if(res.getStatus_chackin().equals("0")){
+
+                        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Student");
+
+                        System.out.println("RRR "+reference);
+                        reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                System.out.println("RRR2.1");
+                                for (DataSnapshot snapshot :dataSnapshot.getChildren()){
+                                    final StudentFirebase studentFirebase = snapshot.getValue(StudentFirebase.class);
+                                    assert studentFirebase != null;
+                                    assert firebaseUser != null;
+
+                                    System.out.println("RRR3 " + studentFirebase.getUsername());
+
+                                    if(studentFirebase.getId().equals(firebaseUser.getUid())){
+
+                                        System.out.println("DIS "+distanceFrom_in_Km(eventlatitude,eventlongitude,studentFirebase.getLatitude(),studentFirebase.getLongitude()));
+
+                                        if (distanceFrom_in_Km(eventlatitude,eventlongitude,studentFirebase.getLatitude(),studentFirebase.getLongitude()) <= 200.00 ){
+                                            btn_Cancel.setText("ยืนยันการเข้าร่วม");
+                                            btn_Cancel.setTextColor(getColor(R.color.colorRed));
+                                            btn_Cancel.setBackgroundResource(R.drawable.backgroundlinegary);
+                                            btn_joinevent.setText("เข้าร่วมแล้ว");
+                                            btn_joinevent.setEnabled(false);
+                                            btn_Cancel.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    setJoinStatus_chackin(1);
+                                                    btn_Cancel.setText("ยืนยันเข้าร่วมเรียบร้อย");
+                                                    btn_Cancel.setTextColor(getColor(R.color.colorGray));
+                                                    btn_Cancel.setEnabled(false);
+
+                                                    if(studentFirebase.getStatus_star()<5){
+                                                        int star = studentFirebase.getStatus_star()+1;
+                                                        HashMap<String, Object> hashMap = new HashMap<>();
+                                                        hashMap.put("status_star", star);
+                                                        reference.updateChildren(hashMap);
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                System.out.println("RRR2.2");
+                            }
+                        });
+                    } else if(res.getStatus_chackin().equals("1")){
+                        btn_joinevent.setText("เข้าร่วมแล้ว");
+                        btn_joinevent.setEnabled(false);
+                        btn_Cancel.setText("ยืนยันเข้าร่วมเรียบร้อย");
+                        btn_Cancel.setTextColor(getColor(R.color.colorGray));
+                        btn_Cancel.setBackgroundResource(R.drawable.backgroundlinegary);
+                        btn_Cancel.setEnabled(false);
+                    }
+                    System.out.println("EVENTCHECK"+res.getMessage());
+                } else {
+                    System.out.println("EVENTCHECK"+res.getMessage());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseCheckin> call, Throwable t) {
+                Toast.makeText(EventDetails.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("ERRORRRRR : "+ t.getMessage());
+            }
+        });
+    }
+
     private boolean checkAmount(){
-        //int amount = Integer.valueOf(textview_amount.getText().toString());
         int amountmax = Integer.valueOf(textview_amountmax.getText().toString());
         if(joineventList.size() < amountmax){
             return true;
@@ -232,7 +482,6 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         for(int i=0 ; i<joineventList.size() ; i++){
             System.out.println("Size :"+ i +" std :"+ joineventList.get(i).getStudentId());
             if(joineventList.get(i).getStudentId().equals(studentId) ){
-
                 return true;
             }
         }
@@ -242,12 +491,10 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
     public void joinEvent(){
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
         Call<ResponseJoinevent> call = apiService.joinevent(studentId,Eventid);
-
         call.enqueue(new Callback<ResponseJoinevent>() {
             @Override
             public void onResponse(Call<ResponseJoinevent> call, Response<ResponseJoinevent> response) {
                 ResponseJoinevent res = response.body();
-
                 if (!res.isStatus()){
                     btn_joinevent.setText("เข้าร่วมแล้ว");
                     btn_joinevent.setEnabled(false);
@@ -257,10 +504,8 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
                     Toast.makeText(EventDetails.this, res.getMessage(), Toast.LENGTH_LONG).show();
                 } else {
                     checkCountJoinEvent();
-
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseJoinevent> call, Throwable t) {
                 Toast.makeText(EventDetails.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
@@ -270,19 +515,14 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void checkCountJoinEvent(){
-
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
         Call<ArrayList<ResponseJoinevent>> call = apiService.checkjoinevent(Eventid);
-
         call.enqueue(new Callback<ArrayList<ResponseJoinevent>>() {
             @Override
             public void onResponse(Call<ArrayList<ResponseJoinevent>> call, Response<ArrayList<ResponseJoinevent>> response) {
                 ArrayList<ResponseJoinevent>  res = response.body();
-
                 joineventList.clear();
-
                 if (res.size() != 0) {
-
                     for (ResponseJoinevent r : res) {
                         joineventList.add(new ResponseJoinevent(r.getStudentId()));
                     }
@@ -301,9 +541,7 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
                     textview_amount.setText(amount_s);
                     Toast.makeText(EventDetails.this, "No event now", Toast.LENGTH_LONG).show();
                 }
-
             }
-
             @Override
             public void onFailure(Call<ArrayList<ResponseJoinevent>> call, Throwable t) {
                 Toast.makeText(EventDetails.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
@@ -315,7 +553,6 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
     public void cancelJoinEvent(){
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
         Call<ResponseJoinevent> call = apiService.canceljoin(studentId,Eventid);
-
         call.enqueue(new Callback<ResponseJoinevent>() {
             @Override
             public void onResponse(Call<ResponseJoinevent> call, Response<ResponseJoinevent> response) {
@@ -334,7 +571,6 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
                     Toast.makeText(EventDetails.this, res.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseJoinevent> call, Throwable t) {
                 Toast.makeText(EventDetails.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
@@ -342,7 +578,6 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
     }
-
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -364,33 +599,39 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
     protected void onResume() {
         super.onResume();
         mapView.onResume();
+        System.out.println(" 4-ON RES-4");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         mapView.onStart();
+        System.out.println(" 4-ON STA-4");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         mapView.onStop();
+        System.out.println(" 4-ON STO-4");
     }
     @Override
     protected void onPause() {
         mapView.onPause();
         super.onPause();
+        System.out.println(" 4-ON PAU-4");
     }
     @Override
     protected void onDestroy() {
         mapView.onDestroy();
         super.onDestroy();
+        System.out.println(" 4-ON DES-4");
     }
     @Override
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
+        System.out.println(" 4-ON LOW-4");
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {

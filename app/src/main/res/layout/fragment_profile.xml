@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/backgroundcolor">
 
     <android.support.v7.widget.Toolbar
@@ -35,91 +36,121 @@
 
 
     </android.support.v7.widget.Toolbar>
-
-    <RelativeLayout
-        android:id="@+id/layout_profile"
-        android:layout_width="390dp"
-        android:layout_height="220dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/backgroundwhite">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImageView_profile"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/girl" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginLeft="150dp">
-
-            <TextView
-                android:id="@+id/firstname_pro"
-                android:textSize="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:text="Firstname" />
-
-            <TextView
-                android:id="@+id/lastname_pro"
-                android:textSize="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lastname" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/circleImageView_profile"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="25dp">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-
-                android:background="@drawable/star"/>
-
-            <TextView
-                android:textSize="24dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_gravity="center"
-                android:text="X" />
-
-            <TextView
-                android:id="@+id/text_star"
-                android:textSize="24dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center"
-                android:text="5" />
-
-        </LinearLayout>
-
-
-
-
-
-    </RelativeLayout>
-
-    <ListView
-        android:id="@+id/listfriend"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layout_profile"
-        android:layout_marginTop="15dp"
-        android:padding="16dp" />
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_profile"
+            android:layout_width="390dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/backgroundwhite">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleImageView_profile"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/girl" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="150dp">
+
+                <TextView
+                    android:id="@+id/firstname_pro"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="Firstname" />
+
+                <TextView
+                    android:id="@+id/lastname_pro"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lastname" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/circleImageView_profile"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="25dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+
+                    android:background="@drawable/star"/>
+
+                <TextView
+                    android:textSize="24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_gravity="center"
+                    android:text="X" />
+
+                <TextView
+                    android:id="@+id/text_star"
+                    android:textSize="24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:text="5" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:text="ผู้ร้องขอความช่วยเหลือ"
+            android:textSize="22dp"/>
+
+        <RelativeLayout
+            android:id="@+id/layout_requsethelp"
+            android:layout_width="390dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/backgroundwhite">
+
+            <TextView
+                android:id="@+id/textview_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="35dp"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/textBackgroung_requsethelp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="20dp"/>
+
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

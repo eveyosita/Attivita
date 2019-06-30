@@ -39,16 +39,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.attivita.notification.App.CHANNEL_1_ID;
+import static com.example.attivita.notification.App.CHANNEL_2_ID;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     public String id ="";
+    String studentid;
     boolean status_notification;
+    boolean status_notificationAccept;
     SharedPreferences shared;
 
     private static final String MY_PREFS = "prefs";
     NotificationManagerCompat notificationManager;
+
+    StudentPHP student = new StudentPHP();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         notificationManager = NotificationManagerCompat.from(this);
+
+        shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
+        studentid = shared.getString("studentId",null);
 
        // mTextMessage = (TextView) findViewById(R.id.message);
 
@@ -69,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
         }
          Intent i = getIntent();
         id = i.getStringExtra("id");
+
+
+        System.out.println("FIRST "+student.getFirstname());
+
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener
@@ -115,21 +128,83 @@ public class MainActivity extends AppCompatActivity {
                     assert studentFirebase != null;
                     assert firebaseUser != null;
 
-                    System.out.println("RRR3 " + studentFirebase.getUsername());
+
 
                     if(studentFirebase.getId().equals(firebaseUser.getUid())){
 
-                        System.out.println("DIS ");
+                        System.out.println("RRR3 " + studentFirebase.getUsername());
 
-                        if (studentFirebase.isStatus_helpful()){
 
-                            buildNotificationHelp(studentFirebase.getHelped(),studentFirebase.getDetail_helpful());
-                            break;
+                        if (studentFirebase.isStatus_helpful() && !studentFirebase.isStatusAccept_helpful()){
+                            System.out.println("RRR4 ");
+                            final String detail = studentFirebase.getDetail_helpful();
+
+                            final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+                            Call<StudentPHP> call = apiService.readstudent(studentFirebase.getHelped());
+                            call.enqueue(new Callback<StudentPHP>() {
+                                @Override
+                                public void onResponse(Call<StudentPHP> call, Response<StudentPHP> response) {
+                                    StudentPHP res = response.body();
+
+                                    if (res.isStatus()){
+
+                                        student = new StudentPHP(res.getFirstname(),res.getLastname());
+                                        buildNotificationHelp(detail);
+                                        status_notification = true;
+                                        SharedPreferences.Editor editor = shared.edit();
+                                        editor.putBoolean("status_notification", status_notification);
+                                        editor.apply();
+                                        System.out.println("EEEE");
+
+                                    }
+                                }
+                                @Override
+                                public void onFailure(Call<StudentPHP> call, Throwable t) {
+                                    Toast.makeText(MainActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                                    System.err.println("ERRORRRRR : "+ t.getMessage());
+                                }
+                            });
 
                         } else {
                             System.out.println("UpdateERROR");
                         }
+                    }
+                    if(!studentFirebase.getId().equals(firebaseUser.getUid())) {
 
+                        System.out.println("SSS3 " + studentFirebase.getUsername());
+
+                        if (studentFirebase.getHelped().equals(studentid) && studentFirebase.isStatusAccept_helpful()){
+
+                            System.out.println("SSS4 ");
+
+                            final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+                            Call<StudentPHP> call = apiService.readstudent(studentFirebase.getUsername());
+                            call.enqueue(new Callback<StudentPHP>() {
+                                @Override
+                                public void onResponse(Call<StudentPHP> call, Response<StudentPHP> response) {
+                                    StudentPHP res = response.body();
+
+                                    if (res.isStatus()){
+
+                                        final String name = res.getFirstname()+" "+res.getLastname();
+                                        buildNotificationAcceptHelp(name);
+                                        status_notification = true;
+                                        SharedPreferences.Editor editor = shared.edit();
+                                        editor.putBoolean("status_notification", status_notification);
+                                        editor.apply();
+                                        System.out.println("EEEE2");
+
+                                    }
+                                }
+                                @Override
+                                public void onFailure(Call<StudentPHP> call, Throwable t) {
+                                    Toast.makeText(MainActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                                    System.err.println("ERRORRRRR : "+ t.getMessage());
+                                }
+                            });
+                        } else {
+                            System.out.println("OUT");
+                        }
                     }
                 }
             }
@@ -139,40 +214,23 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("RRR2.2");
             }
         });
+
     }
 
-    private void buildNotificationHelp(String studentid, String detail){
+    public void buildNotificationHelp(String detail){
 
-
-
-        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
-        Call<StudentPHP> call = apiService.readstudent(studentid);
-
-        call.enqueue(new Callback<StudentPHP>() {
-            @Override
-            public void onResponse(Call<StudentPHP> call, Response<StudentPHP> response) {
-                StudentPHP res = response.body();
-                if (res.isStatus()){
-                    final String name = res.getFirstname()+" "+res.getLastname();
-
-
-                }
-            }
-            @Override
-            public void onFailure(Call<StudentPHP> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
-                System.err.println("ERRORRRRR : "+ t.getMessage());
-            }
-        });
+        String name = student.getFirstname()+" "+student.getLastname();
+        System.out.println("BB");
 
         Intent activityIntent = new Intent(this, RequestHelpActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this,
                 0, activityIntent, 0);
 
+
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.star3)
                 .setContentTitle("ร้องขอความช่วยเหลือ")
-                .setContentText("จากคุณ"+" "+detail)
+                .setContentText("จากคุณ "+name+" "+detail)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setContentIntent(contentIntent)
@@ -181,24 +239,39 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         notificationManager.notify(1, notification);
-        status_notification = true;
-        SharedPreferences.Editor editor = shared.edit();
-        editor.putBoolean("status_notification", true);
-        editor.apply();
         System.out.println("BBB");
 
+    }
+
+    public void buildNotificationAcceptHelp(String name){
+
+        System.out.println("BB2");
+
+        Notification notification2 = new NotificationCompat.Builder(this, CHANNEL_2_ID)
+                .setSmallIcon(R.drawable.star3)
+                .setContentTitle("ได้รับการช่วยเหลือ")
+                .setContentText("จากคุณ "+name)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setAutoCancel(true)
+                .setOnlyAlertOnce(true)
+                .build();
+
+        notificationManager.notify(2, notification2);
+        System.out.println("BBB2");
 
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         status_notification = shared.getBoolean("status_notification", false);
-        if (!status_notification) {
+        status_notificationAccept = shared.getBoolean("status_notificationAccept", false);
+        if (!status_notification ) {
             checkHelp();
         }
-        System.out.println("++ ON START ++ ");
+
+        System.out.println("++ ON START ++ "+status_notification +status_notificationAccept);
     }
 
     @Override
@@ -216,23 +289,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
-        status_notification = shared.getBoolean("status_notification", false);
-        if (!status_notification) {
-            checkHelp();
-        }
-        System.out.println("-- ON STOP -- ");
+//        shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
+//        status_notification = shared.getBoolean("status_notification", false);
+//        status_notificationAccept = shared.getBoolean("status_notificationAccept", false);
+//        if (!status_notification) {
+//            checkHelp();
+//        }
+//        if (!status_notificationAccept) {
+//            checkHelp();
+//        }
+//        System.out.println("-- ON STOP -- ");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        shared = getSharedPreferences(MY_PREFS, Context.MODE_PRIVATE);
         status_notification = shared.getBoolean("status_notification", false);
-        if (!status_notification){
+        status_notificationAccept = shared.getBoolean("status_notificationAccept", false);
+        if (!status_notification ) {
             checkHelp();
         }
-        System.out.println("- ON DESTROY - ");
+        System.out.println("- ON DESTROY - "+status_notification +status_notificationAccept);
     }
 
 

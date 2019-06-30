@@ -233,13 +233,13 @@ public class AddeventActivity extends AppCompatActivity {
                 final AlertDialog alertDialog = builder.create();
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
-                button_cancel_year = (Button)v.findViewById(R.id.button_dialog_cancelyear);
-                cb_1 = (CheckBox)v.findViewById(R.id.checkBox_1);
-                cb_2 = (CheckBox)v.findViewById(R.id.checkBox_2);
-                cb_3 = (CheckBox)v.findViewById(R.id.checkBox_3);
-                cb_4 = (CheckBox)v.findViewById(R.id.checkBox_4);
-                cb_etc = (CheckBox)v.findViewById(R.id.checkBox_etc);
-                button_accept_year = (Button)v.findViewById(R.id.button_dialog_acceptyear);
+                button_cancel_year = v.findViewById(R.id.button_dialog_cancelyear);
+                cb_1 = v.findViewById(R.id.checkBox_1);
+                cb_2 = v.findViewById(R.id.checkBox_2);
+                cb_3 = v.findViewById(R.id.checkBox_3);
+                cb_4 = v.findViewById(R.id.checkBox_4);
+                cb_etc = v.findViewById(R.id.checkBox_etc);
+                button_accept_year = v.findViewById(R.id.button_dialog_acceptyear);
 
 
                 button_accept_year.setOnClickListener(new View.OnClickListener(){

@@ -139,6 +139,7 @@ public class HomeFragment extends Fragment  {
                 }
             });
 
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -166,6 +167,8 @@ public class HomeFragment extends Fragment  {
                     intent.putExtra("eventLatitude", eventLatitude);
                     intent.putExtra("eventLongitude", eventLongitude);
                     intent.putExtra("eventAddress", eventList.get(i).getAddress());
+                    intent.putExtra("eventstatus_checkin", eventList.get(i).getStatus_checkin());
+                    System.out.println("STUH "+eventList.get(i).getStatus_checkin());
                     startActivity(intent);
                 }
             });
@@ -217,7 +220,7 @@ public class HomeFragment extends Fragment  {
                                                  , r.getEndtime() , r.getCategoryId() , r.getEventdetail()
                                                  , r.getAmount() , r.getDepartment()
                                                  , r.getYear() , r.getPlacename() , r.getLatitude()
-                                                 , r.getLongitude() , r.getAddress()));
+                                                 , r.getLongitude() , r.getAddress() , r.getStatus_checkin()));
                                         }
                                      }
                                  }

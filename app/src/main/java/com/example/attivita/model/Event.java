@@ -76,11 +76,15 @@ public class Event {
     @Expose
     private String address;
 
+    @SerializedName("status_checkin")
+    @Expose
+    private String status_checkin;
+
     public Event(){}
 
     public Event(int eventId,String eventname, String studentId, String startdate, String enddate, String strattime, String endtime,
                  int categoryId, String eventdetail, String amount, String department, String year,
-                 String placename, double latitude, double longitude, String address) {
+                 String placename, double latitude, double longitude, String address, String status_checkin) {
 
         this.eventId = eventId;
         this.eventname = eventname;
@@ -98,6 +102,7 @@ public class Event {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
+        this.status_checkin = status_checkin;
 
     }
 
@@ -158,6 +163,10 @@ public class Event {
 
     public String getAddress() {
         return address;
+    }
+
+    public String  getStatus_checkin() {
+        return status_checkin;
     }
 
     public void setStatus(int status) {
@@ -230,6 +239,10 @@ public class Event {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setStatus_checkin(String status_checkin) {
+        this.status_checkin = status_checkin;
     }
 }
 

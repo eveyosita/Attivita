@@ -10,9 +10,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.attivita.adapter.StudentFirebaseAdapter;
+import com.example.attivita.model.Eventhelp;
 import com.example.attivita.model.StudentFirebase;
+import com.example.attivita.model.StudentPHP;
+import com.example.attivita.retrofit.APIInterface;
+import com.example.attivita.retrofit.RetrofitClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,11 +32,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AddwarnActivity extends AppCompatActivity {
 
-    Button but_finishwarn;
+    Button but_finishwarn,button_back;
     private TextInputLayout editText_eventdetail;
-    private List<StudentFirebase> studentFirebaseList;
     double latitude_current,longitude_current;
     private int count = 0;
     String studentId;
@@ -48,6 +56,7 @@ public class AddwarnActivity extends AppCompatActivity {
         studentId = shared.getString("studentId",null);
 
 
+        button_back = findViewById(R.id.button_back);
         but_finishwarn = findViewById(R.id.finishwarn_button);
         editText_eventdetail = findViewById(R.id.editText_eventdetail);
 
@@ -57,10 +66,19 @@ public class AddwarnActivity extends AppCompatActivity {
         latitude_current = Double.valueOf(Latitude);
         longitude_current = Double.valueOf(Longitude);
 
+        button_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
+            }
+        });
+
         but_finishwarn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 requestHelp();
+                Toast.makeText(AddwarnActivity.this, "ขอความช่วยเหลือเรียบร้อย", Toast.LENGTH_LONG).show();
                 finish();
 
             }
@@ -88,31 +106,30 @@ public class AddwarnActivity extends AppCompatActivity {
 
                         System.out.println("DIS "+distanceFrom_in_Km(latitude_current,longitude_current,studentFirebase.getLatitude(),studentFirebase.getLongitude()));
 
-                        if (distanceFrom_in_Km(latitude_current,longitude_current,studentFirebase.getLatitude(),studentFirebase.getLongitude()) <= 1200.00){
+                        if (distanceFrom_in_Km(latitude_current,longitude_current,studentFirebase.getLatitude(),studentFirebase.getLongitude()) <= 1200.00 && !studentFirebase.isStatus_helpful()){
                             count++;
                             DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Student").child(studentFirebase.getId());
                             Map<String, Object> hashMap = new HashMap<>();
+                            hashMap.put("helped_latitude", latitude_current);
+                            hashMap.put("helped_longitude", longitude_current);
                             hashMap.put("helped", studentId);
                             hashMap.put("status_helpful", true);
+                            hashMap.put("statusAccept_helpful", false);
                             hashMap.put("detail_helpful", editText_eventdetail.getEditText().getText().toString());
-                            reference2.updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-                                        System.out.println("YAHH");
-                                    }
-                                }
-                            });
+                            reference2.updateChildren(hashMap);
 
                         } else {
                             System.out.println("UpdateERROR");
                         }
-
+                    } else {
+                        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Student").child(firebaseUser.getUid());
+                        Map<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("requesthelp", true);
+                        reference2.updateChildren(hashMap);
                     }
                 }
                 System.out.println("COUNT "+count);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 System.out.println("RRR2.2");
@@ -133,4 +150,6 @@ public class AddwarnActivity extends AppCompatActivity {
 
         return dist;
     }
+
+
 }

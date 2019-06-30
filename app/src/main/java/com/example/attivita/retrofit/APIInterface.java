@@ -1,6 +1,8 @@
 package com.example.attivita.retrofit;
 
 import com.example.attivita.model.Event;
+import com.example.attivita.model.Eventhelp;
+import com.example.attivita.model.ResponseCheckin;
 import com.example.attivita.model.ResponseJoinevent;
 import com.example.attivita.model.StudentPHP;
 
@@ -154,4 +156,35 @@ public interface APIInterface {
             @Field("longitude") double longitude,
             @Field("address") String address
     );
+
+    @FormUrlEncoded
+    @POST("setEventStatuscheckin.php")
+    Call<ResponseCheckin> setEventStatuscheckin(
+            @Field("eventId") int eventId,
+            @Field("status_checkin") int status_checkin
+
+    );
+
+    @FormUrlEncoded
+    @POST("setJoinStatuscheckin.php")
+    Call<ResponseCheckin> setJoinStatuscheckin(
+            @Field("eventId") int eventId,
+            @Field("studentId") String studentid,
+            @Field("status_checkin") int status_checkin
+
+    );
+
+    @FormUrlEncoded
+    @POST("getEventStatuscheckin.php")
+    Call<ResponseCheckin> getEventStatuscheckin(
+            @Field("eventId") int eventId
+    );
+
+    @FormUrlEncoded
+    @POST("getJoinStatuscheckin.php")
+    Call<ResponseCheckin> getJoinStatuscheckin(
+            @Field("eventId") int eventId,
+            @Field("studentId") String studentid
+    );
+
 }

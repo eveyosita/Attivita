@@ -128,6 +128,7 @@ public class SubJoinFragment extends Fragment {
                 intent.putExtra("eventLatitude", eventLatitude);
                 intent.putExtra("eventLongitude", eventLongitude);
                 intent.putExtra("eventAddress", eventList.get(i).getAddress());
+                intent.putExtra("eventstatus_checkin", eventList.get(i).getStatus_checkin());
                 startActivity(intent);
             }
         });
@@ -153,7 +154,7 @@ public class SubJoinFragment extends Fragment {
                                              , r.getEndtime() , r.getCategoryId() , r.getEventdetail()
                                              , r.getAmount() , r.getDepartment()
                                              , r.getYear() , r.getPlacename() , r.getLatitude()
-                                             , r.getLongitude() , r.getAddress()));
+                                             , r.getLongitude() , r.getAddress() , r.getStatus_checkin()));
                                  }
                                  EventListAdapter adapter = new EventListAdapter(getContext(),R.layout.item_event, eventList);
                                  listView.setAdapter(adapter);
