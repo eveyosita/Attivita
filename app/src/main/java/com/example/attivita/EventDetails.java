@@ -18,6 +18,7 @@ import com.example.attivita.adapter.EventListAdapter;
 import com.example.attivita.model.Event;
 import com.example.attivita.model.ResponseCheckin;
 import com.example.attivita.model.ResponseJoinevent;
+import com.example.attivita.model.ResponseStatus;
 import com.example.attivita.model.StudentFirebase;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
@@ -88,7 +89,7 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         String eventStuId = getIntent.getStringExtra("eventStuId");
         String eventDetail = getIntent.getStringExtra("eventDetail");
         String eventAmount = getIntent.getStringExtra("eventAmount");
-        String eventStartdate = getIntent.getStringExtra("eventStartdate");
+        final String eventStartdate = getIntent.getStringExtra("eventStartdate");
         eventEnddate = getIntent.getStringExtra("eventEnddate");
         String eventStarttime = getIntent.getStringExtra("eventStarttime");
         String eventEndtime = getIntent.getStringExtra("eventEndtime");
@@ -100,7 +101,7 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         String eventLatitude = getIntent.getStringExtra("eventLatitude");
         String eventLongitude = getIntent.getStringExtra("eventLongitude");
         String eventAddress = getIntent.getStringExtra("eventAddress");
-        String eventstatus_checkin = getIntent.getStringExtra("eventstatus_checkin");
+        final String eventstatus_checkin = getIntent.getStringExtra("eventstatus_checkin");
 
         textview_eventname = findViewById(R.id.textview_eventname);
         textview_eventDate = findViewById(R.id.textview_eventDate);
@@ -131,7 +132,7 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
             date = getOnlyDateStart + " - " + getOnlyDateEnd + " " + getOnlyMonth + " " +getOnlyYear;
         }
 
-        String timeStart = eventStarttime.substring(0,5);
+        final String timeStart = eventStarttime.substring(0,5);
         timeend = eventEndtime.substring(0,5);
         String time = timeStart+" - "+timeend +" น.";
 
@@ -177,6 +178,68 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
         SimpleDateFormat formatter2 = new SimpleDateFormat("HH:mm");
         date_current = formatter.format(Dates);
         time_current = formatter2.format(Dates);
+
+        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+        Call<ResponseStatus> call = apiService.getStatusStudent(studentId);
+
+        call.enqueue(new Callback<ResponseStatus>() {
+            @Override
+            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+                ResponseStatus res = response.body();
+                if (res.isStatus()){
+
+                    if (res.getStatus_verify().equals("no")){
+                        btn_joinevent.setText("กำลังตรวจสอบการยืนยันตัวตน");
+                        btn_joinevent.setEnabled(false);
+                    } else {
+                        if(eventstatus_checkin.equals("0")){
+                            System.out.println("HEY 0");
+                            if(date_current.compareTo(eventStartdate) >= 0 && time_current.compareTo(timeStart) >= 0){  //ในวัน
+                                System.out.println("IN");
+                                setEventStatus_chackin(1);
+                            } else if(date_current.compareTo(eventEnddate) > 0 && time_current.compareTo(timeend) > 0){   //นอกวัน
+                                System.out.println("OUT");
+                                getJoinStatuscheckin0();
+                                btn_Cancel.setText("ยกเลิก");
+                                btn_Cancel.setBackgroundResource(R.drawable.backgroundlinegary);
+                            } else if(date_current.compareTo(eventStartdate) <= 0 ){  //ยังไม่ถึงวัน
+                                if(time_current.compareTo(timeStart) < 0){
+                                    System.out.println("COMING1");
+                                    checkCountJoinEvent();
+                                    btn_Cancel.setText("ยกเลิก");
+                                    btn_Cancel.setBackgroundResource(R.drawable.backgroundlinegary);
+                                } else {
+                                    System.out.println("COMING2");
+                                    checkCountJoinEvent();
+                                    btn_Cancel.setText("ยกเลิก");
+                                    btn_Cancel.setBackgroundResource(R.drawable.backgroundlinegary);
+                                }
+
+                            }
+                        }
+                        if(eventstatus_checkin.equals("1")){
+                            System.out.println("HEY 1");
+                            if(date_current.compareTo(eventEnddate) > 0 && time_current.compareTo(timeend) > 0){   //นอกวัน
+                                System.out.println("OUT 1");
+                                setEventStatus_chackin(0);
+                                checkCountJoinEvent();
+                            } else if(date_current.compareTo(eventStartdate) >= 0 && time_current.compareTo(timeStart) >= 0) {   //ในวัน
+                                System.out.println("IN 1");
+                                getJoinStatuscheckin1();
+                            }
+                        }
+                    }
+                    System.out.println("EVENTJOIN"+res.getMessage());
+                } else {
+                    System.out.println("EVENTJOIN"+res.getMessage());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                Toast.makeText(EventDetails.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("ERRORRRRR : "+ t.getMessage());
+            }
+        });
 
         if(eventstatus_checkin.equals("0")){
             System.out.println("HEY 0");
@@ -415,11 +478,11 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
                                         System.out.println("DIS "+distanceFrom_in_Km(eventlatitude,eventlongitude,studentFirebase.getLatitude(),studentFirebase.getLongitude()));
 
                                         if (distanceFrom_in_Km(eventlatitude,eventlongitude,studentFirebase.getLatitude(),studentFirebase.getLongitude()) <= 200.00 ){
+                                            checkCountJoinEvent();
                                             btn_Cancel.setText("ยืนยันการเข้าร่วม");
                                             btn_Cancel.setTextColor(getColor(R.color.colorRed));
                                             btn_Cancel.setBackgroundResource(R.drawable.backgroundlinegary);
-                                            btn_joinevent.setText("เข้าร่วมแล้ว");
-                                            btn_joinevent.setEnabled(false);
+
                                             btn_Cancel.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
@@ -429,13 +492,16 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
                                                     btn_Cancel.setEnabled(false);
 
                                                     if(studentFirebase.getStatus_star()<5){
+                                                        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Student").child(studentFirebase.getId());
                                                         int star = studentFirebase.getStatus_star()+1;
                                                         HashMap<String, Object> hashMap = new HashMap<>();
                                                         hashMap.put("status_star", star);
-                                                        reference.updateChildren(hashMap);
+                                                        reference2.updateChildren(hashMap);
                                                     }
                                                 }
                                             });
+                                        } else {
+                                            checkCountJoinEvent();
                                         }
                                     }
                                 }
@@ -446,15 +512,19 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
                             }
                         });
                     } else if(res.getStatus_chackin().equals("1")){
-                        btn_joinevent.setText("เข้าร่วมแล้ว");
-                        btn_joinevent.setEnabled(false);
-                        btn_Cancel.setText("ยืนยันเข้าร่วมเรียบร้อย");
-                        btn_Cancel.setTextColor(getColor(R.color.colorGray));
-                        btn_Cancel.setBackgroundResource(R.drawable.backgroundlinegary);
-                        btn_Cancel.setEnabled(false);
+                        if(checkJoinEvent()){
+                            btn_joinevent.setText("เข้าร่วมแล้ว");
+                            btn_joinevent.setEnabled(false);
+                            btn_Cancel.setText("ยืนยันเข้าร่วมเรียบร้อย");
+                            btn_Cancel.setTextColor(getColor(R.color.colorGray));
+                            btn_Cancel.setBackgroundResource(R.drawable.backgroundlinegary);
+                            btn_Cancel.setEnabled(false);
+                        }
+
                     }
                     System.out.println("EVENTCHECK"+res.getMessage());
                 } else {
+                    checkCountJoinEvent();
                     System.out.println("EVENTCHECK"+res.getMessage());
                 }
             }
@@ -531,8 +601,6 @@ public class EventDetails extends AppCompatActivity implements OnMapReadyCallbac
                     if(checkJoinEvent()){
                         btn_joinevent.setText("เข้าร่วมแล้ว");
                         btn_joinevent.setEnabled(false);
-                        btn_Cancel.setText("ยกเลิก");
-                        btn_Cancel.setBackgroundResource(R.drawable.backgroundlinegary);
                     } else {
                         checkAmount();
                     }

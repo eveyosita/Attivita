@@ -188,9 +188,9 @@ public class MainActivity extends AppCompatActivity {
 
                                         final String name = res.getFirstname()+" "+res.getLastname();
                                         buildNotificationAcceptHelp(name);
-                                        status_notification = true;
+                                        status_notificationAccept = true;
                                         SharedPreferences.Editor editor = shared.edit();
-                                        editor.putBoolean("status_notification", status_notification);
+                                        editor.putBoolean("status_notificationAccept", status_notificationAccept);
                                         editor.apply();
                                         System.out.println("EEEE2");
 
@@ -270,6 +270,10 @@ public class MainActivity extends AppCompatActivity {
         if (!status_notification ) {
             checkHelp();
         }
+        if (!status_notificationAccept ) {
+            checkHelp();
+        }
+
 
         System.out.println("++ ON START ++ "+status_notification +status_notificationAccept);
     }
@@ -307,6 +311,9 @@ public class MainActivity extends AppCompatActivity {
         status_notification = shared.getBoolean("status_notification", false);
         status_notificationAccept = shared.getBoolean("status_notificationAccept", false);
         if (!status_notification ) {
+            checkHelp();
+        }
+        if (!status_notificationAccept ) {
             checkHelp();
         }
         System.out.println("- ON DESTROY - "+status_notification +status_notificationAccept);

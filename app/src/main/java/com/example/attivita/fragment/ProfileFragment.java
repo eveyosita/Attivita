@@ -46,7 +46,7 @@ import retrofit2.Response;
 
 public class ProfileFragment extends Fragment {
 
-    TextView fnamePro,lnamePro,departPro,idPro,textview_name,textBackgroung_requsethelp;
+    TextView fnamePro,lnamePro,departPro,idPro,textview_name,textBackgroung_requsethelp,text_star,textview_studentid;
 
     Button btn_setting;
     RelativeLayout layout_profile,layout_requsethelp;
@@ -77,7 +77,9 @@ public class ProfileFragment extends Fragment {
         circleImageView_profile =  v.findViewById(R.id.circleImageView_profile);
         fnamePro =  v.findViewById(R.id.firstname_pro);
         lnamePro =  v.findViewById(R.id.lastname_pro);
+        textview_studentid =  v.findViewById(R.id.textview_studentid);
         textview_name =  v.findViewById(R.id.textview_name);
+        text_star =  v.findViewById(R.id.text_star);
         textBackgroung_requsethelp =  v.findViewById(R.id.textBackgroung_requsethelp);
 
         final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
@@ -136,6 +138,10 @@ public class ProfileFragment extends Fragment {
 
                         System.out.println("RRR-- ");
 
+                        String star = String.valueOf(studentFirebase.getStatus_star());
+                        text_star.setText(star);
+                        textview_studentid.setText(studentFirebase.getUsername());
+
                         if (studentFirebase.isStatus_helpful()){
 
                             getStudent(studentFirebase.getHelped());
@@ -173,9 +179,6 @@ public class ProfileFragment extends Fragment {
                 System.out.println("RRR2.2");
             }
         });
-
-
-
 
         return v;
     }

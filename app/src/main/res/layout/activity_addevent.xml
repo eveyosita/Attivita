@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/backgroundcolor"
     tools:context=".AddeventActivity">
 
@@ -29,36 +30,39 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/eventname_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bar_addevent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:text="ชื่อกิจกรรม"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18dp"
-     />
     <RelativeLayout
-        android:id="@+id/relatlayout_eventname"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_below="@+id/eventname_text">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/bar_addevent">
+        <TextView
+            android:id="@+id/eventname_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="ชื่อกิจกรรม"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18dp"
+            />
+        <RelativeLayout
+            android:id="@+id/relatlayout_eventname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_below="@+id/eventname_text">
 
-        <EditText
-            android:id="@+id/eventname_editText"
-            android:layout_width="351dp"
-            android:layout_height="40dp"
-            android:inputType="textPersonName"
-            android:textSize="16dp"
-            android:maxLength="50"
-            android:background="@drawable/layout_corner"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="30dp"/>
+            <EditText
+                android:id="@+id/eventname_editText"
+                android:layout_width="351dp"
+                android:layout_height="40dp"
+                android:inputType="textPersonName"
+                android:textSize="16dp"
+                android:maxLength="50"
+                android:background="@drawable/layout_corner"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"/>
 
-        <!--<TextView-->
+            <!--<TextView-->
             <!--android:id="@+id/editText_count_eventname"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
@@ -66,7 +70,7 @@
             <!--android:layout_toStartOf="@+id/textView_eventnamemax"-->
             <!--android:text="0" />-->
 
-        <!--<TextView-->
+            <!--<TextView-->
             <!--android:id="@+id/textView_eventnamemax"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
@@ -74,29 +78,29 @@
             <!--android:layout_centerVertical="true"-->
             <!--android:layout_marginRight="40dp"-->
             <!--android:text="/50" />-->
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/relatlayout_descrip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_below="@+id/relatlayout_eventname">
+        <RelativeLayout
+            android:id="@+id/relatlayout_descrip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_below="@+id/relatlayout_eventname">
 
-        <EditText
-            android:id="@+id/descrip_editText"
-            android:layout_width="351dp"
-            android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/layout_corner"
-            android:hint="รายละเอียด"
-            android:inputType="textPersonName"
-            android:maxLength="100"
-            android:textSize="16dp" />
+            <EditText
+                android:id="@+id/descrip_editText"
+                android:layout_width="351dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/layout_corner"
+                android:hint="รายละเอียด"
+                android:inputType="textPersonName"
+                android:maxLength="100"
+                android:textSize="16dp" />
 
-        <!--<TextView-->
+            <!--<TextView-->
             <!--android:id="@+id/editText_create_count_name"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
@@ -104,7 +108,7 @@
             <!--android:layout_toStartOf="@+id/textView_name_max"-->
             <!--android:text="0" />-->
 
-        <!--<TextView-->
+            <!--<TextView-->
             <!--android:id="@+id/textView_name_max"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
@@ -112,276 +116,277 @@
             <!--android:layout_centerVertical="true"-->
             <!--android:layout_marginRight="40dp"-->
             <!--android:text="/200" />-->
-    </RelativeLayout>
-
-
-    <TextView
-        android:id="@+id/number_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="จำนวนคน"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18dp"
-        android:layout_below="@+id/relatlayout_descrip"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp" />
-
-    <EditText
-        android:id="@+id/number_editText"
-        android:layout_width="351dp"
-        android:layout_height="40dp"
-        android:inputType="number"
-        android:maxLength="5"
-        android:textSize="14dp"
-        android:background="@drawable/layout_corner"
-        android:layout_below="@+id/number_textView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="30dp"/>
-
-    <TextView
-        android:id="@+id/date_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="วันที่"
-        android:textColor="@android:color/black"
-        android:textSize="18dp"
-        android:layout_below="@+id/number_editText"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"/>
-
-    <EditText
-        android:id="@+id/Sdate_editText"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        android:background="@drawable/layout_corner"
-        android:hint="เริ่มต้น"
-        android:textSize="16dp"
-        android:inputType="date"
-        android:maxLength="9"
-        android:layout_below="@+id/date_textView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="30dp"/>
-
-    <Button
-        android:id="@+id/calendarStart"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/calendar"
-        android:layout_below="@+id/date_textView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="150dp"/>
-
-    <EditText
-        android:id="@+id/Edate_editText"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        android:background="@drawable/layout_corner"
-        android:hint="สิ้นสุด"
-        android:textSize="16dp"
-        android:inputType="date"
-        android:maxLength="9"
-        android:layout_below="@+id/date_textView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="210dp"/>
-    <Button
-        android:id="@+id/calendarEnd"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/calendar"
-        android:layout_below="@+id/date_textView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="330dp"/>
-
-    <TextView
-        android:id="@+id/time_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="เวลา"
-        android:textColor="@android:color/black"
-        android:textSize="18dp"
-        android:layout_below="@+id/Sdate_editText"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"  />
-
-    <EditText
-        android:id="@+id/Stime_editText"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        android:background="@drawable/layout_corner"
-        android:ems="10"
-        android:hint="เริ่มต้น hh:mm"
-        android:textSize="16dp"
-        android:inputType="time"
-        android:maxLength="5"
-        android:layout_below="@+id/time_textView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="30dp"  />
-    <Button
-        android:id="@+id/timeStart"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/ic_access_time_black_24dp"
-        android:layout_below="@+id/time_textView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="150dp"/>
-
-    <EditText
-        android:id="@+id/Etime_editText"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        android:background="@drawable/layout_corner"
-        android:ems="10"
-        android:hint="สิ้นสุด hh:mm"
-        android:textSize="16dp"
-        android:inputType="time"
-        android:maxLength="5"
-        android:layout_below="@+id/time_textView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="210dp" />
-    <Button
-        android:id="@+id/timeEnd"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/ic_access_time_black_24dp"
-        android:layout_below="@+id/time_textView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="330dp"/>
-
-    <TextView
-        android:id="@+id/depart_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ภาควิชา"
-        android:textColor="@android:color/black"
-        android:textSize="18dp"
-        android:layout_below="@+id/Stime_editText"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp" />
-
-    <EditText
-        android:id="@+id/depart_editText"
-        android:layout_width="245dp"
-        android:layout_height="37dp"
-        android:maxLength="100"
-        android:textSize="16dp"
-        android:background="@drawable/layout_corner"
-        android:layout_below="@+id/depart_textView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="30dp"
-        android:lines="1"/>
-    <Button
-        android:id="@+id/button_select_depart"
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:text="เลือกสาขาวิชา"
-        android:background="@drawable/button_login_corner"
-        android:layout_below="@+id/depart_textView"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="280dp"/>
-    <TextView
-        android:id="@+id/year_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ชั้นปี"
-        android:textColor="@android:color/black"
-        android:textSize="18dp"
-        android:layout_below="@+id/depart_editText"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"/>
-
-    <EditText
-        android:id="@+id/year_editText"
-        android:layout_width="180dp"
-        android:layout_height="37dp"
-        android:textSize="16dp"
-        android:maxLength="15"
-        android:background="@drawable/layout_corner"
-        android:layout_below="@+id/depart_editText"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="80dp" />
-    <Button
-        android:id="@+id/button_select_year"
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:text="เลือกชั้นปี"
-        android:background="@drawable/button_login_corner"
-        android:layout_below="@+id/depart_editText"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="280dp"/>
-
-    <TextView
-        android:id="@+id/cate_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ประเภทกิจกรรม"
-        android:textColor="@android:color/black"
-        android:textSize="18dp"
-        android:layout_below="@+id/year_editText"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp" />
-
-    <Spinner
-        android:id="@+id/cate_spinner"
-        android:layout_width="201dp"
-        android:layout_height="37dp"
-        android:textSize="16dp"
-        android:background="@drawable/layout_corner"
-        android:spinnerMode="dropdown"
-        android:layout_below="@+id/year_editText"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="160dp"/>
-
-    <TextView
-        android:id="@+id/locat_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:text="สถานที่"
-        android:textColor="@android:color/black"
-        android:textSize="18dp"
-        android:layout_below="@+id/cate_spinner"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="30dp"/>
-
-    <RelativeLayout
-        android:id="@+id/relatlayout_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cate_spinner"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="100dp">
-
-        <Button
-            android:id="@+id/button_locat"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ic_location_on_black_24dp" />
-        <!--android:layout_marginLeft="100dp"-->
-        <!--android:layout_marginTop="10dp"-->
+        </RelativeLayout>
 
 
         <TextView
-            android:id="@+id/tv_locat"
+            android:id="@+id/number_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:text="เลือกสถานที่จัดกิจกรรม"
-            android:textColor="@color/colorBlack"
-            android:textSize="16dp"/>
-        <!--android:layout_marginLeft="150dp"-->
-        <!--android:layout_marginTop="20dp"-->
+            android:text="จำนวนคน"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18dp"
+            android:layout_below="@+id/relatlayout_descrip"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp" />
+
+        <EditText
+            android:id="@+id/number_editText"
+            android:layout_width="351dp"
+            android:layout_height="40dp"
+            android:inputType="number"
+            android:maxLength="5"
+            android:textSize="14dp"
+            android:background="@drawable/layout_corner"
+            android:layout_below="@+id/number_textView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"/>
+
+        <TextView
+            android:id="@+id/date_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="วันที่"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:layout_below="@+id/number_editText"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"/>
+
+        <EditText
+            android:id="@+id/Sdate_editText"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:background="@drawable/layout_corner"
+            android:hint="เริ่มต้น"
+            android:textSize="16dp"
+            android:inputType="date"
+            android:maxLength="9"
+            android:layout_below="@+id/date_textView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"/>
+
+        <Button
+            android:id="@+id/calendarStart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/calendar"
+            android:layout_below="@+id/date_textView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="150dp"/>
+
+        <EditText
+            android:id="@+id/Edate_editText"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:background="@drawable/layout_corner"
+            android:hint="สิ้นสุด"
+            android:textSize="16dp"
+            android:inputType="date"
+            android:maxLength="9"
+            android:layout_below="@+id/date_textView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="210dp"/>
+        <Button
+            android:id="@+id/calendarEnd"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/calendar"
+            android:layout_below="@+id/date_textView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="330dp"/>
+
+        <TextView
+            android:id="@+id/time_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="เวลา"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:layout_below="@+id/Sdate_editText"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"  />
+
+        <EditText
+            android:id="@+id/Stime_editText"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:background="@drawable/layout_corner"
+            android:ems="10"
+            android:hint="เริ่มต้น hh:mm"
+            android:textSize="16dp"
+            android:inputType="time"
+            android:maxLength="5"
+            android:layout_below="@+id/time_textView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"  />
+        <Button
+            android:id="@+id/timeStart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_access_time_black_24dp"
+            android:layout_below="@+id/time_textView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="150dp"/>
+
+        <EditText
+            android:id="@+id/Etime_editText"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:background="@drawable/layout_corner"
+            android:ems="10"
+            android:hint="สิ้นสุด hh:mm"
+            android:textSize="16dp"
+            android:inputType="time"
+            android:maxLength="5"
+            android:layout_below="@+id/time_textView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="210dp" />
+        <Button
+            android:id="@+id/timeEnd"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_access_time_black_24dp"
+            android:layout_below="@+id/time_textView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="330dp"/>
+
+        <TextView
+            android:id="@+id/depart_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ภาควิชา"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:layout_below="@+id/Stime_editText"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp" />
+
+        <EditText
+            android:id="@+id/depart_editText"
+            android:layout_width="245dp"
+            android:layout_height="37dp"
+            android:maxLength="100"
+            android:textSize="16dp"
+            android:background="@drawable/layout_corner"
+            android:layout_below="@+id/depart_textView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"
+            android:lines="1"/>
+        <Button
+            android:id="@+id/button_select_depart"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:text="เลือกสาขาวิชา"
+            android:background="@drawable/button_login_corner"
+            android:layout_below="@+id/depart_textView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="280dp"/>
+        <TextView
+            android:id="@+id/year_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ชั้นปี"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:layout_below="@+id/depart_editText"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"/>
+
+        <EditText
+            android:id="@+id/year_editText"
+            android:layout_width="180dp"
+            android:layout_height="37dp"
+            android:textSize="16dp"
+            android:maxLength="15"
+            android:background="@drawable/layout_corner"
+            android:layout_below="@+id/depart_editText"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="80dp" />
+        <Button
+            android:id="@+id/button_select_year"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:text="เลือกชั้นปี"
+            android:background="@drawable/button_login_corner"
+            android:layout_below="@+id/depart_editText"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="280dp"/>
+
+        <TextView
+            android:id="@+id/cate_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ประเภทกิจกรรม"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:layout_below="@+id/year_editText"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp" />
+
+        <Spinner
+            android:id="@+id/cate_spinner"
+            android:layout_width="201dp"
+            android:layout_height="37dp"
+            android:textSize="16dp"
+            android:background="@drawable/layout_corner"
+            android:spinnerMode="dropdown"
+            android:layout_below="@+id/year_editText"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="160dp"/>
+
+        <TextView
+            android:id="@+id/locat_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:text="สถานที่"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:layout_below="@+id/cate_spinner"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="30dp"/>
+
+        <RelativeLayout
+            android:id="@+id/relatlayout_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cate_spinner"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="100dp">
+
+            <Button
+                android:id="@+id/button_locat"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_location_on_black_24dp" />
+            <!--android:layout_marginLeft="100dp"-->
+            <!--android:layout_marginTop="10dp"-->
+
+
+            <TextView
+                android:id="@+id/tv_locat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+                android:text="เลือกสถานที่จัดกิจกรรม"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp"/>
+            <!--android:layout_marginLeft="150dp"-->
+            <!--android:layout_marginTop="20dp"-->
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/finishaddevent_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/select_button"
+            android:text="เสร็จสิ้น"
+            android:layout_below="@+id/locat_textView"
+            android:layout_marginTop="30dp"
+            android:layout_centerInParent="true" />
+
+
     </RelativeLayout>
-
-
-    <Button
-        android:id="@+id/finishaddevent_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/select_button"
-        android:text="เสร็จสิ้น"
-        android:layout_below="@+id/locat_textView"
-        android:layout_marginTop="30dp"
-        android:layout_centerInParent="true" />
-
-
-</RelativeLayout>
+</LinearLayout>

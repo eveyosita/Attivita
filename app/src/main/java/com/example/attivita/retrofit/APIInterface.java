@@ -4,6 +4,7 @@ import com.example.attivita.model.Event;
 import com.example.attivita.model.Eventhelp;
 import com.example.attivita.model.ResponseCheckin;
 import com.example.attivita.model.ResponseJoinevent;
+import com.example.attivita.model.ResponseStatus;
 import com.example.attivita.model.StudentPHP;
 
 import java.util.ArrayList;
@@ -185,6 +186,18 @@ public interface APIInterface {
     Call<ResponseCheckin> getJoinStatuscheckin(
             @Field("eventId") int eventId,
             @Field("studentId") String studentid
+    );
+
+    @FormUrlEncoded
+    @POST("getStatusStudent.php")
+    Call<ResponseStatus> getStatusStudent(
+            @Field("studentId") String studentid
+    );
+
+    @FormUrlEncoded
+    @POST("deleteEvent.php")
+    Call<ResponseJoinevent> deleteEvent(
+            @Field("eventId") int eventId
     );
 
 }

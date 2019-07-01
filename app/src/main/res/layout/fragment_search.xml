@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/backgroundcolor">
 
     <android.support.v7.widget.Toolbar
@@ -42,7 +43,7 @@
 
             <EditText
                 android:id="@+id/edittext_search"
-                android:layout_width="250dp"
+                android:layout_width="230dp"
                 android:layout_height="30dp"
                 android:background="@null"
                 android:hint="ค้นหา"
@@ -62,20 +63,20 @@
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/bar_search2">
+
        <RelativeLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
            android:layout_marginTop="5dp"
->
+            >
 
            <LinearLayout
                android:id="@+id/layoutset1"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:paddingLeft="3dp"
                android:orientation="horizontal">
                <LinearLayout
                    android:id="@+id/layout1"
@@ -108,7 +109,6 @@
                    android:layout_width="200dp"
                    android:layout_height="200dp"
                    android:layout_gravity="bottom"
-                   android:layout_marginLeft="5dp"
                    android:gravity="center_vertical"
                    android:orientation="vertical">
 
@@ -135,7 +135,6 @@
                android:id="@+id/layoutset2"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:paddingLeft="3dp"
                android:layout_below="@+id/layoutset1">
                <LinearLayout
                    android:id="@+id/layout3"
@@ -168,7 +167,6 @@
                    android:layout_width="200dp"
                    android:layout_height="200dp"
                    android:layout_gravity="right"
-                   android:layout_marginLeft="5dp"
                    android:gravity="center_vertical"
                    android:orientation="vertical">
 
@@ -195,7 +193,6 @@
                android:id="@+id/layoutset3"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:paddingLeft="3dp"
                android:layout_below="@+id/layoutset2">
                <LinearLayout
                    android:id="@+id/layout5"
@@ -228,7 +225,7 @@
                    android:layout_width="200dp"
                    android:layout_height="200dp"
                    android:layout_gravity="right"
-                   android:layout_marginLeft="5dp"
+
                    android:gravity="center_vertical"
                    android:orientation="vertical">
 
@@ -255,7 +252,6 @@
                android:id="@+id/layoutset4"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:paddingLeft="3dp"
                android:layout_below="@+id/layoutset3">
                <LinearLayout
                    android:id="@+id/layout7"
@@ -288,7 +284,6 @@
                    android:layout_width="200dp"
                    android:layout_height="200dp"
                    android:layout_gravity="right"
-                   android:layout_marginLeft="5dp"
                    android:gravity="center_vertical"
                    android:orientation="vertical">
 
@@ -331,4 +326,4 @@
     <!--</GridView>-->
 
 
-</RelativeLayout>
+</LinearLayout>

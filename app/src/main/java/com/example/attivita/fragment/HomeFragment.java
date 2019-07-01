@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.attivita.AddeventActivity;
@@ -49,6 +50,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -65,6 +68,7 @@ public class HomeFragment extends Fragment  {
     ImageButton imbut_addwarn;
     ImageButton imbut_addevent;
     ListView listView;
+    TextView textview_backgroundhome;
     private ArrayList<Event> eventList = new ArrayList<>();
     ProgressDialog dialog;
 
@@ -85,6 +89,7 @@ public class HomeFragment extends Fragment  {
              View v = inflater.inflate(R.layout.fragment_home, container, false);
                 imbut_addevent = v.findViewById(R.id.addevent_imBut);
                 imbut_addwarn = v.findViewById(R.id.addwarn_imBut);
+                textview_backgroundhome = v.findViewById(R.id.textview_backgroundhome);
                 listView = v.findViewById(R.id.list_event);
 
             imbut_addwarn.setOnClickListener(new View.OnClickListener() {
@@ -227,7 +232,7 @@ public class HomeFragment extends Fragment  {
                                  EventListAdapter adapter = new EventListAdapter(getContext(),R.layout.item_event, eventList);
                                  listView.setAdapter(adapter);
                              } else {
-                                 Toast.makeText(getContext(), "No event now", Toast.LENGTH_LONG).show();
+                                 textview_backgroundhome.setText("ยังไม่มีกิจกรรมสำหรับท่าน");
                              }
                          }
 

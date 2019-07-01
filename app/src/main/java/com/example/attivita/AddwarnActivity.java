@@ -10,10 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.attivita.adapter.StudentFirebaseAdapter;
 import com.example.attivita.model.Eventhelp;
+import com.example.attivita.model.ResponseStatus;
 import com.example.attivita.model.StudentFirebase;
 import com.example.attivita.model.StudentPHP;
 import com.example.attivita.retrofit.APIInterface;
@@ -43,6 +45,7 @@ public class AddwarnActivity extends AppCompatActivity {
     double latitude_current,longitude_current;
     private int count = 0;
     String studentId;
+    TextView textview_background;
 
     private static final String MY_PREFS = "prefs";
 
@@ -59,12 +62,61 @@ public class AddwarnActivity extends AppCompatActivity {
         button_back = findViewById(R.id.button_back);
         but_finishwarn = findViewById(R.id.finishwarn_button);
         editText_eventdetail = findViewById(R.id.editText_eventdetail);
+        textview_background = findViewById(R.id.textview_background);
 
         Intent getIntent = getIntent();
         String Latitude = getIntent.getStringExtra("Latitude_current");
         String Longitude = getIntent.getStringExtra("Longitude_current");
         latitude_current = Double.valueOf(Latitude);
         longitude_current = Double.valueOf(Longitude);
+
+        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+        Call<ResponseStatus> call = apiService.getStatusStudent(studentId);
+
+        call.enqueue(new Callback<ResponseStatus>() {
+            @Override
+            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+                ResponseStatus res = response.body();
+                if (res.isStatus()){
+
+                    if (res.getStatus_verify().equals("no")){
+                        but_finishwarn.setText("กำลังตรวจสอบการยืนยันตัวตน");
+                        but_finishwarn.setEnabled(false);
+                        editText_eventdetail.setEnabled(false);
+
+                    } else {
+                        if(distanceFrom_in_Km(13.818900999999999,100.0401997,latitude_current,longitude_current) <= 600){
+                            but_finishwarn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    requestHelp();
+                                    Toast.makeText(AddwarnActivity.this, "ขอความช่วยเหลือเรียบร้อย", Toast.LENGTH_LONG).show();
+                                    finish();
+                                }
+                            });
+                        } else {
+                            but_finishwarn.setEnabled(false);
+                            textview_background.setText("ท่านอยู่นอกเขตของการขอความช่วยเหลือ");
+                            textview_background.setTextColor(getColor(R.color.colorRed));
+                            editText_eventdetail.setEnabled(false);
+                        }
+                    }
+                    System.out.println("EVENTJOIN"+res.getMessage());
+                } else {
+                    System.out.println("EVENTJOIN"+res.getMessage());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                Toast.makeText(AddwarnActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("ERRORRRRR : "+ t.getMessage());
+            }
+        });
+
+
+
+
+
 
         button_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,15 +126,7 @@ public class AddwarnActivity extends AppCompatActivity {
             }
         });
 
-        but_finishwarn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestHelp();
-                Toast.makeText(AddwarnActivity.this, "ขอความช่วยเหลือเรียบร้อย", Toast.LENGTH_LONG).show();
-                finish();
 
-            }
-        });
     }
 
     private void requestHelp(){

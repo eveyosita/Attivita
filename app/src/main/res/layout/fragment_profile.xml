@@ -53,14 +53,32 @@
                 android:id="@+id/circleImageView_profile"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
                 android:src="@drawable/girl" />
 
             <LinearLayout
+                android:id="@+id/layout_studentid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="150dp">
+
+                <TextView
+                    android:id="@+id/textview_studentid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="studentid"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_studentid"
+                android:layout_marginTop="25dp"
                 android:layout_marginLeft="150dp">
 
                 <TextView
@@ -83,14 +101,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/circleImageView_profile"
-                android:layout_marginLeft="45dp"
-                android:layout_marginTop="25dp">
+                android:layout_below="@+id/layout_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="45dp">
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-
                     android:background="@drawable/star"/>
 
                 <TextView
@@ -106,9 +124,8 @@
                     android:textSize="24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_gravity="center"
-                    android:text="5" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center" />
 
             </LinearLayout>
         </RelativeLayout>

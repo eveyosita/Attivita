@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.attivita.model.Event;
 import com.example.attivita.model.ResponseJoinevent;
+import com.example.attivita.model.ResponseStatus;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,7 +36,7 @@ public class EventcreateDetailActivity extends AppCompatActivity implements OnMa
 
     TextView textview_eventname,textview_eventDate,textview_eventTime,textview_eventAddress,textview_eventnameaddress
             ,textview_eventCategory,textview_amount,textview_amountmax,textview_eventDetail,btn_Edit;
-    Button btn_joinevent;
+    Button button_deleteevent;
     ImageView btn_back;
     String studentId;
     String eventId;
@@ -74,7 +75,7 @@ public class EventcreateDetailActivity extends AppCompatActivity implements OnMa
         textview_amount = findViewById(R.id.textview_amount);
         textview_amountmax = findViewById(R.id.textview_amountmax);
         textview_eventDetail = findViewById(R.id.textview_eventDetail);
-        btn_joinevent = findViewById(R.id.button_joinevent);
+        button_deleteevent = findViewById(R.id.button_deleteevent);
         btn_back = findViewById(R.id.button_backhome);
         btn_Edit = findViewById(R.id.buttonEdit);
 
@@ -105,6 +106,34 @@ public class EventcreateDetailActivity extends AppCompatActivity implements OnMa
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        button_deleteevent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+                Call<ResponseJoinevent> call = apiService.deleteEvent(Eventid);
+
+                call.enqueue(new Callback<ResponseJoinevent>() {
+                    @Override
+                    public void onResponse(Call<ResponseJoinevent> call, Response<ResponseJoinevent> response) {
+                        ResponseJoinevent res = response.body();
+                        if (res.isStatus()){
+
+                            Toast.makeText(EventcreateDetailActivity.this,res.getMessage(), Toast.LENGTH_LONG).show();
+                            finish();
+                            System.out.println("EVENTJOIN"+res.getMessage());
+                        } else {
+                            System.out.println("EVENTJOIN"+res.getMessage());
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ResponseJoinevent> call, Throwable t) {
+                        Toast.makeText(EventcreateDetailActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                        System.err.println("ERRORRRRR : "+ t.getMessage());
+                    }
+                });
             }
         });
 

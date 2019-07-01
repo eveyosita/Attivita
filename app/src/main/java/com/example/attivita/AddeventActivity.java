@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.attivita.model.Event;
 import com.example.attivita.model.ResponseJoinevent;
+import com.example.attivita.model.ResponseStatus;
 import com.example.attivita.retrofit.APIInterface;
 import com.example.attivita.retrofit.RetrofitClient;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -50,7 +51,7 @@ public class AddeventActivity extends AppCompatActivity {
     EditText eventname, edittexe_startdate, edittexe_enddate, strattime, endtime, eventdetail, amount, department,
             year_ed;
     Spinner category;
-    String depart,year, cate, id,Startdate,Enddate;
+    String depart,year, cate, id,Startdate,Enddate,dateS,dateE;
     int cate_posit,eventId;
     CheckBox cb_match, cb_bio, cb_chem, cb_phy, cb_stat, cb_envi, cb_com, cb_micro, cb_appmatch,
             cb_it, cb_tphy, cb_dsci;
@@ -130,10 +131,10 @@ public class AddeventActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                                 // TODO: 2019-03-06  set textview เอาวันที่ที่เลือกมาแสดง
-                                String date = day + "/" + (month + 1) + "/" + (year+543);
+                                dateS = day + "/" + (month + 1) + "/" + (year+543);
                                 Startdate = year + "-" + (month + 1) + "-" + day;
 
-                                edittexe_startdate.setText(date);
+                                edittexe_startdate.setText(dateS);
                             }
                         }, year, month, day);
 
@@ -157,10 +158,10 @@ public class AddeventActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                                 // TODO: 2019-03-06  set textview เอาวันที่ที่เลือกมาแสดง
-                                String date = day + "/" + (month + 1) + "/" + (year+543);
+                                dateE = day + "/" + (month + 1) + "/" + (year+543);
                                 Enddate = year + "-" + (month + 1) + "-" + day;
 
-                                edittexe_enddate.setText(date);
+                                edittexe_enddate.setText(dateE);
                             }
                         }, year, month, day);
 
@@ -169,6 +170,7 @@ public class AddeventActivity extends AppCompatActivity {
             }
         });
 
+      
         // ปุ่มเลือกเอก
         button_depart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -340,37 +342,59 @@ public class AddeventActivity extends AppCompatActivity {
             }
         });
 
-        // ปุ่มเสร็จสิ้น
-        button_finishaddevent.setOnClickListener(new View.OnClickListener() {
+        SharedPreferences shared = AddeventActivity.this.getSharedPreferences(MY_PREFS,
+                Context.MODE_PRIVATE);
+
+        id = shared.getString("studentId",null);
+
+        final APIInterface apiService = RetrofitClient.getClient().create(APIInterface.class);
+        Call<ResponseStatus> call = apiService.getStatusStudent(id);
+
+        call.enqueue(new Callback<ResponseStatus>() {
             @Override
-            public void onClick(View v) {
+            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+                ResponseStatus res = response.body();
+                if (res.isStatus()){
 
-                SharedPreferences shared = AddeventActivity.this.getSharedPreferences(MY_PREFS,
-                        Context.MODE_PRIVATE);
+                    if (res.getStatus_verify().equals("no")){
+                        button_finishaddevent.setText("กำลังตรวจสอบการยืนยันตัวตน");
+                        button_finishaddevent.setEnabled(false);
+                    } else {
+                        button_finishaddevent.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
-                id = shared.getString("studentId",null);
-                String ename = eventname.getText().toString();
-                String detail = eventdetail.getText().toString();
-                String amout = amount.getText().toString();
-                String stime = strattime.getText().toString();
-                String etime = endtime.getText().toString();
-                String year = year_ed.getText().toString();
+                                // ปุ่มเสร็จสิ้น
+                                String ename = eventname.getText().toString();
+                                String detail = eventdetail.getText().toString();
+                                String amout = amount.getText().toString();
+                                String stime = strattime.getText().toString();
+                                String etime = endtime.getText().toString();
 
+                                if(!checkEventname() || !checkEventdetail() || !checkEventamount() || !checkEventstartdate()
+                                        || !checkEventenddate() || !checkEventstrattime() || !checkEventendtime() ||
+                                        !checkEventdepartment() || !checkEventyear()){
+                                    Toast.makeText(AddeventActivity.this, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    setEvent(ename,id,stime,etime,cate_posit,detail
+                                            ,amout);
 
-                if(!checkEventname() || !checkEventdetail() || !checkEventamount() || !checkEventstartdate()
-                        || !checkEventenddate() || !checkEventstrattime() || !checkEventendtime() ||
-                        !checkEventdepartment() || !checkEventyear()){
-                    Toast.makeText(AddeventActivity.this, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
+                    }
+                    System.out.println("EVENTJOIN"+res.getMessage());
                 } else {
-                    setEvent(ename,id,stime,etime,cate_posit,detail
-                            ,amout);
-
+                    System.out.println("EVENTJOIN"+res.getMessage());
                 }
-
+            }
+            @Override
+            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                Toast.makeText(AddeventActivity.this, "Fail.."+t.getMessage(), Toast.LENGTH_LONG).show();
+                System.err.println("ERRORRRRR : "+ t.getMessage());
             }
         });
-
-
     }
 
     private void createCategory(){
@@ -411,7 +435,7 @@ public class AddeventActivity extends AppCompatActivity {
                 event_longitude = place.getLatLng().longitude;
                 event_address = String.format("%s", place.getAddress());
                 stBuilder.append(event_placename);
-
+                System.out.println("LAT "+event_latitude+" LOG "+event_longitude);
                 textView_location.setText(stBuilder.toString());
             }
         }
